@@ -9,5 +9,5 @@ export default defineConfig({
     tailwindcss(),
    
   ],
-  base: "/my-responsive-website/",
+  base: "./",
 })
