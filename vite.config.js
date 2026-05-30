@@ -7,5 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+   
   ],
+  base: "/my-responsive-website/",
 })
