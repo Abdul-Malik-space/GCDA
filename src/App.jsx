@@ -4,12 +4,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CentralBody from './pages/AboutSubMenus/CentralBody';
-// فارم کمپوننٹ
 import MembershipForm from './components/MembershipForm'; 
-
-// فوٹو گیلری پیجز
+import Introduction from './pages/Introduction';
+import MissionVision from './pages/AboutSubMenus/MissionVision';
+import History from './pages/AboutSubMenus/History';
+import HouseOfDelegates from './pages/AboutSubMenus/HouseOfDelegates';
+import BoardOfTrustees from './pages/AboutSubMenus/BoardOfTrustes';
+import Committees from './pages/AboutSubMenus/Committees';
 import GalleryHome from './pages/Gallary/GalleryHome';
 import AlbumDetails from './pages/Gallary/AlbumDetails';
+
 
 // ویڈیو گیلری پیجز
 import VideoGalleryHome from './pages/Gallary/VideoGalleryHome';
@@ -45,9 +49,13 @@ function App() {
             <Route path="/videos" element={<div className="w-full animate-fade-in"><VideoGalleryHome /></div>} />
             <Route path="/videos/:eventId" element={<div className="w-full animate-fade-in"><VideoAlbumDetails /></div>} />
             <Route path="/about/central-body" element={<div className="w-full animate-fade-in"><CentralBody /></div>} />
-            {/* 📅 مین ایونٹس کا پیج */}
-            {/* مین ایونٹس کا پیج اب مینیو کے لنک کے مطابق کھلے گا */}
-<Route path="/programs/upcoming" element={<div className="w-full animate-fade-in"><UpcomingEvents /></div>} />
+            <Route path="/about/introduction" element={<div className="w-full animate-fade-in"><Introduction /></div>} />
+            <Route path="/about/mission-vision" element={<div className="w-full animate-fade-in"><MissionVision /></div>} />
+            <Route path="/about/history" element={<div className="w-full animate-fade-in"><History /></div>} />
+            <Route path="/about/house-delegates" element={<div className="w-full animate-fade-in"><HouseOfDelegates /></div>} />
+            <Route path="/about/board-trustees" element={<div className="w-full animate-fade-in"><BoardOfTrustees /></div>} />
+            <Route path="/about/committees" element={<div className="w-full animate-fade-in"><Committees /></div>} />
+            <Route path="/programs/upcoming" element={<div className="w-full animate-fade-in"><UpcomingEvents /></div>} />
             
             {/* 🔍 ایونٹ ڈیٹیل کا ڈائنامک پیج */}
             <Route path="/event/:id" element={<div className="w-full animate-fade-in"><EventDetails onOpenMembership={() => setIsFormOpen(true)} /></div>} />
@@ -55,7 +63,7 @@ function App() {
             {/* 📰 پریس کلپنگ گیلری راؤٹ */}
             <Route path="/press-gallery" element={<div className="text-center py-20 font-bold text-gray-500 bg-white min-h-[60vh] flex items-center justify-center">Press Clipping Gallery Component Coming Soon!</div>} />
 
-            {/* 📂 باقی مینیو لنکس کے لیے عارضی راؤٹس */}
+           
             <Route path="/about/:section" element={<div className="text-center py-20 font-bold text-gray-500 bg-white min-h-[60vh] flex items-center justify-center">About Section Component Coming Soon!</div>} />
             <Route path="/publications/:section" element={<div className="text-center py-20 font-bold text-gray-500 bg-white min-h-[60vh] flex items-center justify-center">Publications Component Coming Soon!</div>} />
             <Route path="/membership/:section" element={<div className="text-center py-20 font-bold text-gray-500 bg-white min-h-[60vh] flex items-center justify-center">Membership Component Coming Soon!</div>} />

@@ -1,6 +1,8 @@
-// src/pages/CentralBody/CentralBody.jsx
 import React, { useState } from "react";
-import { centralBodyLeadership, centralBodyRows } from "../../data/centralBodyData";
+import {
+  boardTrusteesLeadership,
+  boardTrusteesRows,
+} from "../../data/boardTrusteesData";
 
 // ══════════════════════════════════════════════════════
 // چھوٹے ری یوزایبل بلاکس (پروفائل پیج کے لیے)
@@ -27,7 +29,10 @@ const RightSection = ({ title, children }) => (
 const BulletList = ({ items }) => (
   <ul className="space-y-2 mt-1">
     {items?.map((item, i) => (
-      <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed">
+      <li
+        key={i}
+        className="flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed"
+      >
         <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#1A7963] flex-shrink-0" />
         <span>{item}</span>
       </li>
@@ -37,17 +42,17 @@ const BulletList = ({ items }) => (
 
 const getAvatarUrl = (name) =>
   `https://ui-avatars.com/api/?name=${encodeURIComponent(
-    name || "GCDA Member"
+    name || "GCDA Trustee"
   )}&background=1A7963&color=fff&size=300`;
 
 // ══════════════════════════════════════════════════════
-// تفصیلی پروفائل ویو — Punjab Assembly / House of Delegates انداز
+// تفصیلی پروفائل ویو — Board of Trustees انداز
 // ══════════════════════════════════════════════════════
 
 const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) => {
   return (
     <div className="w-full bg-slate-100 min-h-screen font-sans pb-20">
-      {/* ── Breadcrumb بار ── */}
+      {/* Breadcrumb Bar */}
       <div className="bg-white border-b border-slate-200 px-6 py-3 flex items-center gap-2 text-xs text-slate-500 font-medium">
         <button onClick={onBack} className="hover:text-[#1A7963] transition-colors">
           Home
@@ -58,7 +63,7 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
         </button>
         <span>›</span>
         <button onClick={onBack} className="hover:text-[#1A7963] transition-colors">
-          Central Executive Body
+          Board of Trustees
         </button>
         <span>›</span>
         <span className="text-slate-800 font-bold">Profile</span>
@@ -80,9 +85,11 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-6 mt-8">
-        <h1 className="text-2xl font-black text-slate-800 mb-6">Profile</h1>
+        <h1 className="text-2xl font-black text-slate-800 mb-6">
+          Trustee Profile
+        </h1>
 
-        {/* ══ Top Navigation Bar ══ */}
+        {/* Top Navigation Bar */}
         <div className="flex items-center justify-between mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
           <button
             onClick={onBack}
@@ -96,7 +103,7 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-            Back to Central Body List
+            Back to Board of Trustees List
           </button>
 
           <div className="flex items-center gap-3">
@@ -136,9 +143,9 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
           </div>
         </div>
 
-        {/* ═══ مین گرڈ: بایاں + دایاں ═══ */}
+        {/* Main Profile Grid */}
         <div className="flex flex-col lg:flex-row gap-0 shadow-lg rounded-lg overflow-hidden">
-          {/* ══ بایاں کالم ══ */}
+          {/* Left Column */}
           <div className="lg:w-[300px] flex-shrink-0 bg-[#1e2d3d] text-white flex flex-col">
             <div className="p-6 flex flex-col items-center border-b border-slate-700/50">
               <div className="w-36 h-36 rounded-full overflow-hidden ring-4 ring-slate-600 shadow-xl mb-4 bg-slate-700">
@@ -151,13 +158,18 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
                   }}
                 />
               </div>
+
               <h2 className="text-base font-black text-white text-center leading-tight">
                 {member.name}
               </h2>
+
               <p className="text-slate-400 text-xs font-medium mt-1 text-center">
                 {member.designation || member.role}
               </p>
-              <p className="text-slate-500 text-[10px] mt-0.5 text-center">{member.hospital}</p>
+
+              <p className="text-slate-500 text-[10px] mt-0.5 text-center">
+                {member.hospital}
+              </p>
             </div>
 
             {member.positions?.length > 0 && (
@@ -165,10 +177,16 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
                 <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">
                   Position(s) Held
                 </p>
+
                 <div className="space-y-1.5">
                   {member.positions.map((pos, i) => (
-                    <div key={i} className="flex items-start gap-2 text-[11px] text-slate-300 leading-relaxed">
-                      <span className="text-[#e67e22] font-black mt-0.5 flex-shrink-0">›</span>
+                    <div
+                      key={i}
+                      className="flex items-start gap-2 text-[11px] text-slate-300 leading-relaxed"
+                    >
+                      <span className="text-[#e67e22] font-black mt-0.5 flex-shrink-0">
+                        ›
+                      </span>
                       <span>{pos}</span>
                     </div>
                   ))}
@@ -189,22 +207,25 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
             </div>
           </div>
 
-          {/* ══ دایاں کالم ══ */}
+          {/* Right Column */}
           <div className="flex-1 bg-white px-8 py-8 overflow-y-auto">
             <div className="mb-8 pb-6 border-b border-slate-100">
               <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-500 mb-4">
-                Central Governance Profile
+                Board of Trustees Governance Profile
               </p>
 
               <h2 className="text-2xl font-black text-slate-900 tracking-tight uppercase mb-1">
                 {member.name}
               </h2>
+
               <p className="text-sm text-slate-500 font-medium mb-5">
                 {member.role} — {member.region}
               </p>
 
               {member.bio && (
-                <p className="text-slate-600 text-sm leading-relaxed text-justify">{member.bio}</p>
+                <p className="text-slate-600 text-sm leading-relaxed text-justify">
+                  {member.bio}
+                </p>
               )}
             </div>
 
@@ -223,7 +244,7 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
             )}
 
             {member.executiveRoles?.length > 0 && (
-              <RightSection title="Central / Executive Roles">
+              <RightSection title="Board / Executive Roles">
                 <BulletList items={member.executiveRoles} />
               </RightSection>
             )}
@@ -243,6 +264,7 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">
                 Official Communications
               </p>
+
               <div className="flex flex-col sm:flex-row gap-3">
                 {member.email && (
                   <a
@@ -252,6 +274,7 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
                     <span>✉️</span> {member.email}
                   </a>
                 )}
+
                 {member.phone && (
                   <a
                     href={`tel:${member.phone}`}
@@ -265,7 +288,7 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
           </div>
         </div>
 
-        {/* ══ نیچے نیویگیشن بار ══ */}
+        {/* Bottom Navigation Bar */}
         <div className="flex items-center justify-between mt-6">
           <button
             onClick={onBack}
@@ -279,13 +302,14 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-            Back to Central Body List
+            Back to Board of Trustees List
           </button>
 
           <div className="flex items-center gap-3">
             <span className="text-xs text-slate-400 font-medium">
               {currentIndex + 1} / {total}
             </span>
+
             <button
               onClick={onPrev}
               className="w-9 h-9 bg-white hover:bg-[#1A7963] hover:text-white text-slate-700 rounded-full flex items-center justify-center shadow border border-slate-200 transition-all"
@@ -300,6 +324,7 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
                 />
               </svg>
             </button>
+
             <button
               onClick={onNext}
               className="w-9 h-9 bg-white hover:bg-[#1A7963] hover:text-white text-slate-700 rounded-full flex items-center justify-center shadow border border-slate-200 transition-all"
@@ -322,16 +347,17 @@ const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) =>
 };
 
 // ══════════════════════════════════════════════════════
-// مین کمپوننٹ
+// Main Component
 // ══════════════════════════════════════════════════════
 
-const CentralBody = () => {
+const BoardTrustees = () => {
   const [selectedMember, setSelectedMember] = useState(null);
 
-  // سینٹرل باڈی ڈیٹا فائل سے تمام ممبرز کی فلیٹ لسٹ
-  const allMembers = centralBodyRows.flatMap((row) => row.members || []);
+  const allMembers = boardTrusteesRows.flatMap((row) => row.members || []);
 
-  const regionsCount = new Set(allMembers.map((member) => member.region).filter(Boolean)).size;
+  const regionsCount = new Set(
+    allMembers.map((member) => member.region).filter(Boolean)
+  ).size;
 
   const currentIndex = selectedMember
     ? allMembers.findIndex((member) => member.id === selectedMember.id)
@@ -344,6 +370,7 @@ const CentralBody = () => {
 
   const handleNext = () => {
     if (!allMembers.length) return;
+
     const next = allMembers[(currentIndex + 1) % allMembers.length];
     setSelectedMember(next);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -351,6 +378,7 @@ const CentralBody = () => {
 
   const handlePrev = () => {
     if (!allMembers.length) return;
+
     const prev = allMembers[(currentIndex - 1 + allMembers.length) % allMembers.length];
     setSelectedMember(prev);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -379,14 +407,16 @@ const CentralBody = () => {
 
         {isChief && (
           <span className="absolute top-2 right-2 bg-amber-50 text-amber-700 text-[9px] font-extrabold px-2 py-0.5 rounded-full border border-amber-200 uppercase tracking-wider">
-            Supreme Head
+            Chairman
           </span>
         )}
+
         {isPresident && (
           <span className="absolute top-2 right-2 bg-emerald-50 text-[#1A7963] text-[9px] font-extrabold px-2 py-0.5 rounded-full border border-emerald-200 uppercase tracking-wider">
-            Executive Core
+            Board Core
           </span>
         )}
+
         {isGS && (
           <span className="absolute top-2 right-2 bg-blue-50 text-blue-700 text-[9px] font-extrabold px-2 py-0.5 rounded-full border border-blue-200 uppercase tracking-wider">
             Secretariat
@@ -417,7 +447,7 @@ const CentralBody = () => {
         </p>
 
         <p className="text-[11px] text-slate-400 mt-2 font-medium border-t pt-2 w-full border-slate-100 line-clamp-2 h-9">
-          {member.designation || member.hospital || "GCDA Central Leadership Council Member"}
+          {member.designation || member.hospital || "GCDA Board of Trustees Member"}
         </p>
 
         <div
@@ -433,6 +463,7 @@ const CentralBody = () => {
               ✉️
             </a>
           )}
+
           <button
             type="button"
             className="text-slate-400 hover:text-[#1A7963] transition-colors p-1.5 bg-slate-50 hover:bg-emerald-50 rounded-lg"
@@ -446,7 +477,6 @@ const CentralBody = () => {
     );
   };
 
-  // ── پروفائل پیج ──
   if (selectedMember) {
     return (
       <ProfileView
@@ -460,7 +490,6 @@ const CentralBody = () => {
     );
   }
 
-  // ── مین لسٹ پیج ──
   return (
     <div className="w-full bg-gray-50 min-h-screen font-sans">
       {/* Hero Banner */}
@@ -477,41 +506,54 @@ const CentralBody = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto animate-[fadeInUp_1s_ease-out]">
           <span className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-[10px] font-black tracking-[0.3em] uppercase px-5 py-2 rounded-full mb-5 shadow-lg">
-            {centralBodyLeadership.subtitle}
+            {boardTrusteesLeadership.subtitle}
           </span>
 
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4 drop-shadow-lg">
-            {centralBodyLeadership.title}
+            {boardTrusteesLeadership.title}
           </h1>
 
           <div className="w-24 h-1 bg-[#e67e22] mx-auto mb-6 rounded-full" />
 
           <p className="text-white/95 font-medium text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-            {centralBodyLeadership.description}
+            {boardTrusteesLeadership.description}
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 mt-10">
             <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10">
-              <p className="text-2xl font-black text-white">{centralBodyRows.length}</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wider">Leadership Rows</p>
+              <p className="text-2xl font-black text-white">
+                {boardTrusteesRows.length}
+              </p>
+              <p className="text-xs text-slate-300 uppercase tracking-wider">
+                Trustee Rows
+              </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10">
-              <p className="text-2xl font-black text-white">{allMembers.length}</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wider">Central Members</p>
+              <p className="text-2xl font-black text-white">
+                {allMembers.length}
+              </p>
+              <p className="text-xs text-slate-300 uppercase tracking-wider">
+                Board Members
+              </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10">
-              <p className="text-2xl font-black text-white">{regionsCount}</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wider">Regions</p>
+              <p className="text-2xl font-black text-white">
+                {regionsCount}
+              </p>
+              <p className="text-xs text-slate-300 uppercase tracking-wider">
+                Regions
+              </p>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Main List Page */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-14 space-y-16">
         <div className="space-y-14">
-          {centralBodyRows.map((row) => (
+          {boardTrusteesRows.map((row) => (
             <div key={row.id} className="border-t border-gray-200 pt-10">
               <h3 className="text-lg font-bold text-gray-800 mb-7 flex items-center gap-2">
                 <span className="w-1.5 h-5 bg-emerald-600 rounded-full" />
@@ -533,4 +575,4 @@ const CentralBody = () => {
   );
 };
 
-export default CentralBody;
+export default BoardTrustees;

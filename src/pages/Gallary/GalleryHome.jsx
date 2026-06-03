@@ -1,192 +1,253 @@
-// src/pages/Gallary/GalleryHome.jsx
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom'; // 👈 1. ری ایکٹ راؤٹر امپورٹ کیا
-import { galleryData } from '../../data/galleryData';
+import React, { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { galleryData } from "../../data/galleryData";
 
-function GalleryHome() { // 👈 2. یہاں سے onAlbumSelect ہٹا دیا کیونکہ اب ہم راؤٹر استعمال کریں گے
-  const navigate = useNavigate(); // 👈 3. نیویگیشن ہک انیشیئلائز کیا
-  const [selectedYear, setSelectedYear] = useState(galleryData[0]?.year || '');
+function GalleryHome() {
+  const defaultYear =
+    galleryData.find((item) => item.year === "2026")?.year ||
+    galleryData[0]?.year ||
+    "";
 
-  const currentYearData = galleryData.find(item => item.year === selectedYear);
+  const [selectedYear, setSelectedYear] = useState(defaultYear);
+  const navigate = useNavigate();
 
-  // کارڈز کی ترتیب کے لیے اینیمیشن ویرینٹس
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
+  const selectedYearIndex = Math.max(
+    galleryData.findIndex((item) => item.year === selectedYear),
+    0
+  );
+
+  const visibleYears = useMemo(() => {
+    const total = galleryData.length;
+
+    if (total <= 3) return galleryData;
+
+    let startIndex = selectedYearIndex - 1;
+
+    if (startIndex < 0) startIndex = 0;
+    if (startIndex > total - 3) startIndex = total - 3;
+
+    return galleryData.slice(startIndex, startIndex + 3);
+  }, [selectedYearIndex]);
+
+  const currentYearData = galleryData.find((item) => item.year === selectedYear);
+
+  const canGoPrev = selectedYearIndex > 0;
+  const canGoNext = selectedYearIndex < galleryData.length - 1;
+
+  const handlePrevYear = () => {
+    if (!canGoPrev) return;
+
+    const prevYear = galleryData[selectedYearIndex - 1]?.year;
+    if (prevYear) setSelectedYear(prevYear);
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: 'spring', stiffness: 60, damping: 15 } 
+  const handleNextYear = () => {
+    if (!canGoNext) return;
+
+    const nextYear = galleryData[selectedYearIndex + 1]?.year;
+    if (nextYear) setSelectedYear(nextYear);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 35 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 70, damping: 14 },
     },
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 relative overflow-hidden w-full left-0 right-0">
-      
-      {/* 1. فل اسکرین ہیرو بینر */}
-      <div className="relative h-[65vh] md:h-[75vh] w-full flex items-center justify-center bg-gray-950 overflow-hidden left-0 right-0">
-        <motion.img 
-          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070" 
-          alt="GCDA Gallery Header" 
-          className="absolute inset-0 w-full h-full object-cover opacity-35"
-          animate={{ scale: [1.02, 1.07] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 relative overflow-hidden w-full pb-20">
+      {/* Hero Banner */}
+      <div className="relative h-[55vh] w-full flex items-center justify-center bg-gray-950 overflow-hidden">
+        <motion.img
+          src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1600"
+          alt="GCDA Gallery Header"
+          className="absolute inset-0 w-full h-full object-cover opacity-25"
+          animate={{ scale: [1.02, 1.06] }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear",
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/85 to-transparent"></div>
-        
+
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent" />
+
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-          <motion.h1 
-            initial={{ opacity: 0, x: -80 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-xl"
-          >
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-xl">
             GCDA Photo Gallery
-          </motion.h1>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.4 }}
-            className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-[#0F765E] mb-6 rounded-full"
-          ></motion.div>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-            className="text-gray-200 text-sm md:text-lg leading-relaxed font-medium drop-shadow max-w-2xl"
-          >
-            Explore and revisit memories, annual seminars, and free medical camps organized by the General Cadre Doctor's Association.
-          </motion.p>
+          </h1>
+
+          <div className="w-24 h-1 bg-gradient-to-r from-[#e67e22] to-[#0F765E] mb-6 rounded-full" />
+
+          <p className="text-gray-200 text-sm md:text-lg font-medium max-w-2xl">
+            Explore GCDA seminar albums, official events, awareness drives,
+            medical camps, and organizational moments.
+          </p>
         </div>
       </div>
 
-      {/* 2. بٹنز اور گرڈ سیکشن */}
-      <div className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0F765E]/5 rounded-full blur-3xl pointer-events-none"></div>
-        
-        {/* سالوں (Years) کا بٹن سیکشن */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="max-w-4xl mx-auto mb-14 relative z-10"
-        >
-          <div className="flex items-center space-x-3 overflow-x-auto pb-4 pt-2 px-2 scrollbar-thin scrollbar-track-transparent justify-start md:justify-center">
-            {galleryData.map((data) => (
-              <button
-                key={data.year}
-                onClick={() => setSelectedYear(data.year)}
-                className={`px-6 py-2.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-300 transform active:scale-95 flex-shrink-0 ${
-                  selectedYear === data.year
-                    ? 'bg-[#0F765E] text-white shadow-lg shadow-[#0F765E]/30 scale-105 border border-transparent'
-                    : 'bg-white text-gray-600 hover:text-[#0F765E] hover:bg-emerald-50/50 border border-gray-200 shadow-sm'
-                }`}
-              >
-                {data.year}
-              </button>
-            ))}
-          </div>
-        </motion.div>
+      <div className="px-4 sm:px-6 lg:px-12 max-w-[1700px] mx-auto w-full pt-10">
+        {/* Year Selector - only 3 years visible */}
+        <div className="mb-12 bg-white border border-gray-200 rounded-2xl shadow-sm p-4">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#0F765E] mb-2">
+                Select Year
+              </p>
 
-        {/* البم گرڈ سیکشن */}
-        <div className="relative z-10">
-          <AnimatePresence mode="wait">
-            {currentYearData && currentYearData.events.length > 0 ? (
-              <motion.div
-                key={selectedYear}
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-100px" }}
-                exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+              <p className="text-sm text-gray-500 font-medium">
+                Use arrows to browse gallery years one by one.
+              </p>
+            </div>
+
+            <div className="lg:ml-auto flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={handlePrevYear}
+                disabled={!canGoPrev}
+                className={`w-11 h-11 rounded-xl border font-black text-lg transition-all flex items-center justify-center ${
+                  canGoPrev
+                    ? "bg-white text-gray-700 border-gray-200 hover:bg-[#0F765E] hover:text-white hover:border-[#0F765E]"
+                    : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                }`}
+                title="Previous Year"
               >
-                {currentYearData.events.map((album) => (
-                  <motion.div
-                    key={album.id}
-                    variants={cardVariants}
-                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                    onClick={() => navigate(`/gallery/${album.id}`)} // 👈 4. اب یہ کلک کرنے پر صحیح یو آر ایل پر لے جائے گا!
-                    className="group bg-white rounded-2xl shadow-sm hover:shadow-2xl border border-gray-100/80 overflow-hidden cursor-pointer flex flex-col"
+                ‹
+              </button>
+
+              <div className="grid grid-cols-3 gap-3">
+                {visibleYears.map((data) => (
+                  <button
+                    key={data.year}
+                    type="button"
+                    onClick={() => setSelectedYear(data.year)}
+                    className={`w-[76px] sm:w-[88px] px-3 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 transform active:scale-95 ${
+                      selectedYear === data.year
+                        ? "bg-[#0F765E] text-white shadow-lg scale-105"
+                        : "bg-gray-50 text-gray-600 hover:text-[#0F765E] border border-gray-200"
+                    }`}
                   >
-                    {/* کور امیج */}
-                    <div className="relative h-56 w-full bg-gray-100 overflow-hidden">
-                      <img
-                        src={album.coverImage}
-                        alt={album.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      
-                      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#0F765E] text-xs font-bold px-3 py-1.5 rounded-xl shadow-md border border-emerald-100 flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        {album.images.length} Photos
+                    {data.year}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleNextYear}
+                disabled={!canGoNext}
+                className={`w-11 h-11 rounded-xl border font-black text-lg transition-all flex items-center justify-center ${
+                  canGoNext
+                    ? "bg-white text-gray-700 border-gray-200 hover:bg-[#0F765E] hover:text-white hover:border-[#0F765E]"
+                    : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                }`}
+                title="Next Year"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#0F765E] mb-2">
+            {selectedYear} Photo Albums
+          </p>
+
+          <h2 className="text-3xl font-black text-gray-900">
+            Gallery Album Collection
+          </h2>
+
+          <div className="w-20 h-1 bg-[#e67e22] mt-4 rounded-full" />
+        </div>
+
+        {/* Album Cards */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedYear}
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7"
+          >
+            {currentYearData && currentYearData.events?.length > 0 ? (
+              currentYearData.events.map((event) => (
+                <motion.div
+                  key={event.id}
+                  variants={itemVariants}
+                  whileHover={{ y: -6 }}
+                  onClick={() => navigate(`/gallery/${event.id}`)}
+                  className="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200/70 overflow-hidden cursor-pointer flex flex-col"
+                >
+                  <div className="relative h-56 w-full bg-gray-100 overflow-hidden">
+                    <img
+                      src={event.coverImage}
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      onError={(e) => {
+                        e.currentTarget.src =
+                          "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1200";
+                      }}
+                    />
+
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/45 transition-opacity" />
+
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-16 h-16 rounded-full bg-white/95 text-[#0F765E] flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                        <span className="text-2xl">🖼️</span>
+                      </div>
+                    </div>
+
+                    <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#0F765E] text-xs font-bold px-3 py-1.5 rounded-xl shadow-md">
+                      📷 {event.images?.length || 0} Photos
+                    </span>
+                  </div>
+
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#0F765E] mb-2">
+                        GCDA Photo Album
+                      </p>
+
+                      <h3 className="text-lg font-extrabold text-gray-800 mb-2 group-hover:text-[#0F765E] transition-colors line-clamp-2">
+                        {event.title}
+                      </h3>
+
+                      <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">
+                        {event.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-gray-100 text-sm font-bold text-[#0F765E] flex items-center justify-between">
+                      <span>Open Photo Album</span>
+                      <span className="bg-emerald-50 group-hover:bg-[#0F765E] group-hover:text-white p-1.5 rounded-lg transition-colors">
+                        →
                       </span>
                     </div>
-
-                    {/* تفصیلات */}
-                    <div className="p-6 flex-1 flex flex-col justify-between bg-white relative">
-                      <div>
-                        <h3 className="text-xl font-extrabold text-gray-800 mb-2.5 group-hover:text-[#0F765E] transition-colors duration-300 line-clamp-1 leading-tight">
-                          {album.title}
-                        </h3>
-                        <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 font-normal">
-                          {album.description}
-                        </p>
-                      </div>
-
-                      <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-sm font-bold text-[#0F765E] group-hover:text-emerald-500 transition-colors">
-                        <span className="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#0F765E] group-hover:after:w-full after:transition-all after:duration-300">
-                          Open Album
-                        </span>
-                        <span className="transform group-hover:translate-x-2 transition-transform duration-300 bg-emerald-50 group-hover:bg-[#0F765E] group-hover:text-white p-1.5 rounded-lg">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
+                  </div>
+                </motion.div>
+              ))
             ) : (
-              <motion.div 
-                key="empty"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-200 shadow-sm"
-              >
-                <p className="text-gray-400 text-lg font-medium">
-                  No albums available for this year.
+              <div className="col-span-full text-center py-20 bg-white rounded-2xl border border-dashed border-gray-200">
+                <p className="text-gray-400 font-semibold">
+                  No photo albums available for {selectedYear}.
                 </p>
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
-
-      <style dangerouslySetInnerHTML={{__html: `
-        .scrollbar-thin::-webkit-scrollbar {
-          height: 5px;
-        }
-        .scrollbar-thin::-webkit-scrollbar-thumb {
-          background-color: rgba(15, 118, 94, 0.2);
-          border-radius: 10px;
-        }
-      `}} />
     </div>
   );
 }
