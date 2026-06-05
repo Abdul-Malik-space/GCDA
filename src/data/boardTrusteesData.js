@@ -1,55 +1,13 @@
-export const boardTrusteesLeadership = {
+// src/data/BoardOftrustyData.js
+
+export const boardOftrustyLeadership = {
   title: "GCDA Board of Trustees",
   subtitle: "Board of Trustees",
   description:
     "The apex governing body responsible for overseeing policy framework, legal structure, and financial governance.",
 };
 
-export const boardTrusteesChairman = {
-  id: 501,
-  name: "Dr. Masood Akhtar Sheikh",
-  role: "Chairman Board of Trustees",
-  status: "Chief Patron / Central President",
-  region: "Central HQ",
-  image: "assets/images/centrolBodyImages/Dr-chief.jpeg",
-  imgSrc: "assets/images/centrolBodyImages/Dr-chief.jpeg",
-  designation: "Chief Consultant / Grade-20",
-  hospital: "GCDA Central HQ, Lahore",
-  qualification: "MBBS, FCPS (Public Health), Master in Health Administration",
-  email: "president@gcda.com",
-  phone: "+92 333 4567891",
-  fathersName: "Sheikh Akhtar Hussain",
-  joinedGCDA: "January 2010",
-  type: "chief",
-  bio: "Visionary leader driving the grand strategic direction of GCDA. Dr. Masood Akhtar Sheikh has been a monumental force in structural health reforms and the protection of doctors' rights for over two decades.",
-  professionalSummary:
-    "Dr. Masood Akhtar Sheikh is a distinguished healthcare administrator and public health specialist with over 25 years of leadership experience. He has pioneered administrative frameworks, led successful advocacy panels at the prime ministerial level, and structured the foundational framework of GCDA.",
-  positions: [
-    "Central President — General Cadre Doctors Association (GCDA)",
-    "Chief Consultant — Public Health Directorate, Lahore",
-    "Chairman: National Medical Policy Board, Pakistan",
-    "Chief Liaison: Federal Healthcare Taskforce",
-  ],
-  education: [
-    "MBBS — King Edward Medical University, Lahore (1995)",
-    "FCPS (Public Health) — College of Physicians and Surgeons Pakistan (2002)",
-    "Master in Health Administration (MHA) — Punjab University (2006)",
-  ],
-  executiveRoles: [
-    "Central President, GCDA Pakistan (2015–Present)",
-    "Chief Medical Officer / Consultant, Public Health Sector (2010–Present)",
-    "Director Health Services, Lahore Division (2007–2010)",
-    "Senior Medical Officer, Services Hospital, Lahore (2000–2007)",
-  ],
-  achievements: [
-    "Led the historical negotiation team for the approval of the 4-Tier Promotion Structure for General Cadre Doctors.",
-    "Unified over 15,000 doctors across Pakistan under a single administrative and welfare platform.",
-    "Authored the National Public Health Emergency Guidelines adopted by provincial ministries.",
-    "Established the GCDA Legal Defense and Protection Cell for frontline medical workers.",
-  ],
-};
-
-export const boardTrusteesRows = [
+export const boardOftrustyRows = [
   {
     id: 1,
     rowTitle: "Core Advisory & Executive Leadership (Row 1)",
@@ -234,7 +192,6 @@ export const boardTrusteesRows = [
       },
     ],
   },
-
   {
     id: 2,
     rowTitle: "Provincial & Regional Command (Row 2)",
@@ -374,7 +331,6 @@ export const boardTrusteesRows = [
       },
     ],
   },
-
   {
     id: 3,
     rowTitle: "Central Secretariat & Operations Desk (Row 3)",
@@ -517,7 +473,6 @@ export const boardTrusteesRows = [
       },
     ],
   },
-
   {
     id: 4,
     rowTitle: "Extended Governance & Task Force Desk (Row 4)",

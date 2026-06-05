@@ -6,18 +6,18 @@ const MissionVision = () => {
     <div className="w-full bg-gray-50 min-h-screen font-sans">
       
       {/* 🖤 1. خوبصورت ہیڈر بینر (مکمل چوڑائی میں) */}
-      <div className="w-full bg-gradient-to-r from-[#072F1D] to-[#0A4429] text-white py-20 px-4 text-center relative overflow-hidden shadow-inner">
-        <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
-        <div className="relative z-10 max-w-4xl mx-auto animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            Our Mission & Vision
-          </h1>
-          <div className="w-24 h-1 bg-[#e67e22] mx-auto mb-4 rounded"></div>
-          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Discover the foundational principles, core mandates, and operational pillars driving the General Cadre Doctors Association.
-          </p>
-        </div>
-      </div>
+      <div className="w-full bg-gradient-to-r from-[#072F1D] to-[#0A4429] text-white py-10 md:py-12 px-4 text-center relative overflow-hidden shadow-inner">
+  <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
+  <div className="relative z-10 max-w-4xl mx-auto animate-fade-in">
+    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+      Our Mission & Vision
+    </h1>
+    <div className="w-24 h-1 bg-[#e67e22] mx-auto mb-4 rounded"></div>
+    {/* <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+      Discover the foundational principles, core mandates, and operational pillars driving the General Cadre Doctors Association.
+    </p> */}
+  </div>
+</div>
 
       {/* 📦 2. مین کنٹینٹ کا ایریا */}
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-16">

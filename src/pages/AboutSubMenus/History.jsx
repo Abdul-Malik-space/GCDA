@@ -32,21 +32,21 @@ const History = () => {
     <div className="w-full bg-gray-50 min-h-screen font-sans antialiased selection:bg-[#1A7963] selection:text-white">
       
       {/* 🖤 1. خوبصورت ہیڈر بینر (Full Width Banner) */}
-      <div className="w-full bg-gradient-to-r from-[#072F1D] to-[#0A4429] text-white py-20 px-4 text-center relative overflow-hidden shadow-inner">
-        <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
-        <div className="relative z-10 max-w-4xl mx-auto animate-fade-in">
-          <span className="text-[#e67e22] text-xs font-bold tracking-widest uppercase bg-[#e67e22]/10 px-3 py-1 rounded-full">
-            Our Journey & Legacy
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mt-3 mb-4">
-            History of GCDA Pakistan
-          </h1>
-          <div className="w-24 h-1 bg-[#e67e22] mx-auto mb-4 rounded"></div>
-          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
-            Explore the historical milestones, strategic achievements, and legal battles that shaped the primary and secondary public healthcare infrastructure of Punjab.
-          </p>
-        </div>
-      </div>
+      <div className="w-full bg-gradient-to-r from-[#072F1D] to-[#0A4429] text-white py-10 md:py-12 px-4 text-center relative overflow-hidden shadow-inner">
+  <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
+  <div className="relative z-10 max-w-4xl mx-auto animate-fade-in">
+    {/* <span className="text-[#e67e22] text-xs font-bold tracking-widest uppercase bg-[#e67e22]/10 px-3 py-1 rounded-full">
+      Our Journey & Legacy
+    </span> */}
+    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mt-3 mb-4">
+      History of GCDA Pakistan
+    </h1>
+    <div className="w-24 h-1 bg-[#e67e22] mx-auto mb-4 rounded"></div>
+    {/* <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
+      Explore the historical milestones, strategic achievements, and legal battles that shaped the primary and secondary public healthcare infrastructure of Punjab.
+    </p> */}
+  </div>
+</div>
 
       {/* 📦 مین کنٹینٹ ہولڈر */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-16">

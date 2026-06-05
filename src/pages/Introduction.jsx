@@ -6,18 +6,18 @@ const Introduction = () => {
     <div className="w-full bg-gray-50 min-h-screen font-sans">
       
       {/* 🖤 1. گیلری جیسا خوبصورت ہیڈر بینر */}
-      <div className="w-full bg-gradient-to-r from-[#072F1D] to-[#0A4429] text-white py-16 px-4 text-center relative overflow-hidden shadow-inner">
-        <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            Introduction to GCDA
-          </h1>
-          <div className="w-24 h-1 bg-[#e67e22] mx-auto mb-4 rounded"></div>
-          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            The collective voice of general cadre medical practitioners in Pakistan.
-          </p>
-        </div>
-      </div>
+      <div className="w-full bg-gradient-to-r from-[#072F1D] to-[#0A4429] text-white py-10 md:py-12 px-4 text-center relative overflow-hidden shadow-inner">
+  <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
+  <div className="relative z-10 max-w-4xl mx-auto">
+    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+      Introduction to GCDA
+    </h1>
+    <div className="w-24 h-1 bg-[#e67e22] mx-auto mb-4 rounded"></div>
+    {/* <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+      The collective voice of general cadre medical practitioners in Pakistan.
+    </p> */}
+  </div>
+</div>
 
       {/* 📦 2. مین کنٹینٹ کا ایریا */}
       <div className="max-w-5xl mx-auto px-4 md:px-6 py-12">

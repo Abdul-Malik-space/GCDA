@@ -1,3 +1,5 @@
+// src/pages/Committees/Committees.jsx
+
 import React, { useState } from "react";
 import { committeesLeadership, committeesRows } from "../../data/committeesData";
 
@@ -52,7 +54,9 @@ const ProfileDetail = ({ member, onClose }) => (
             <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">
               Hospital
             </p>
-            <p className="text-sm font-semibold text-slate-700 mt-1">{member.hospital}</p>
+            <p className="text-sm font-semibold text-slate-700 mt-1">
+              {member.hospital}
+            </p>
           </div>
 
           <div className="bg-white rounded-xl border border-slate-200 p-3">
@@ -68,7 +72,9 @@ const ProfileDetail = ({ member, onClose }) => (
             <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">
               Contact
             </p>
-            <p className="text-sm font-semibold text-slate-700 mt-1">{member.phone}</p>
+            <p className="text-sm font-semibold text-slate-700 mt-1">
+              {member.phone}
+            </p>
           </div>
         </div>
 
@@ -97,54 +103,43 @@ const ProfileDetail = ({ member, onClose }) => (
 );
 
 const CommitteeMemberCard = ({ member, isActive, onClick }) => (
-  <button
-    type="button"
+  <div
+    role="button"
+    tabIndex={0}
     onClick={onClick}
-    className={`text-left group rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md bg-white
-      ${
-        isActive
-          ? "border-[#1A7963] ring-4 ring-emerald-100"
-          : "border-slate-200 hover:border-emerald-200"
-      }
-    `}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" || e.key === " ") onClick();
+    }}
+    className={`bg-white rounded-xl border p-3 flex flex-col text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden group w-full cursor-pointer ${
+      isActive
+        ? "border-[#1A7963] ring-4 ring-emerald-100"
+        : "border-slate-200 hover:border-emerald-200"
+    }`}
   >
-    <div className="flex items-center gap-3">
-      <div className="w-16 h-16 rounded-full overflow-hidden border border-slate-200 bg-slate-50 p-1 flex-shrink-0">
-        <img
-          src={member.imgSrc || getAvatarUrl(member.name)}
-          alt={member.name}
-          className="w-full h-full rounded-full object-cover"
-          onError={(e) => {
-            e.currentTarget.src = getAvatarUrl(member.name);
-          }}
-        />
-      </div>
-
-      <div className="min-w-0">
-        <h4 className="text-sm font-black text-slate-900 leading-tight group-hover:text-[#1A7963] transition-colors">
-          {member.name}
-        </h4>
-
-        <p className="text-[11px] font-bold text-slate-500 mt-1 line-clamp-2">
-          {member.role}
-        </p>
-
-        <p className="text-[10px] font-bold text-emerald-700 mt-2">
-          {member.region}
-        </p>
-      </div>
+    <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100 mb-3">
+      <img
+        src={member.imgSrc || getAvatarUrl(member.name)}
+        alt={member.name}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        onError={(e) => {
+          e.currentTarget.src = getAvatarUrl(member.name);
+        }}
+      />
     </div>
-  </button>
+
+    <h3 className="font-black text-slate-800 tracking-tight transition-colors duration-300 group-hover:text-[#1A7963] text-sm line-clamp-1">
+      {member.name}
+    </h3>
+
+    <p className="text-[11px] font-semibold text-slate-500 mt-1 line-clamp-1">
+      {member.role || member.designation || "GCDA Committee Member"}
+    </p>
+  </div>
 );
 
 const Committees = () => {
   const [selectedProfile, setSelectedProfile] = useState(null);
-
-  const allMembers = committeesRows.flatMap((committee) => committee.members || []);
-
-  const regionsCount = new Set(
-    allMembers.map((member) => member.region).filter(Boolean)
-  ).size;
+  const [openDescriptions, setOpenDescriptions] = useState({});
 
   const handleProfileClick = (committeeId, member) => {
     setSelectedProfile((prev) => {
@@ -156,81 +151,71 @@ const Committees = () => {
     });
   };
 
+  const toggleDescription = (committeeId) => {
+    setOpenDescriptions((prev) => ({
+      ...prev,
+      [committeeId]: !prev[committeeId],
+    }));
+  };
+
   return (
-    <div className="w-full bg-white min-h-screen font-sans">
-      {/* Hero Banner */}
-      <div
-        className="w-full text-white py-20 px-4 text-left relative overflow-hidden bg-cover bg-center"
+    <div className="w-full bg-gray-50 min-h-screen font-sans">
+      <section
+        className="relative w-full bg-cover bg-center py-10 md:py-12 px-4 text-center overflow-hidden"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1600')",
+            "url('https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1600&auto=format&fit=crop')",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/45" />
-        <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(circle,#fff_1px,transparent_1px)] [background-size:15px_15px]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80" />
+        <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(circle,#fff_1px,transparent_1px)] [background-size:14px_14px]" />
 
-        <div className="relative z-10 max-w-none ml-0 md:ml-8 lg:ml-10">
-          <span className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-[10px] font-black tracking-[0.3em] uppercase px-5 py-2 rounded-full mb-5 shadow-lg">
-            {committeesLeadership.subtitle}
-          </span>
-
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4 drop-shadow-lg">
+        <div className="relative z-10">
+          <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight drop-shadow-lg">
             {committeesLeadership.title}
           </h1>
-
-          <div className="w-24 h-1 bg-[#e67e22] mb-6 rounded-full" />
-
-          <p className="text-white/95 font-medium text-base md:text-lg max-w-3xl leading-relaxed">
-            {committeesLeadership.description}
-          </p>
-
-          <div className="flex flex-wrap gap-4 mt-9">
-            <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10">
-              <p className="text-2xl font-black text-white">{committeesRows.length}</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wider">Committees</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10">
-              <p className="text-2xl font-black text-white">{allMembers.length}</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wider">
-                Committee Profiles
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10">
-              <p className="text-2xl font-black text-white">{regionsCount}</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wider">Regions</p>
-            </div>
-          </div>
+          <div className="w-20 h-1 bg-[#e67e22] mx-auto mt-3 rounded-full" />
         </div>
-      </div>
+      </section>
 
-      {/* Committees Content */}
-      <div className="w-full px-4 md:px-8 lg:px-10 py-12">
-        <div className="max-w-none">
-          {committeesRows.map((committee) => {
+      <div className="w-full px-4 md:px-6 py-5">
+        <div className="w-full space-y-5">
+          {committeesRows.map((committee, index) => {
             const activeMember =
               selectedProfile?.committeeId === committee.id
                 ? selectedProfile.member
                 : null;
 
+            const isDescriptionOpen = !!openDescriptions[committee.id];
+
             return (
               <section
                 key={committee.id}
-                className="border-t border-[#d6b35a] py-8 first:border-t-0 first:pt-0"
+                className={`w-full pt-4 ${
+                  index === 0 ? "" : "border-t border-gray-200"
+                }`}
               >
-                <div className="max-w-6xl">
-                  <h2 className="text-2xl md:text-3xl font-black text-[#00334d] leading-tight">
+                <div className="w-full">
+                  <h3 className="text-base font-black text-gray-800 flex items-center gap-2">
+                    <span className="w-1.5 h-5 bg-emerald-600 rounded-full" />
                     {committee.committeeName}
-                  </h2>
+                  </h3>
 
-                  <div className="w-full h-px bg-[#d6b35a] mt-3 mb-4" />
+                  <button
+                    type="button"
+                    onClick={() => toggleDescription(committee.id)}
+                    className="mt-2 mb-3 text-xs font-black text-[#1A7963] bg-white border border-emerald-100 hover:bg-emerald-50 px-3 py-1.5 rounded-lg transition-all"
+                  >
+                    {isDescriptionOpen ? "Hide Description" : "Show Description"}
+                  </button>
 
-                  <p className="whitespace-pre-line text-[15px] md:text-base text-slate-700 leading-7 max-w-5xl">
-                    {committee.description}
-                  </p>
+                  {isDescriptionOpen && (
+                    <p className="text-sm text-slate-600 leading-relaxed bg-white border border-slate-200 rounded-xl p-4 mb-4 w-full text-justify">
+                      {committee.description?.replace(/\s+/g, " ")}
+                    </p>
+                  )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                     {committee.members?.map((member) => (
                       <CommitteeMemberCard
                         key={member.id}

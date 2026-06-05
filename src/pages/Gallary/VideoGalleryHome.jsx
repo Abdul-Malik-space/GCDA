@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { videoData } from "../../data/videoData";
 
 const getYouTubeId = (url = "") => {
@@ -15,9 +15,31 @@ const getThumbnail = (url) => {
   return id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : "";
 };
 
+const getLatestYear = () => {
+  if (!videoData?.length) return "2025";
+
+  return videoData
+    .map((item) => item.year)
+    .filter(Boolean)
+    .sort((a, b) => Number(b) - Number(a))[0];
+};
+
 function VideoGalleryHome() {
-  const [selectedYear, setSelectedYear] = useState("2025");
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const urlYear = searchParams.get("year");
+  const savedYear = localStorage.getItem("selectedVideoYear");
+  const latestYear = getLatestYear();
+
+  const initialYear =
+    videoData.some((item) => item.year === urlYear)
+      ? urlYear
+      : videoData.some((item) => item.year === savedYear)
+      ? savedYear
+      : latestYear;
+
+  const [selectedYear, setSelectedYear] = useState(initialYear);
 
   const selectedYearIndex = Math.max(
     videoData.findIndex((item) => item.year === selectedYear),
@@ -42,18 +64,31 @@ function VideoGalleryHome() {
   const canGoPrev = selectedYearIndex > 0;
   const canGoNext = selectedYearIndex < videoData.length - 1;
 
+  const updateSelectedYear = (year) => {
+    if (!year) return;
+
+    setSelectedYear(year);
+    localStorage.setItem("selectedVideoYear", year);
+    setSearchParams({ year });
+  };
+
   const handlePrevYear = () => {
     if (!canGoPrev) return;
 
     const prevYear = videoData[selectedYearIndex - 1]?.year;
-    if (prevYear) setSelectedYear(prevYear);
+    updateSelectedYear(prevYear);
   };
 
   const handleNextYear = () => {
     if (!canGoNext) return;
 
     const nextYear = videoData[selectedYearIndex + 1]?.year;
-    if (nextYear) setSelectedYear(nextYear);
+    updateSelectedYear(nextYear);
+  };
+
+  const openSeminar = (event) => {
+    localStorage.setItem("selectedVideoYear", selectedYear);
+    navigate(`/videos/${event.id}?year=${selectedYear}`);
   };
 
   const containerVariants = {
@@ -62,7 +97,7 @@ function VideoGalleryHome() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 35 },
+    hidden: { opacity: 0, y: 25 },
     show: {
       opacity: 1,
       y: 0,
@@ -71,112 +106,77 @@ function VideoGalleryHome() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 relative overflow-hidden w-full pb-20">
-      {/* Hero Banner */}
-      <div className="relative h-[55vh] w-full flex items-center justify-center bg-gray-950 overflow-hidden">
-        <motion.img
-          src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071"
-          alt="GCDA Video Header"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
-          animate={{ scale: [1.02, 1.06] }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "linear",
-          }}
-        />
+    <div className="min-h-screen bg-gray-50 w-full pb-20 font-sans">
+      {/* Compact Hero Section */}
+      <section
+        className="relative w-full bg-cover bg-center py-10 md:py-12 px-4 text-center overflow-hidden"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop')",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80" />
+        <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(circle,#fff_1px,transparent_1px)] [background-size:14px_14px]" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent" />
-
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-xl">
+        <div className="relative z-10">
+          <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight drop-shadow-lg">
             GCDA Video Gallery
           </h1>
-
-          <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-[#0F765E] mb-6 rounded-full" />
-
-          <p className="text-gray-200 text-sm md:text-lg font-medium max-w-2xl">
-            Watch GCDA seminar albums, keynote sessions, policy discussions, and organizational videos.
-          </p>
+          <div className="w-20 h-1 bg-[#e67e22] mx-auto mt-3 rounded-full" />
         </div>
-      </div>
+      </section>
 
-      <div className="px-4 sm:px-6 lg:px-12 max-w-[1700px] mx-auto w-full pt-10">
-        {/* Year Selector - 3 Years Only */}
-        <div className="mb-12 bg-white border border-gray-200 rounded-2xl shadow-sm p-4">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#0F765E] mb-2">
-                Select Year
-              </p>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-5">
+        {/* Small Year Selector on Right Side */}
+        <div className="flex justify-end mb-5">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-2 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handlePrevYear}
+              disabled={!canGoPrev}
+              className={`w-9 h-9 rounded-lg border font-black text-lg transition-all flex items-center justify-center ${
+                canGoPrev
+                  ? "bg-white text-gray-700 border-gray-200 hover:bg-[#0F765E] hover:text-white hover:border-[#0F765E]"
+                  : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+              }`}
+              title="Previous Year"
+            >
+              ‹
+            </button>
 
-              <p className="text-sm text-gray-500 font-medium">
-                Use arrows to browse years one by one.
-              </p>
+            <div className="grid grid-cols-3 gap-2">
+              {visibleYears.map((data) => (
+                <button
+                  key={data.year}
+                  onClick={() => updateSelectedYear(data.year)}
+                  className={`w-[70px] px-2 py-2 rounded-lg font-bold text-xs transition-all duration-300 ${
+                    selectedYear === data.year
+                      ? "bg-[#0F765E] text-white shadow-md"
+                      : "bg-gray-50 text-gray-600 hover:text-[#0F765E] border border-gray-200"
+                  }`}
+                >
+                  {data.year}
+                </button>
+              ))}
             </div>
 
-            <div className="lg:ml-auto flex items-center justify-end gap-3">
-              <button
-                type="button"
-                onClick={handlePrevYear}
-                disabled={!canGoPrev}
-                className={`w-11 h-11 rounded-xl border font-black text-lg transition-all flex items-center justify-center ${
-                  canGoPrev
-                    ? "bg-white text-gray-700 border-gray-200 hover:bg-[#0F765E] hover:text-white hover:border-[#0F765E]"
-                    : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
-                }`}
-                title="Previous Year"
-              >
-                ‹
-              </button>
-
-              <div className="grid grid-cols-3 gap-3">
-                {visibleYears.map((data) => (
-                  <button
-                    key={data.year}
-                    onClick={() => setSelectedYear(data.year)}
-                    className={`w-[76px] sm:w-[88px] px-3 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 transform active:scale-95 ${
-                      selectedYear === data.year
-                        ? "bg-[#0F765E] text-white shadow-lg scale-105"
-                        : "bg-gray-50 text-gray-600 hover:text-[#0F765E] border border-gray-200"
-                    }`}
-                  >
-                    {data.year}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={handleNextYear}
-                disabled={!canGoNext}
-                className={`w-11 h-11 rounded-xl border font-black text-lg transition-all flex items-center justify-center ${
-                  canGoNext
-                    ? "bg-white text-gray-700 border-gray-200 hover:bg-[#0F765E] hover:text-white hover:border-[#0F765E]"
-                    : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
-                }`}
-                title="Next Year"
-              >
-                ›
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={handleNextYear}
+              disabled={!canGoNext}
+              className={`w-9 h-9 rounded-lg border font-black text-lg transition-all flex items-center justify-center ${
+                canGoNext
+                  ? "bg-white text-gray-700 border-gray-200 hover:bg-[#0F765E] hover:text-white hover:border-[#0F765E]"
+                  : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+              }`}
+              title="Next Year"
+            >
+              ›
+            </button>
           </div>
         </div>
 
-        <div className="mb-8">
-          <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#0F765E] mb-2">
-            {selectedYear} Seminar Albums
-          </p>
-
-          <h2 className="text-3xl font-black text-gray-900">
-            Video Seminar Collection
-          </h2>
-
-          <div className="w-20 h-1 bg-[#e67e22] mt-4 rounded-full" />
-        </div>
-
-        {/* Seminar Cards: 4 in one row */}
+        {/* Seminar Cards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedYear}
@@ -184,58 +184,45 @@ function VideoGalleryHome() {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7"
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5"
           >
             {currentYearData && currentYearData.events.length > 0 ? (
               currentYearData.events.map((event) => (
                 <motion.div
                   key={event.id}
                   variants={itemVariants}
-                  whileHover={{ y: -6 }}
-                  onClick={() => navigate(`/videos/${event.id}`)}
-                  className="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200/70 overflow-hidden cursor-pointer flex flex-col"
+                  whileHover={{ y: -4 }}
+                  onClick={() => openSeminar(event)}
+                  className="group bg-white rounded-xl shadow-sm hover:shadow-lg border border-gray-200 overflow-hidden cursor-pointer flex flex-col transition-all"
                 >
                   <div className="relative h-56 w-full bg-gray-100 overflow-hidden">
                     <img
                       src={event.coverImage || getThumbnail(event.frontVideo)}
                       alt={event.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
 
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-opacity" />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors" />
 
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-full bg-white/95 text-red-600 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                        <span className="text-2xl ml-1">▶</span>
-                      </div>
-                    </div>
-
-                    <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#0F765E] text-xs font-bold px-3 py-1.5 rounded-xl shadow-md">
-                      🎬 {event.videos.length} Videos
+                    <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-md text-[#0F765E] text-[10px] font-bold px-2.5 py-1 rounded-lg shadow-sm">
+                      {event.videos.length} Videos
                     </span>
                   </div>
 
-                  <div className="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#0F765E] mb-2">
-                        {event.date} • {event.location}
-                      </p>
+                  <div className="p-4">
+                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#0F765E] mb-2">
+                      {event.date} {event.location ? `• ${event.location}` : ""}
+                    </p>
 
-                      <h3 className="text-lg font-extrabold text-gray-800 mb-2 group-hover:text-[#0F765E] transition-colors line-clamp-2">
-                        {event.title}
-                      </h3>
+                    <h3 className="text-base font-black text-gray-900 group-hover:text-[#0F765E] transition-colors line-clamp-2">
+                      {event.title}
+                    </h3>
 
-                      <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">
+                    {event.description && (
+                      <p className="text-xs text-gray-500 leading-relaxed mt-2 line-clamp-3">
                         {event.description}
                       </p>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-gray-100 text-sm font-bold text-[#0F765E] flex items-center justify-between">
-                      <span>Open Seminar Videos</span>
-                      <span className="bg-emerald-50 group-hover:bg-[#0F765E] group-hover:text-white p-1.5 rounded-lg transition-colors">
-                        →
-                      </span>
-                    </div>
+                    )}
                   </div>
                 </motion.div>
               ))
