@@ -75,9 +75,9 @@ function SimpleTable({ title, columns, rows }) {
 function BhakkarProfileDetails() {
   const { profileId } = useParams();
 
-  const profile = bhakkarDistrictData.profiles.find(
-    (item) => item.id === profileId
-  );
+const profile = bhakkarDistrictData.profiles.find(
+  (item) => String(item.id) === String(profileId)
+);
 
   if (!profile) {
     return (
