@@ -10,42 +10,44 @@ function Navbar({ onOpenMembership, setActivePage }) {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const [activeBranchMenu, setActiveBranchMenu] = useState(null);
+  const [activeDesktopNestedMenu, setActiveDesktopNestedMenu] = useState(null);
   const [activeMobileMenu, setActiveMobileMenu] = useState(null);
   const [activeMobileBranchType, setActiveMobileBranchType] = useState(null);
+  const [activeMobileNestedMenu, setActiveMobileNestedMenu] = useState(null);
 
   const provinces = [
-    "Punjab",
-    "Sindh",
-    "Balochistan",
-    "KPK",
-    "Gilgit Baltistan",
-    "Azad Jammu Kashmir",
+    { label: "Punjab", slug: "punjab" },
+    { label: "Sindh", slug: "sindh" },
+    { label: "Balochistan", slug: "balochistan" },
+    { label: "KPK", slug: "kpk" },
+    { label: "Gilgit Baltistan", slug: "gilgit-baltistan" },
+    { label: "Azad Jammu Kashmir", slug: "azad-jammu-kashmir" },
   ];
 
-  const districts = [
-    "Attock District",
-    "Bahawalnagar District",
-    "Bahawalpur District",
-    "Bhakkar District",
-    "Chiniot District",
-    "Chakwal District",
-    "DG Khan District",
-    "Faisalabad District",
-    "Gujranwala District",
-    "Gujrat District",
-    "Hafizabad District",
-    "Jehlum District",
-    "Kasur District",
-    "Khanewal District",
-    "Khushab",
-    "Lahore",
-    "Layyah",
-    "Lodharan",
-    "Mandi Bahauddin",
-    "Mianwali",
-    "Multan",
-    "Muzaffar Gargh",
-  ];
+const districts = [
+  { label: "Attock District", slug: "attock-district" },
+  { label: "Bahawalnagar District", slug: "bahawalnagar-district" },
+  { label: "Bahawalpur District", slug: "bahawalpur-district" },
+  { label: "Bhakkar District", slug: "bhakkar-district" },
+  { label: "Chiniot District", slug: "chiniot-district" },
+  { label: "Chakwal District", slug: "chakwal-district" },
+  { label: "DG Khan District", slug: "dg-khan-district" },
+  { label: "Faisalabad District", slug: "faisalabad-district" },
+  { label: "Gujranwala District", slug: "gujranwala-district" },
+  { label: "Gujrat District", slug: "gujrat-district" },
+  { label: "Hafizabad District", slug: "hafizabad-district" },
+  { label: "Jehlum District", slug: "jehlum-district" },
+  { label: "Kasur District", slug: "kasur-district" },
+  { label: "Khanewal District", slug: "khanewal-district" },
+  { label: "Khushab", slug: "khushab" },
+  { label: "Lahore", slug: "lahore" },
+  { label: "Layyah", slug: "layyah" },
+  { label: "Lodharan", slug: "lodharan" },
+  { label: "Mandi Bahauddin", slug: "mandi-bahauddin" },
+  { label: "Mianwali", slug: "mianwali" },
+  { label: "Multan", slug: "multan" },
+  { label: "Muzaffar Gargh", slug: "muzaffar-gargh" },
+];
 
   const aboutLinks = [
     { label: "Introduction", to: "/about/introduction" },
@@ -71,6 +73,81 @@ function Navbar({ onOpenMembership, setActivePage }) {
     { label: "Upcoming Programs", to: "/programs/upcoming" },
     { label: "Health Programs", to: "/programs/health" },
     { label: "Training Programs", to: "/programs/training" },
+    { label: "Training Session", to: "/programs/training-session" },
+    { label: "ACSM Activities", to: "/programs/acsm-activities" },
+    { label: "International Programs", to: "/programs/international-programs" },
+  ];
+
+  const serviceMatterLinks = [
+    { label: "Rules & Regulation", to: "/service-matter/rules-regulation" },
+    { label: "Policies", to: "/service-matter/policies" },
+    { label: "Service Matters", to: "/service-matter/service-matters" },
+    { label: "Service Case Laws", to: "/service-matter/service-case-laws" },
+    { label: "Taxation Matters", to: "/service-matter/taxation-matters" },
+  ];
+
+  const jobPortalLinks = [
+    {
+      label: "Jobs in Primary & Secondary Health Care Dept",
+      to: "/job-portal/primary-secondary-health-care-dept",
+    },
+    { label: "Jobs in SHC & MED", to: "/job-portal/shc-med" },
+    { label: "Job in Private Sector", to: "/job-portal/private-sector" },
+    { label: "Overseas Jobs", to: "/job-portal/overseas-jobs" },
+  ];
+
+  const registrationHccLinks = [
+    { label: "Laboratory", to: "/registration-hcc/laboratory" },
+    { label: "Collection Center", to: "/registration-hcc/collection-center" },
+    { label: "Clinic", to: "/registration-hcc/clinic" },
+    { label: "Hospital", to: "/registration-hcc/hospital" },
+  ];
+
+  const doctorsInitiativeLinks = [
+    {
+      label: "Children Scholarships",
+      to: "/doctors-initiatives/children-scholarships",
+    },
+    {
+      label: "Educational Gold Medals",
+      to: "/doctors-initiatives/educational-gold-medals",
+    },
+    {
+      label: "International Trainings",
+      to: "/doctors-initiatives/international-trainings",
+    },
+    { label: "Housing Projects", to: "/doctors-initiatives/housing-projects" },
+    {
+      label: "Adopt a Doctor Scheme",
+      to: "/doctors-initiatives/adopt-a-doctor-scheme",
+    },
+    {
+      label: "Lab Test Subsidised",
+      to: "/doctors-initiatives/lab-test-subsidised",
+    },
+    {
+      label: "Subsidised Hospital Care",
+      to: "/doctors-initiatives/subsidised-hospital-care",
+    },
+    { label: "Health Insurance", to: "/doctors-initiatives/health-insurance" },
+    {
+      label: "Medical Students",
+      children: [
+        {
+          label: "Career Counsellings (National & International)",
+          to: "/doctors-initiatives/medical-students/career-counsellings",
+        },
+      ],
+    },
+    { label: "Dr 4 Dr Program", to: "/doctors-initiatives/dr-4-dr-program" },
+  ];
+
+  const consultationHubLinks = [
+    { label: "Skin Disease", to: "/consultation-hub/skin-disease" },
+    { label: "Stomach", to: "/consultation-hub/stomach" },
+    { label: "Respiratory", to: "/consultation-hub/respiratory" },
+    { label: "Digestive", to: "/consultation-hub/digestive" },
+    { label: "Reproductive", to: "/consultation-hub/reproductive" },
   ];
 
   const diseaseLinks = [
@@ -82,17 +159,26 @@ function Navbar({ onOpenMembership, setActivePage }) {
     { label: "Video Gallery", to: "/videos" },
     { label: "Photos Gallery", to: "/gallery" },
     { label: "Press Clipping Gallery", to: "/press-gallery" },
+    { label: "Procurement Videos", to: "/gallery/procurement-videos" },
+    { label: "Service Matter Videos", to: "/gallery/service-matter-videos" },
   ];
 
   const contactLinks = [
-    { label: "Contact Info", to: "/contact/info" },
-    { label: "Ask a Question", to: "/contact/ask" },
-  ];
+  {
+    label: "Contact Info",
+    to: "/contact/contact-info",
+  },
+  {
+    label: "Ask a Question",
+    to: "/contact/ask-a-question",
+  },
+];
 
   const closeMobileMenu = () => {
     setIsOpen(false);
     setActiveMobileMenu(null);
     setActiveMobileBranchType(null);
+    setActiveMobileNestedMenu(null);
   };
 
   const handleMembershipOpen = () => {
@@ -108,10 +194,15 @@ function Navbar({ onOpenMembership, setActivePage }) {
   const toggleMobileMenu = (menuName) => {
     setActiveMobileMenu((prev) => (prev === menuName ? null : menuName));
     setActiveMobileBranchType(null);
+    setActiveMobileNestedMenu(null);
   };
 
   const toggleMobileBranchType = (type) => {
     setActiveMobileBranchType((prev) => (prev === type ? null : type));
+  };
+
+  const toggleMobileNestedMenu = (menuName) => {
+    setActiveMobileNestedMenu((prev) => (prev === menuName ? null : menuName));
   };
 
   const MobileLink = ({ to, children, extraClass = "" }) => (
@@ -137,11 +228,65 @@ function Navbar({ onOpenMembership, setActivePage }) {
     </button>
   );
 
+  const MobileNestedLinks = ({ links, parentId }) => (
+    <div className="bg-slate-50">
+      {links.map((item) => {
+        const nestedId = `${parentId}-${item.label}`;
+
+        if (item.children?.length) {
+          return (
+            <div key={nestedId}>
+              <button
+                type="button"
+                onClick={() => toggleMobileNestedMenu(nestedId)}
+                className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50 hover:text-[#1A7963]"
+              >
+                <span>{item.label}</span>
+                <span className="text-[#1A7963]">
+                  {activeMobileNestedMenu === nestedId ? "−" : "+"}
+                </span>
+              </button>
+
+              {activeMobileNestedMenu === nestedId && (
+                <div className="bg-white">
+                  {item.children.map((child) => (
+                    <MobileLink
+                      key={child.to}
+                      to={child.to}
+                      extraClass="pl-8 text-xs"
+                    >
+                      {child.label}
+                    </MobileLink>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        }
+
+        return (
+          <MobileLink key={item.to} to={item.to}>
+            {item.label}
+          </MobileLink>
+        );
+      })}
+    </div>
+  );
+
+  const DesktopLink = ({ to, children }) => (
+    <Link
+      to={to}
+      className="py-3 hover:text-[#1A7963] transition-colors cursor-pointer whitespace-nowrap"
+    >
+      {children}
+    </Link>
+  );
+
   const DesktopDropdown = ({ label, links, width = "w-56" }) => (
-    <div className="relative group py-5">
+    <div className="relative group py-3">
       <button
         type="button"
-        className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer"
+        className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
       >
         {label}
         <svg
@@ -166,13 +311,91 @@ function Navbar({ onOpenMembership, setActivePage }) {
           <Link
             key={item.to}
             to={item.to}
-            className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${
-              index !== links.length - 1 ? "border-b border-gray-100" : ""
-            }`}
+            className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${index !== links.length - 1 ? "border-b border-gray-100" : ""
+              }`}
           >
             {item.label}
           </Link>
         ))}
+      </div>
+    </div>
+  );
+
+  const DesktopNestedDropdown = ({ label, links, width = "w-72" }) => (
+    <div
+      className="relative group py-3"
+      onMouseLeave={() => setActiveDesktopNestedMenu(null)}
+    >
+      <button
+        type="button"
+        className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
+      >
+        {label}
+        <svg
+          className="w-3 h-3 text-gray-500 mt-0.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2.5"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+
+      <div
+        className={`absolute left-0 mt-2 ${width} bg-white border border-gray-100 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm font-normal text-gray-700 py-2 z-50`}
+      >
+        {links.map((item, index) => {
+          const hasChildren = item.children?.length;
+
+          if (hasChildren) {
+            return (
+              <div
+                key={item.label}
+                className={`relative ${index !== links.length - 1 ? "border-b border-gray-100" : ""
+                  }`}
+                onMouseEnter={() => setActiveDesktopNestedMenu(item.label)}
+              >
+                <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] cursor-pointer">
+                  <span>{item.label}</span>
+                  <span className="text-gray-400">›</span>
+                </div>
+
+                {activeDesktopNestedMenu === item.label && (
+                  <div className="absolute left-full top-0 w-72 bg-white border border-gray-100 shadow-xl rounded-md py-2 z-50">
+                    {item.children.map((child, childIndex) => (
+                      <Link
+                        key={child.to}
+                        to={child.to}
+                        className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${childIndex !== item.children.length - 1
+                          ? "border-b border-gray-100"
+                          : ""
+                          }`}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          }
+
+          return (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${index !== links.length - 1 ? "border-b border-gray-100" : ""
+                }`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
@@ -288,26 +511,20 @@ function Navbar({ onOpenMembership, setActivePage }) {
       {/* MAIN NAVBAR */}
       <div className="w-full bg-white shadow-md border-b border-gray-100">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between min-h-[66px] py-1.5 items-center gap-6">
-            <div className="hidden lg:flex items-center gap-x-4 xl:gap-x-7 font-semibold text-gray-800 text-sm xl:text-[15px]">
-              <Link
-                to="/"
-                className="pb-1 transition-all cursor-pointer text-gray-600 hover:text-[#1A7963]"
-              >
-                Home
-              </Link>
-
-              
+          <div className="flex justify-between min-h-[62px] py-1.5 items-center gap-6">
+            <div className="hidden lg:flex flex-wrap items-center gap-x-4 xl:gap-x-5 gap-y-0 font-semibold text-gray-800 text-sm xl:text-[15px] leading-none flex-1">
+              <DesktopLink to="/">Home</DesktopLink>
 
               <DesktopDropdown label="About" links={aboutLinks} />
+
               {/* BRANCHES MAIN MENU */}
               <div
-                className="relative group py-5"
+                className="relative group py-3"
                 onMouseLeave={() => setActiveBranchMenu(null)}
               >
                 <button
                   type="button"
-                  className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer"
+                  className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
                 >
                   Branches
                   <svg
@@ -339,11 +556,11 @@ function Navbar({ onOpenMembership, setActivePage }) {
                       <div className="absolute left-full top-0 w-52 bg-white border border-gray-100 shadow-xl rounded-md py-2 z-50">
                         {provinces.map((province) => (
                           <Link
-                            key={province}
-                            to={`/branches/provincial/${province.toLowerCase()}`}
+                            key={province.slug}
+                            to={`/branches/provincial/${province.slug}`}
                             className="block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] border-b border-gray-50 last:border-none"
                           >
-                            {province}
+                            {province.label}
                           </Link>
                         ))}
                       </div>
@@ -362,94 +579,69 @@ function Navbar({ onOpenMembership, setActivePage }) {
                     {activeBranchMenu === "district" && (
                       <div className="absolute left-full top-0 w-56 bg-white border border-gray-100 shadow-xl rounded-md py-2 max-h-72 overflow-y-auto z-50">
                         {districts.map((district) => (
-                          <Link
-                            key={district}
-                            to={`/branches/district/${district.toLowerCase()}`}
-                            className="block px-4 py-1.5 hover:bg-gray-50 hover:text-[#1A7963] text-xs border-b border-gray-50 last:border-none"
-                          >
-                            {district}
-                          </Link>
-                        ))}
+  <Link
+    key={district.slug}
+    to={`/branches/district/${district.slug}`}
+    className="block px-4 py-1.5 hover:bg-gray-50 hover:text-[#1A7963] text-xs border-b border-gray-50 last:border-none"
+  >
+    {district.label}
+  </Link>
+))}
                       </div>
                     )}
                   </div>
                 </div>
               </div>
+
               <DesktopDropdown
                 label="Publication"
                 links={publicationLinks}
                 width="w-64"
               />
-              
-              
 
-              {/* Membership Dropdown */}
-              <div className="relative group py-5">
-                <button
-                  type="button"
-                  className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer"
-                >
-                  Membership
-                  <svg
-                    className="w-3 h-3 text-gray-500 mt-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2.5"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
+              <DesktopDropdown label="Programs" links={programLinks} width="w-60" />
+              <DesktopDropdown
+                label="Service Matter"
+                links={serviceMatterLinks}
+                width="w-60"
+              />
+              <DesktopDropdown
+                label="Job Portal"
+                links={jobPortalLinks}
+                width="w-80"
+              />
+              <DesktopDropdown
+                label="Registration with HCC"
+                links={registrationHccLinks}
+                width="w-64"
+              />
+              <DesktopNestedDropdown
+                label="Doctors Initiatives"
+                links={doctorsInitiativeLinks}
+                width="w-72"
+              />
+              <DesktopDropdown
+                label="Consultation Hub"
+                links={consultationHubLinks}
+                width="w-56"
+              />
+              <DesktopLink to="/pharmaceutical-updates">
+                Pharmaceutical Updates
+              </DesktopLink>
+              <DesktopLink to="/medical-tourism">Medical Tourism</DesktopLink>
 
-                <div className="absolute left-0 mt-2 w-60 bg-white border border-gray-100 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm font-normal text-gray-700 py-2 z-50">
-                  <Link
-                    to="/membership/overview"
-                    className="block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] border-b border-gray-100"
-                  >
-                    Membership Overview
-                  </Link>
-
-                  <button
-                    type="button"
-                    onClick={handleMembershipOpen}
-                    className="w-full text-left block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] border-b border-gray-100 font-normal cursor-pointer"
-                  >
-                    Online Membership Form
-                  </button>
-
-                  <Link
-                    to="/membership/doctors-form"
-                    className="block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] border-b border-gray-100"
-                  >
-                    Doctors Form
-                  </Link>
-
-                  <Link
-                    to="/membership/students"
-                    className="block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963]"
-                  >
-                    Membership for Students
-                  </Link>
-                </div>
-              </div>
-
-              <DesktopDropdown label="Programs" links={programLinks} width="w-52" />
               <DesktopDropdown label="Diseases" links={diseaseLinks} width="w-44" />
-              <DesktopDropdown label="Gallery" links={galleryLinks} width="w-52" />
+              <DesktopDropdown label="Gallery" links={galleryLinks} width="w-60" />
               <DesktopDropdown label="Contact" links={contactLinks} width="w-48" />
             </div>
 
             {/* Desktop Search */}
-            <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
+            <div className="hidden 2xl:flex items-center space-x-4 flex-shrink-0">
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Search"
-                  className="bg-gray-50 border border-gray-200 rounded-md pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-[#1A7963] w-32 xl:w-44"
+                  className="bg-gray-50 border border-gray-200 rounded-md pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-[#1A7963] w-44"
                 />
                 <svg
                   className="w-4 h-4 text-gray-400 absolute left-3 top-3"
@@ -576,9 +768,11 @@ function Navbar({ onOpenMembership, setActivePage }) {
             <nav className="pb-6">
               <MobileLink to="/">Home</MobileLink>
 
-              
-
               <MobileToggle id="about" label="About" />
+              {activeMobileMenu === "about" && (
+                <MobileNestedLinks links={aboutLinks} parentId="about" />
+              )}
+
               <MobileToggle id="branches" label="Branches" />
               {activeMobileMenu === "branches" && (
                 <div className="bg-slate-50">
@@ -597,11 +791,11 @@ function Navbar({ onOpenMembership, setActivePage }) {
                     <div className="bg-white">
                       {provinces.map((province) => (
                         <MobileLink
-                          key={province}
-                          to={`/branches/provincial/${province.toLowerCase()}`}
+                          key={province.slug}
+                          to={`/branches/provincial/${province.slug}`}
                           extraClass="pl-8 text-xs"
                         >
-                          {province}
+                          {province.label}
                         </MobileLink>
                       ))}
                     </div>
@@ -620,106 +814,88 @@ function Navbar({ onOpenMembership, setActivePage }) {
 
                   {activeMobileBranchType === "district" && (
                     <div className="bg-white max-h-72 overflow-y-auto">
-                      {districts.map((district) => (
-                        <MobileLink
-                          key={district}
-                          to={`/branches/district/${district.toLowerCase()}`}
-                          extraClass="pl-8 text-xs"
-                        >
-                          {district}
-                        </MobileLink>
-                      ))}
+                     {districts.map((district) => (
+  <MobileLink
+    key={district.slug}
+    to={`/branches/district/${district.slug}`}
+    extraClass="pl-8 text-xs"
+  >
+    {district.label}
+  </MobileLink>
+))}
                     </div>
                   )}
-                </div>
-              )}
-              {activeMobileMenu === "about" && (
-                <div className="bg-slate-50">
-                  {aboutLinks.map((item) => (
-                    <MobileLink key={item.to} to={item.to}>
-                      {item.label}
-                    </MobileLink>
-                  ))}
                 </div>
               )}
 
               <MobileToggle id="publication" label="Publication" />
               {activeMobileMenu === "publication" && (
-                <div className="bg-slate-50">
-                  {publicationLinks.map((item) => (
-                    <MobileLink key={item.to} to={item.to}>
-                      {item.label}
-                    </MobileLink>
-                  ))}
-                </div>
-              )}
-
-              <MobileToggle id="membership" label="Membership" />
-              {activeMobileMenu === "membership" && (
-                <div className="bg-slate-50">
-                  <MobileLink to="/membership/overview">
-                    Membership Overview
-                  </MobileLink>
-
-                  <button
-                    type="button"
-                    onClick={handleMembershipOpen}
-                    className="w-full text-left block px-4 py-3 text-sm font-semibold text-slate-700 border-b border-slate-100 hover:bg-emerald-50 hover:text-[#1A7963]"
-                  >
-                    Online Membership Form
-                  </button>
-
-                  <MobileLink to="/membership/doctors-form">
-                    Doctors Form
-                  </MobileLink>
-                  <MobileLink to="/membership/students">
-                    Membership for Students
-                  </MobileLink>
-                </div>
+                <MobileNestedLinks
+                  links={publicationLinks}
+                  parentId="publication"
+                />
               )}
 
               <MobileToggle id="programs" label="Programs" />
               {activeMobileMenu === "programs" && (
-                <div className="bg-slate-50">
-                  {programLinks.map((item) => (
-                    <MobileLink key={item.to} to={item.to}>
-                      {item.label}
-                    </MobileLink>
-                  ))}
-                </div>
+                <MobileNestedLinks links={programLinks} parentId="programs" />
               )}
+
+              <MobileToggle id="service-matter" label="Service Matter" />
+              {activeMobileMenu === "service-matter" && (
+                <MobileNestedLinks
+                  links={serviceMatterLinks}
+                  parentId="service-matter"
+                />
+              )}
+
+              <MobileToggle id="job-portal" label="Job Portal" />
+              {activeMobileMenu === "job-portal" && (
+                <MobileNestedLinks links={jobPortalLinks} parentId="job-portal" />
+              )}
+
+              <MobileToggle id="registration-hcc" label="Registration with HCC" />
+              {activeMobileMenu === "registration-hcc" && (
+                <MobileNestedLinks
+                  links={registrationHccLinks}
+                  parentId="registration-hcc"
+                />
+              )}
+
+              <MobileToggle id="doctors-initiatives" label="Doctors Initiatives" />
+              {activeMobileMenu === "doctors-initiatives" && (
+                <MobileNestedLinks
+                  links={doctorsInitiativeLinks}
+                  parentId="doctors-initiatives"
+                />
+              )}
+
+              <MobileToggle id="consultation-hub" label="Consultation Hub" />
+              {activeMobileMenu === "consultation-hub" && (
+                <MobileNestedLinks
+                  links={consultationHubLinks}
+                  parentId="consultation-hub"
+                />
+              )}
+
+              <MobileLink to="/pharmaceutical-updates">
+                Pharmaceutical Updates
+              </MobileLink>
+              <MobileLink to="/medical-tourism">Medical Tourism</MobileLink>
 
               <MobileToggle id="diseases" label="Diseases" />
               {activeMobileMenu === "diseases" && (
-                <div className="bg-slate-50">
-                  {diseaseLinks.map((item) => (
-                    <MobileLink key={item.to} to={item.to}>
-                      {item.label}
-                    </MobileLink>
-                  ))}
-                </div>
+                <MobileNestedLinks links={diseaseLinks} parentId="diseases" />
               )}
 
               <MobileToggle id="gallery" label="Gallery" />
               {activeMobileMenu === "gallery" && (
-                <div className="bg-slate-50">
-                  {galleryLinks.map((item) => (
-                    <MobileLink key={item.to} to={item.to}>
-                      {item.label}
-                    </MobileLink>
-                  ))}
-                </div>
+                <MobileNestedLinks links={galleryLinks} parentId="gallery" />
               )}
 
               <MobileToggle id="contact" label="Contact" />
               {activeMobileMenu === "contact" && (
-                <div className="bg-slate-50">
-                  {contactLinks.map((item) => (
-                    <MobileLink key={item.to} to={item.to}>
-                      {item.label}
-                    </MobileLink>
-                  ))}
-                </div>
+                <MobileNestedLinks links={contactLinks} parentId="contact" />
               )}
             </nav>
           </div>
