@@ -1,226 +1,325 @@
 // src/pages/BoardOftrusty/BoardOftrusty.jsx
 
 import React, { useState } from "react";
-import { boardOftrustyLeadership, boardOftrustyRows } from "../../data/boardTrusteesData";
-
-const SideInfoRow = ({ label, value }) =>
-  value ? (
-    <div className="border-b border-slate-700/40 py-3">
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400 mb-1">
-        {label}
-      </p>
-      <p className="text-sm text-slate-100 font-medium leading-snug">{value}</p>
-    </div>
-  ) : null;
-
-const RightSection = ({ title, children }) => (
-  <div className="mb-8">
-    <h3 className="text-sm font-black text-slate-800 mb-1">{title}</h3>
-    <div className="w-10 h-0.5 bg-[#e67e22] mb-4 rounded" />
-    {children}
-  </div>
-);
-
-const BulletList = ({ items }) => (
-  <ul className="space-y-2 mt-1">
-    {items?.map((item, index) => (
-      <li
-        key={index}
-        className="flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed"
-      >
-        <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#1A7963] flex-shrink-0" />
-        <span>{item}</span>
-      </li>
-    ))}
-  </ul>
-);
+import {
+  boardOftrustyLeadership,
+  boardOftrustyRows,
+} from "../../data/boardTrusteesData";
 
 const getAvatarUrl = (name) =>
   `https://ui-avatars.com/api/?name=${encodeURIComponent(
     name || "GCDA Trustee"
   )}&background=1A7963&color=fff&size=300`;
 
-const ProfileView = ({ member, onBack, onPrev, onNext, currentIndex, total }) => {
+function SideSection({ title, children }) {
+  if (!children) return null;
+
   return (
-    <div className="w-full bg-slate-100 min-h-screen font-sans pb-14">
-      <div className="bg-white border-b border-slate-200 px-6 py-3 flex items-center gap-2 text-xs text-slate-500 font-medium">
-        <button onClick={onBack} className="hover:text-[#1A7963] transition-colors">
-          Home
-        </button>
-        <span>›</span>
-        <button onClick={onBack} className="hover:text-[#1A7963] transition-colors">
-          Members
-        </button>
-        <span>›</span>
-        <button onClick={onBack} className="hover:text-[#1A7963] transition-colors">
-          Board of Trustees
-        </button>
-        <span>›</span>
-        <span className="text-slate-800 font-bold">Profile</span>
+    <div className="border-t border-slate-600 pt-4">
+      <h3 className="text-xs font-black uppercase tracking-wider text-slate-200">
+        {title}
+      </h3>
 
-        <button
-          onClick={() => window.print()}
-          className="ml-auto flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-colors"
-        >
-          Print
-        </button>
-      </div>
+      <div className="mt-2 text-sm leading-6 text-slate-300">{children}</div>
+    </div>
+  );
+}
 
-      <div className="max-w-6xl mx-auto px-4 md:px-6 mt-6">
-        <h1 className="text-2xl font-black text-slate-800 mb-4">Profile</h1>
+function BulletList({ items }) {
+  if (!items || items.length === 0) return null;
 
-        <div className="flex items-center justify-between mb-5 bg-white p-3 rounded-xl shadow-sm border border-slate-200">
+  return (
+    <ul className="mt-3 list-disc pl-5 space-y-2 text-slate-700 leading-7">
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+function SimpleTable({ title, columns, rows }) {
+  return (
+    <section className="bg-white border border-slate-100 shadow-sm rounded-xl p-6 overflow-x-auto">
+      <h2 className="text-lg font-black uppercase tracking-wider text-slate-800 mb-4">
+        {title}
+      </h2>
+
+      {rows && rows.length > 0 ? (
+        <table className="w-full border border-slate-200 text-sm">
+          <thead className="bg-slate-200 text-slate-800 uppercase text-xs">
+            <tr>
+              {columns.map((column) => (
+                <th
+                  key={column.key}
+                  className="border border-slate-300 px-4 py-3 text-left"
+                >
+                  {column.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {rows.map((row, rowIndex) => (
+              <tr key={rowIndex} className="odd:bg-white even:bg-slate-50">
+                {columns.map((column) => (
+                  <td
+                    key={column.key}
+                    className="border border-slate-200 px-4 py-3 align-top"
+                  >
+                    {row[column.key] || "-"}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-sm text-slate-500">No record available.</p>
+      )}
+    </section>
+  );
+}
+
+function ProfileView({
+  member,
+  onBack,
+  onPrev,
+  onNext,
+  currentIndex,
+  total,
+}) {
+  const personalCareerInterests = [
+    member.bio,
+    member.positions?.length
+      ? member.positions.join(" ")
+      : "",
+  ].filter(Boolean);
+
+  const previousOfficialPositions = (
+    member.executiveRoles?.length ? member.executiveRoles : member.positions || []
+  ).map((position) => ({
+    officialBody: member.hospital || "GCDA",
+    post: position,
+    duration: "-",
+  }));
+
+  return (
+    <main className="w-full bg-white min-h-screen">
+      <section className="max-w-[1200px] mx-auto px-4 py-8 md:py-10">
+        <div className="flex items-center justify-between gap-3 mb-6">
           <button
+            type="button"
             onClick={onBack}
-            className="flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold text-sm px-4 py-2 rounded-xl transition-all shadow-sm"
+            className="inline-block text-sm font-bold text-[#1A7963] hover:underline"
           >
-            ← Back to Board of Trustees List
+            ← Back to Board of Trustees
           </button>
 
-          <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="bg-[#1A7963] hover:bg-[#14624f] text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
+          >
+            Print
+          </button>
+        </div>
+
+        <div className="relative">
+          {/* LEFT BUTTON */}
+          <button
+            type="button"
+            onClick={onPrev}
+            className="hidden md:flex absolute left-[-18px] top-[155px] z-20 w-8 h-8 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-xl font-black text-slate-700 hover:bg-[#1A7963] hover:text-white transition-all"
+            title="Previous"
+          >
+            ‹
+          </button>
+
+          {/* RIGHT BUTTON */}
+          <button
+            type="button"
+            onClick={onNext}
+            className="hidden md:flex absolute right-[-18px] top-[155px] z-20 w-8 h-8 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-xl font-black text-slate-700 hover:bg-[#1A7963] hover:text-white transition-all"
+            title="Next"
+          >
+            ›
+          </button>
+
+          <div className="flex md:hidden items-center justify-center gap-3 mb-5">
             <button
+              type="button"
               onClick={onPrev}
-              className="w-9 h-9 bg-white hover:bg-[#1A7963] hover:text-white text-slate-700 rounded-full flex items-center justify-center shadow border border-slate-200 transition-all"
-              title="Previous"
+              className="w-8 h-8 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-xl font-black text-slate-700 hover:bg-[#1A7963] hover:text-white"
             >
               ‹
             </button>
 
-            <span className="text-sm font-semibold text-slate-500 min-w-[60px] text-center">
+            <span className="text-xs font-bold text-slate-500">
               {currentIndex + 1} / {total}
             </span>
 
             <button
+              type="button"
               onClick={onNext}
-              className="w-9 h-9 bg-white hover:bg-[#1A7963] hover:text-white text-slate-700 rounded-full flex items-center justify-center shadow border border-slate-200 transition-all"
-              title="Next"
+              className="w-8 h-8 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-xl font-black text-slate-700 hover:bg-[#1A7963] hover:text-white"
             >
               ›
             </button>
           </div>
-        </div>
 
-        <div className="flex flex-col lg:flex-row gap-0 shadow-lg rounded-lg overflow-hidden">
-          <div className="lg:w-[300px] flex-shrink-0 bg-[#1e2d3d] text-white flex flex-col">
-            <div className="p-6 flex flex-col items-center border-b border-slate-700/50">
-              <div className="w-40 h-44 rounded-xl overflow-hidden ring-4 ring-slate-600 shadow-xl mb-4 bg-slate-700">
-                <img
-                  src={member.imgSrc || getAvatarUrl(member.name)}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = getAvatarUrl(member.name);
-                  }}
-                />
-              </div>
-
-              <h2 className="text-base font-black text-white text-center leading-tight">
-                {member.name}
-              </h2>
-
-              <p className="text-slate-400 text-xs font-medium mt-1 text-center">
-                {member.designation || member.role}
-              </p>
-
-              <p className="text-slate-500 text-[10px] mt-0.5 text-center">
-                {member.hospital}
-              </p>
-            </div>
-
-            {member.positions?.length > 0 && (
-              <div className="px-5 py-4 border-b border-slate-700/50">
-                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">
-                  Position(s) Held
-                </p>
-
-                <div className="space-y-1.5">
-                  {member.positions.map((position, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-2 text-[11px] text-slate-300 leading-relaxed"
-                    >
-                      <span className="text-[#e67e22] font-black mt-0.5 flex-shrink-0">
-                        ›
-                      </span>
-                      <span>{position}</span>
-                    </div>
-                  ))}
+          <div className="grid grid-cols-1 lg:grid-cols-[370px_1fr] gap-8 items-start">
+            {/* LEFT SIDE */}
+            <aside className="bg-slate-700 text-white shadow-lg overflow-hidden">
+              <div className="p-7 text-center">
+                <div className="w-full h-[310px] bg-slate-800 border border-slate-600 overflow-hidden">
+                  <img
+                    src={member.imgSrc || getAvatarUrl(member.name)}
+                    alt={member.name}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.currentTarget.src = getAvatarUrl(member.name);
+                    }}
+                  />
                 </div>
+
+                <h1 className="mt-6 text-xl font-black tracking-wide">
+                  {member.name}
+                </h1>
+
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  {member.qualification}
+                </p>
+
+                <p className="mt-2 text-xs leading-5 text-slate-400">
+                  {member.role || member.designation}
+                </p>
               </div>
-            )}
 
-            <div className="px-5 py-4 space-y-0 flex-1">
-              <SideInfoRow
-                label="Association"
-                value="Government Corporate Doctors Association (GCDA)"
-              />
-              <SideInfoRow label="Father's / Husband's Name" value={member.fathersName} />
-              <SideInfoRow label="Qualification" value={member.qualification} />
-              <SideInfoRow label="Region / Station" value={member.region} />
-              <SideInfoRow label="Joined GCDA" value={member.joinedGCDA} />
-              <SideInfoRow label="Current Role" value={member.role} />
-            </div>
-          </div>
+              <div className="px-8 pb-8 space-y-5">
+                <SideSection title="Position Held">
+                  <ul className="space-y-1">
+                    {member.positions?.map((position, index) => (
+                      <li key={index}>{position}</li>
+                    ))}
+                  </ul>
+                </SideSection>
 
-          <div className="flex-1 bg-white px-8 py-8 overflow-y-auto">
-            <div className="mb-8 pb-6 border-b border-slate-100">
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-500 mb-4">
-                Board of Trustees Profile
-              </p>
+                <SideSection title="Current Posting">
+                  {member.hospital}
+                </SideSection>
 
-              <h2 className="text-2xl font-black text-slate-900 tracking-tight uppercase mb-1">
-                {member.name}
-              </h2>
+                <SideSection title="Region / Station">
+                  {member.region}
+                </SideSection>
 
-              <p className="text-sm text-slate-500 font-medium mb-5">
-                {member.role} — {member.region}
-              </p>
+                <SideSection title="Joined GCDA">
+                  {member.joinedGCDA}
+                </SideSection>
+              </div>
+            </aside>
 
-              {member.bio && (
-                <p className="text-slate-600 text-sm leading-relaxed text-justify">
-                  {member.bio}
+            {/* RIGHT SIDE */}
+            <div className="space-y-8">
+              <section className="bg-white border border-slate-100 shadow-sm rounded-xl p-6">
+                <h2 className="text-lg font-black uppercase tracking-wider text-slate-800">
+                  Personal Career & Interests
+                </h2>
+
+                <div className="mt-4 space-y-4 text-sm md:text-base leading-8 text-slate-700 text-justify">
+                  {personalCareerInterests.length > 0 ? (
+                    personalCareerInterests.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))
+                  ) : (
+                    <p>No record available.</p>
+                  )}
+                </div>
+              </section>
+
+              <section className="bg-white border border-slate-100 shadow-sm rounded-xl p-6">
+                <h2 className="text-lg font-black uppercase tracking-wider text-slate-800">
+                  Professional Summary
+                </h2>
+
+                <p className="mt-4 text-sm md:text-base leading-8 text-slate-700 text-justify">
+                  {member.professionalSummary || "No record available."}
                 </p>
-              )}
-            </div>
+              </section>
 
-            {member.professionalSummary && (
-              <RightSection title="Professional Summary">
-                <p className="text-slate-600 text-sm leading-relaxed text-justify">
-                  {member.professionalSummary}
-                </p>
-              </RightSection>
-            )}
+              <section className="bg-white border border-slate-100 shadow-sm rounded-xl p-6">
+                <h2 className="text-lg font-black uppercase tracking-wider text-slate-800">
+                  Education
+                </h2>
 
-            {member.education?.length > 0 && (
-              <RightSection title="Education & Academic Background">
                 <BulletList items={member.education} />
-              </RightSection>
-            )}
+              </section>
 
-            {member.executiveRoles?.length > 0 && (
-              <RightSection title="Trustee / Executive Roles">
-                <BulletList items={member.executiveRoles} />
-              </RightSection>
-            )}
+              <section className="bg-white border border-slate-100 shadow-sm rounded-xl p-6">
+                <h2 className="text-lg font-black uppercase tracking-wider text-slate-800">
+                  Key Achievements
+                </h2>
 
-            {member.achievements?.length > 0 && (
-              <RightSection title="Key Achievements">
-                <div className="space-y-2 mt-1">
-                  <p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-2">
-                    Contributions & Governance
-                  </p>
-                  <BulletList items={member.achievements} />
+                <div className="mt-4 space-y-6">
+                  <div>
+                    <h3 className="font-black text-slate-800">
+                      Contributions & Governance
+                    </h3>
+                    <BulletList items={member.achievements} />
+                  </div>
                 </div>
-              </RightSection>
-            )}
+              </section>
+
+              <SimpleTable
+                title="Previous Official Positions"
+                columns={[
+                  { key: "officialBody", label: "Official Body" },
+                  { key: "post", label: "Post" },
+                  { key: "duration", label: "Duration" },
+                ]}
+                rows={previousOfficialPositions}
+              />
+
+              <section className="bg-white border border-slate-100 shadow-sm rounded-xl p-6">
+                <h2 className="text-lg font-black uppercase tracking-wider text-slate-800">
+                  Permanent Contact
+                </h2>
+
+                <p className="mt-4 text-slate-700 leading-7">
+                  {member.region || "No record available."}
+                </p>
+              </section>
+
+              <section className="bg-white border border-slate-100 shadow-sm rounded-xl p-6">
+                <h2 className="text-lg font-black uppercase tracking-wider text-slate-800">
+                  Present Contact
+                </h2>
+
+                <p className="mt-4 text-slate-700 leading-7">
+                  {member.hospital || "No record available."}
+                </p>
+
+                {member.phone && (
+                  <p className="mt-2 text-[#1A7963] font-semibold">
+                    {member.phone}
+                  </p>
+                )}
+
+                {member.email && (
+                  <p className="mt-1 text-[#1A7963] font-semibold">
+                    {member.email}
+                  </p>
+                )}
+              </section>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
-};
+}
 
-const BoardOfTrustees = () => {
+function BoardOfTrustees() {
   const [selectedMember, setSelectedMember] = useState(null);
 
   const allMembers = boardOftrustyRows.flatMap((row) => row.members || []);
@@ -236,15 +335,19 @@ const BoardOfTrustees = () => {
   };
 
   const handleNext = () => {
-    if (!allMembers.length) return;
+    if (!allMembers.length || currentIndex < 0) return;
+
     const next = allMembers[(currentIndex + 1) % allMembers.length];
     setSelectedMember(next);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePrev = () => {
-    if (!allMembers.length) return;
-    const prev = allMembers[(currentIndex - 1 + allMembers.length) % allMembers.length];
+    if (!allMembers.length || currentIndex < 0) return;
+
+    const prev =
+      allMembers[(currentIndex - 1 + allMembers.length) % allMembers.length];
+
     setSelectedMember(prev);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -257,26 +360,26 @@ const BoardOfTrustees = () => {
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") handleSelect(member);
       }}
-      className="bg-white rounded-xl border border-slate-200 p-3 flex flex-col text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden group w-full cursor-pointer"
+      className="group rounded-xl overflow-hidden bg-white border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
     >
-      <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100 mb-3">
+      <div className="overflow-hidden">
         <img
           src={member.imgSrc || getAvatarUrl(member.name)}
           alt={member.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
             e.currentTarget.src = getAvatarUrl(member.name);
           }}
         />
       </div>
 
-      <h3 className="font-black text-slate-800 tracking-tight transition-colors duration-300 group-hover:text-[#1A7963] text-sm line-clamp-1">
-        {member.name}
-      </h3>
+      <div className="p-4 text-center">
+        <h4 className="text-sm font-black text-slate-800">{member.name}</h4>
 
-      <p className="text-[11px] font-semibold text-slate-500 mt-1 line-clamp-1">
-        {member.role || member.designation || "GCDA Trustee Member"}
-      </p>
+        <p className="mt-2 text-xs text-slate-600 leading-5 line-clamp-3">
+          {member.role || member.designation || "GCDA Trustee Member"}
+        </p>
+      </div>
     </div>
   );
 
@@ -294,53 +397,66 @@ const BoardOfTrustees = () => {
   }
 
   return (
-    <div className="w-full bg-gray-50 min-h-screen font-sans">
+    <main className="w-full bg-white">
+      {/* HERO SECTION */}
       <section
-        className="relative w-full bg-cover bg-center py-10 md:py-12 px-4 text-center overflow-hidden"
+        className="relative min-h-[90px] md:min-h-[145px] flex items-center justify-center bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1600&auto=format&fit=crop')",
+            "linear-gradient(rgba(26, 121, 99, 0.84), rgba(26, 121, 99, 0.84)), url('https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1600&auto=format&fit=crop')",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80" />
-        <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(circle,#fff_1px,transparent_1px)] [background-size:14px_14px]" />
-
-        <div className="relative z-10">
-          <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight drop-shadow-lg">
+        <div className="max-w-[1200px] mx-auto px-4 text-center text-white">
+          <h1 className="text-2xl md:text-3xl font-black tracking-wide">
             {boardOftrustyLeadership.title}
           </h1>
-          <div className="w-20 h-1 bg-[#e67e22] mx-auto mt-3 rounded-full" />
+
+          <p className="mt-2 text-xs md:text-sm font-semibold text-emerald-50">
+            {boardOftrustyLeadership.subtitle}
+          </p>
+
+          <div className="mt-3 w-16 h-[3px] bg-[#E9967A] mx-auto rounded-full" />
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-5">
-        {featuredMember && (
-          <div className="mb-5 max-w-[250px]">
+      {/* FIRST PROFILE CENTERED */}
+      {featuredMember && (
+        <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-8">
+          <div className="max-w-[220px] mx-auto">
             {renderMemberCard(featuredMember)}
           </div>
-        )}
+        </section>
+      )}
 
-        <div className="space-y-5">
-          {boardOftrustyRows.map((row) => (
-            <section key={row.id} className="border-t border-gray-200 pt-4">
-              <h3 className="text-base font-black text-gray-800 mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-5 bg-emerald-600 rounded-full" />
-                {row.rowTitle}
-              </h3>
+      {/* OTHER MEMBERS ROWS */}
+      <section className="max-w-[1200px] mx-auto px-4 pb-16">
+        <div className="space-y-8">
+          {boardOftrustyRows.map((row) => {
+            const members = row.members?.filter(
+              (member) => member.id !== featuredMember?.id
+            );
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                {row.members?.map((member) => (
-                  <div key={member.id} className="w-full">
-                    {renderMemberCard(member)}
-                  </div>
-                ))}
-              </div>
-            </section>
-          ))}
+            if (!members || members.length === 0) return null;
+
+            return (
+              <section key={row.id}>
+                <h3 className="text-base font-black text-slate-800 mb-4 flex items-center gap-2">
+                  <span className="w-1.5 h-5 bg-[#1A7963] rounded-full" />
+                  {row.rowTitle}
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+                  {members.map((member) => (
+                    <div key={member.id}>{renderMemberCard(member)}</div>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
-};
+}
 
 export default BoardOfTrustees;

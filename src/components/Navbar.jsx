@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MembershipForm from "./MembershipForm";
-import gcdaLogo from "../assets/images/gcda-logo.png";
+import gcdaLogo from "../assets/images/gcda-logo.png.jpeg";
 
 function Navbar({ onOpenMembership, setActivePage }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,16 +36,16 @@ const districts = [
   { label: "Gujranwala District", slug: "gujranwala-district" },
   { label: "Gujrat District", slug: "gujrat-district" },
   { label: "Hafizabad District", slug: "hafizabad-district" },
-  { label: "Jehlum District", slug: "jehlum-district" },
+  { label: "Jehlum District", slug: "jhelum-district" },
   { label: "Kasur District", slug: "kasur-district" },
   { label: "Khanewal District", slug: "khanewal-district" },
-  { label: "Khushab", slug: "khushab" },
-  { label: "Lahore", slug: "lahore" },
-  { label: "Layyah", slug: "layyah" },
-  { label: "Lodharan", slug: "lodharan" },
-  { label: "Mandi Bahauddin", slug: "mandi-bahauddin" },
-  { label: "Mianwali", slug: "mianwali" },
-  { label: "Multan", slug: "multan" },
+  { label: "Khushab District", slug: "khushab-district" },
+  { label: "Lahore District", slug: "lahore-district" },
+  { label: "Layyah District", slug: "layyah-district" },
+  { label: "Lodharan District", slug: "lodharan-district" },
+  { label: "Mandi Bahauddin District", slug: "mandi-bahauddin-district" },
+  { label: "Mianwali", slug: "mianwali-district" },
+  { label: "Multan", slug: "multan-district" },
   { label: "Muzaffar Gargh", slug: "muzaffar-gargh" },
 ];
 
@@ -158,7 +158,7 @@ const districts = [
   const galleryLinks = [
     { label: "Video Gallery", to: "/videos" },
     { label: "Photos Gallery", to: "/gallery" },
-    { label: "Press Clipping Gallery", to: "/press-gallery" },
+    { label: "Press Clipping Gallery", to: "/gallery/press-clipping-gallery" },
     { label: "Procurement Videos", to: "/gallery/procurement-videos" },
     { label: "Service Matter Videos", to: "/gallery/service-matter-videos" },
   ];
@@ -401,112 +401,63 @@ const districts = [
   );
 
   return (
-    <header className="w-full font-sans relative z-50">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
       {/* TOP GREEN BAR */}
-      <div className="w-full bg-[#1A7963] text-white text-sm hidden md:block">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 min-h-[96px] py-2.5 transition-all duration-300">
-          <div
-            className="flex items-center cursor-pointer group flex-shrink-0 min-w-0"
-            onClick={() => setActivePage?.("home")}
-          >
-            <div className="bg-white rounded-2xl px-2.5 py-2 shadow-lg border border-white/70 flex items-center justify-center flex-shrink-0">
-              <img
-                src={gcdaLogo}
-                alt="GCDA Logo"
-                className="h-[40px] lg:h-[60px] xl:h-[74px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-              />
-            </div>
+     <div className="w-full bg-[#1A7963] text-white text-sm hidden md:block">
+  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8  flex items-center justify-between gap-4 h-[90px]"> {/* یہاں ہائٹ کم کر دی گئی ہے */}
+    
+    {/* لوگو سیکشن */}
+    <div
+      className="flex items-center cursor-pointer group flex-shrink-0 min-w-0"
+      onClick={() => setActivePage?.("home")}
+    >
+      <div className="rounded-full overflow-hidden flex items-center justify-center flex-shrink-0"> {/* بیک گراؤنڈ ہٹا کر اوور فلو ہڈن کیا */}
+        <img
+          src={gcdaLogo}
+          alt="GCDA Logo"
+          className="h-[70px] w-auto object-contain transition-transform duration-200 group-hover:scale-105" // ہائٹ ایڈجسٹ کی
+        />
+      </div>
 
-            <div className="ml-4 leading-tight min-w-0">
-              <h1 className="text-white text-lg lg:text-xl xl:text-2xl font-black tracking-wide leading-snug max-w-[340px] xl:max-w-none">
-                General Cadre Doctors Association
-              </h1>
+      <div className="ml-4 leading-tight min-w-0">
+        <h1 className="text-white text-lg font-black tracking-wide leading-snug">
+          General Cadre Doctors Association GCDA
+        </h1>
+      </div>
+    </div>
 
-              <p className="text-emerald-100 text-xs xl:text-sm font-bold tracking-[0.25em] uppercase mt-1.5">
-                GCDA
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-end gap-2.5 min-w-0 flex-1">
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2 min-w-0">
-              <a
-                href="mailto:amdulma125656@ggmail.com"
-                className="hover:underline truncate max-w-[120px] lg:max-w-[180px] xl:max-w-[245px] text-xs xl:text-sm font-medium"
-              >
-                amdulma125656@ggmail.com
-              </a>
-
-              <div className="bg-[#E9967A] p-2 text-white rounded-md flex-shrink-0">
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2 flex-shrink-0">
-              <a
-                href="tel:+3337074846"
-                className="direction-ltr cursor-pointer text-xs xl:text-sm font-medium"
-              >
-                +333-7074846
-              </a>
-
-              <div className="bg-[#E9967A] p-2 text-white rounded-md flex-shrink-0">
-                <svg
-                  className="w-3.5 h-3.5 rotate-90"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={handleMembershipOpen}
-              className="bg-[#E9967A] hover:bg-[#d68569] text-white text-xs xl:text-sm font-bold px-3 xl:px-4 py-2.5 rounded-lg shadow-sm transition-all duration-200 flex items-center gap-2 cursor-pointer flex-shrink-0"
-            >
-              <div className="bg-white/20 p-1 rounded">
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2.5"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </div>
-
-              <span className="leading-tight whitespace-nowrap">
-                Online Membership
-              </span>
-            </button>
-          </div>
+    {/* بٹن اور فون نمبر سیکشن */}
+    <div className="flex items-center justify-end gap-4 min-w-0 flex-1">
+      
+      {/* فون نمبر */}
+      <div className="flex items-center gap-2 border border-white/20 rounded-lg px-3 py-1.5 flex-shrink-0 bg-white/5">
+        <a
+          href="tel:+3337074846"
+          className="cursor-pointer text-xs font-medium"
+        >
+          +333-7074846
+        </a>
+        <div className="text-white">
+          <svg className="w-3.5 h-3.5 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
         </div>
       </div>
+
+      {/* ممبرشپ بٹن */}
+      <button
+        type="button"
+        onClick={handleMembershipOpen}
+        className="bg-[#E9967A] hover:bg-[#d68569] text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-2 cursor-pointer flex-shrink-0"
+      >
+        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+        <span className="whitespace-nowrap">Online Membership</span>
+      </button>
+    </div>
+  </div>
+</div>
 
       {/* MAIN NAVBAR */}
       <div className="w-full bg-white shadow-md border-b border-gray-100">
