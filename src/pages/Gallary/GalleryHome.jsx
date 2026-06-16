@@ -52,6 +52,7 @@ function GalleryHome() {
 
   const updateSelectedYear = (year) => {
     if (!year) return;
+
     setSelectedYear(year);
     localStorage.setItem("selectedGalleryYear", year);
     setSearchParams({ year });
@@ -59,12 +60,14 @@ function GalleryHome() {
 
   const handlePrevYear = () => {
     if (!canGoPrev) return;
+
     const prevYear = galleryData[selectedYearIndex - 1]?.year;
     updateSelectedYear(prevYear);
   };
 
   const handleNextYear = () => {
     if (!canGoNext) return;
+
     const nextYear = galleryData[selectedYearIndex + 1]?.year;
     updateSelectedYear(nextYear);
   };
@@ -90,7 +93,6 @@ function GalleryHome() {
 
   return (
     <div className="min-h-screen bg-gray-50 w-full pb-20 font-sans">
-      {/* Compact Hero Section */}
       <section
         className="relative w-full bg-cover bg-center py-10 md:py-12 px-4 text-center overflow-hidden"
         style={{
@@ -105,12 +107,12 @@ function GalleryHome() {
           <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight drop-shadow-lg">
             GCDA Photo Gallery
           </h1>
+
           <div className="w-20 h-1 bg-[#e67e22] mx-auto mt-3 rounded-full" />
         </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-5">
-        {/* Year Selector shifted to Right */}
         <div className="flex justify-end mb-5">
           <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-2 flex items-center gap-2">
             <button
@@ -160,7 +162,6 @@ function GalleryHome() {
           </div>
         </div>
 
-        {/* Album Cards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedYear}
@@ -179,7 +180,7 @@ function GalleryHome() {
                   onClick={() => openAlbum(event)}
                   className="group bg-white rounded-xl shadow-sm hover:shadow-lg border border-gray-200 overflow-hidden cursor-pointer flex flex-col transition-all"
                 >
-                  <div className="relative h-56 w-full bg-gray-100 overflow-hidden">
+                  <div className="relative h-72 w-full bg-gray-100 overflow-hidden">
                     <img
                       src={event.coverImage}
                       alt={event.title}
@@ -197,17 +198,17 @@ function GalleryHome() {
                     </span>
                   </div>
 
-                  <div className="p-4">
-                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#0F765E] mb-2">
+                  <div className="p-3">
+                    <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[#0F765E] mb-1">
                       GCDA Photo Album
                     </p>
 
-                    <h3 className="text-base font-black text-gray-900 group-hover:text-[#0F765E] transition-colors line-clamp-2">
+                    <h3 className="text-sm font-black text-gray-900 group-hover:text-[#0F765E] transition-colors line-clamp-1">
                       {event.title}
                     </h3>
 
                     {event.description && (
-                      <p className="text-xs text-gray-500 leading-relaxed mt-2 line-clamp-3">
+                      <p className="text-[11px] text-gray-500 leading-5 mt-1 line-clamp-2">
                         {event.description}
                       </p>
                     )}

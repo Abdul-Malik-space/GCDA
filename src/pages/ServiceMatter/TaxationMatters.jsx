@@ -1,79 +1,155 @@
-import React from "react";
+import React, { useState } from "react";
 import taxationMattersData from "../../data/taxationMattersData";
 
 function TaxationMatters() {
+  const [selectedMatter, setSelectedMatter] = useState(null);
+
+  const openMatter = (matter) => {
+    setSelectedMatter(matter);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const backToMatters = () => {
+    setSelectedMatter(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <main className="w-full bg-white">
-      {/* SMALL HERO SECTION */}
-      <section className="relative min-h-[90px] md:min-h-[145px] flex items-center justify-center bg-[#1A7963]">
+      {/* HERO SECTION */}
+      <section
+        className="relative min-h-[90px] md:min-h-[145px] flex items-center justify-center bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(26, 121, 99, 0.84), rgba(26, 121, 99, 0.84)), url(${taxationMattersData.heroImage})`,
+        }}
+      >
         <div className="max-w-[1200px] mx-auto px-4 text-center text-white">
           <h1 className="text-2xl md:text-3xl font-black tracking-wide">
-            Taxation Matters
+            {taxationMattersData.title}
           </h1>
 
           <p className="mt-2 text-xs md:text-sm font-semibold text-emerald-50">
-            General Cadre Doctors Association
+            {taxationMattersData.subtitle}
           </p>
 
           <div className="mt-3 w-16 h-[3px] bg-[#E9967A] mx-auto rounded-full" />
         </div>
       </section>
 
-      {/* PDF LINKS GRID */}
-      <section className="max-w-[1200px] mx-auto px-4 py-12 md:py-14">
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-black text-slate-800">
-            Taxation Documents
-          </h2>
+      {/* TAXATION MATTERS LIST */}
+      {!selectedMatter && (
+        <section className="max-w-[1200px] mx-auto px-4 py-12 md:py-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {taxationMattersData.matters.map((matter) => (
+              <button
+                key={matter.id}
+                type="button"
+                onClick={() => openMatter(matter)}
+                className="group text-left bg-white border border-slate-100 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative h-[230px] bg-slate-100 overflow-hidden">
+                  <img
+                    src={matter.image}
+                    alt={matter.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
 
-          <p className="mt-3 text-sm md:text-base text-slate-600 leading-7">
-            Click on any document to view the PDF. You can also download the
-            document for offline use.
-          </p>
-        </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {taxationMattersData.map((item, index) => (
-            <div
-              key={index}
-              className="group bg-white border border-slate-100 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
-              <div className="p-6">
-                <div className="w-14 h-14 rounded-xl bg-[#1A7963]/10 flex items-center justify-center mb-5">
-                  <span className="text-2xl">📄</span>
+                  <span className="absolute top-3 right-3 bg-white/90 text-[#1A7963] text-[10px] font-black px-3 py-1 rounded-lg shadow-sm">
+                    {matter.documents?.length || 0} PDFs
+                  </span>
+
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    <h2 className="text-lg md:text-xl font-black">
+                      {matter.title}
+                    </h2>
+
+                    <p className="mt-1 text-xs md:text-sm text-white/90 line-clamp-2">
+                      {matter.description}
+                    </p>
+                  </div>
                 </div>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
 
-                <h3 className="text-lg font-black text-slate-800 group-hover:text-[#1A7963] transition-colors">
-                  {item.title}
-                </h3>
+      {/* SELECTED TAXATION MATTER PDF DOCUMENTS */}
+      {selectedMatter && (
+        <section className="max-w-[1200px] mx-auto px-4 py-12 md:py-14">
+          <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <button
+                type="button"
+                onClick={backToMatters}
+                className="inline-flex items-center text-sm font-bold text-[#1A7963] hover:underline mb-3"
+              >
+                ← Back to All Taxation Matters
+              </button>
 
-                <p className="mt-3 text-sm text-slate-600 leading-6">
-                  Open this document in PDF format or download it directly.
-                </p>
+              <h2 className="text-2xl md:text-3xl font-black text-slate-800">
+                {selectedMatter.title}
+              </h2>
 
-                <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                  <a
-                    href={item.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#1A7963] text-white text-sm font-bold hover:bg-[#146552] transition-colors"
-                  >
-                    View PDF
-                  </a>
-
-                  <a
-                    href={item.file}
-                    download
-                    className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg border border-[#1A7963] text-[#1A7963] text-sm font-bold hover:bg-[#1A7963] hover:text-white transition-colors"
-                  >
-                    Download
-                  </a>
-                </div>
-              </div>
+              <p className="mt-2 text-sm text-slate-600 max-w-2xl leading-6">
+                {selectedMatter.description}
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+
+          {selectedMatter.documents && selectedMatter.documents.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {selectedMatter.documents.map((item, index) => (
+                <div
+                  key={index}
+                  className="group bg-white border border-slate-100 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+                >
+                  <div className="p-6">
+                    <div className="w-14 h-14 rounded-xl bg-[#1A7963]/10 flex items-center justify-center mb-5">
+                      <span className="text-2xl">📄</span>
+                    </div>
+
+                    <h3 className="text-lg font-black text-slate-800 group-hover:text-[#1A7963] transition-colors">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm text-slate-600 leading-6">
+                      Open this PDF document or download it for offline use.
+                    </p>
+
+                    <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                      <a
+                        href={item.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#1A7963] text-white text-sm font-bold hover:bg-[#146552] transition-colors"
+                      >
+                        View PDF
+                      </a>
+
+                      <a
+                        href={item.file}
+                        download
+                        className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg border border-[#1A7963] text-[#1A7963] text-sm font-bold hover:bg-[#1A7963] hover:text-white transition-colors"
+                      >
+                        Download
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white border border-dashed border-slate-200 rounded-2xl p-10 text-center">
+              <p className="text-slate-500 font-semibold">
+                No PDF documents available for this taxation matter.
+              </p>
+            </div>
+          )}
+        </section>
+      )}
     </main>
   );
 }

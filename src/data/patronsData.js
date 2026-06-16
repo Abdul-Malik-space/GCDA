@@ -120,12 +120,6 @@ const patronsData = {
     createProfile("Dr Kashif Raza", 2),
     createProfile("Dr Hina Batool", 3),
     createProfile("Dr Usman Yusuf", 4),
-    createProfile("Dr Sana Malik", 5),
-    createProfile("Patron Member 06", 6),
-    createProfile("Patron Member 07", 7),
-    createProfile("Patron Member 08", 8),
-    createProfile("Patron Member 09", 9),
-    createProfile("Patron Member 10", 10),
   ],
 };
 

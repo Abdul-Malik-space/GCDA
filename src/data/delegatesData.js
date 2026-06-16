@@ -1,757 +1,152 @@
-// src/data/delegatesData.js
+const sharedProfileDetails = {
+  qualification:
+    "MBBS, DCH, MPH, MBA, LLB, PG Cert in Human Resource Management in Health (QM University UK)",
 
-export const houseLeadership = {
-  title: "House of Delegates",
-  subtitle: "Representative Body of General Cadre Doctors",
-//  image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200",
-  description:
-    "The House of Delegates serves as the apex representative platform for General Cadre doctors across all provinces, driving structural healthcare reforms, policy-making, career-structure security, and democratic governance.",
+  positionHeld: [
+    "President GCDA",
+    "Rx Medical Superintendent, Said Mitha Hospital, Lahore",
+    "Ex. Medical Superintendent, Shahdra Teaching Hospital, Lahore",
+    "Ex-General Secretary, PMA Punjab",
+    "Ex Editor, The Medical Tribune",
+  ],
+
+  currentPosting: "Sir Ganga Ram Hospital, Lahore",
+
+  personalCareerInterests: [
+    "Dr Masood Akhtar Sheikh is President, General Cadre Doctors Association. He is a senior medical professional with experience in medical administration, public health, health human resource management, medico-legal understanding, and professional leadership.",
+
+    "Malik Muhammad Ahmad Khan stands as a distinguished figure in national politics and law, boasting a rich tapestry of experience spanning over two decades. As the incumbent Speaker of the Assembly, he brings a wealth of knowledge and expertise to his role. Hailing from district Kasur, Mr. Khan has dutifully represented his constituency in the Assembly for an impressive fourth consecutive term, a testament to the unwavering trust and confidence of his constituents. His journey into public service finds its roots in a family legacy steeped in dedication and commitment to the nation. Following in the footsteps of his esteemed father, Malik Muhammad Ali, a revered parliamentarian in his own right who served as both a member of the Provincial Assembly and as the Deputy Chairman of the Senate, Khan's ascent to prominence is marked by a profound sense of duty and service to the people.",
+  ],
+
+  professionalSummary:
+    "Malik Muhammad Ahmad Khan is a seasoned legislator, legal expert, and governance reformist, currently serving as the Speaker of the Punjab Assembly since February 2024. With a distinguished career spanning over two decades, he has played a pivotal role in modernizing legislative procedures, enhancing transparency, and fostering inclusive governance. His leadership is marked by institutional independence, bipartisan cooperation, and a commitment to strengthening democratic governance.",
+
+  education: [
+    "LL.B. (Hons.) – University of Buckingham, UK (1998)",
+    "Government College, Lahore – Pre-Law Studies",
+    "Aitchison College, Lahore – Secondary & Higher Secondary Education",
+    "Practicing Lawyer – Specializing in constitutional law, governance frameworks, and public policy",
+  ],
+
+  keyAchievements: {
+    educational: [
+      "Led the historic revision of the Assembly’s Rules of Procedure, strengthening executive oversight.",
+      "Introduced a Code of Conduct, enforcing ethical standards and decorum.",
+      "Strengthened budgetary oversight, reinforcing financial scrutiny by the Assembly.",
+    ],
+
+    administrative: [
+      "Mandated live-streaming of Assembly sessions, ensuring public accessibility.",
+      "Digitized Assembly records, improving access to legislative documentation.",
+      "Opened committee proceedings for expert consultations, fostering participatory democracy.",
+    ],
+
+    sociopolitical: [
+      "Secured unanimous approval for parliamentary rule reforms, reinforcing cross-party collaboration.",
+      "Strengthened working relationships between government and opposition, ensuring inclusive decision-making.",
+      "Institutionalized independent parliamentary governance, reducing executive interference.",
+    ],
+  },
+
+  previousOfficialPositions: [
+    {
+      officialBody: "District Council",
+      post: "Chairman",
+      duration: "1987-1993",
+    },
+    {
+      officialBody: "District Council",
+      post: "Vice Chairman",
+      duration: "1983-1987",
+    },
+    {
+      officialBody: "Provincial Assembly of the Punjab",
+      post: "MPA",
+      duration: "1993-1996",
+    },
+    {
+      officialBody: "Provincial Assembly of the Punjab",
+      post: "Minister for Live Stock & Dairy Development",
+      duration: "1997-1999",
+    },
+    {
+      officialBody: "Provincial Assembly of the Punjab",
+      post: "Speaker",
+      duration: "2008-2018",
+    },
+  ],
+
+  permanentContact: "Khai Hithar P.O. Same, Tehsil & District Kasur",
+  presentContact: "3 Upper Mall, Lahore",
+  workPhone: "042-99200311 (Off), 042-99200312 (Fax)",
 };
 
-export const delegateRows = [
-  {
-    id: 1,
-    rowTitle: "Punjab Delegates",
-    members: [
-      {
-        id: 101,
-        name: "Dr. Muhammad Ali",
-        role: "Provincial Delegate",
-        region: "Punjab",
-        imgSrc: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=300",
-        designation: "Senior Medical Officer (SMO / Grade-18)",
-        hospital: "Mayo Hospital, Lahore",
-        qualification: "MBBS, FCPS (Community Medicine)",
-        email: "dr.muhammadali@gcda.com",
-        phone: "+92 300 1234567",
-        fathersName: "Muhammad Yusuf",
-        // religion: "Islam",
-        joinedGCDA: "March 2015",
-        bio: "Dr. Muhammad Ali has been serving the public healthcare sector for over 12 years. He is actively involved in reforming the career framework and multi-tier promotion criteria for general cadre doctors in Punjab.",
-        professionalSummary:
-          "Dr. Muhammad Ali is a seasoned public health administrator with over a decade of experience in government healthcare delivery. He has championed policy reforms, doctor welfare initiatives, and institutional transparency within the GCDA framework.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Punjab)",
-          "Senior Medical Officer — Mayo Hospital, Lahore",
-          "Member: Healthcare Reform Sub-Committee, GCDA",
-          "Provincial Coordinator: Doctor Welfare Cell, Punjab",
-        ],
-        education: [
-          "MBBS — King Edward Medical University, Lahore (2005)",
-          "FCPS (Community Medicine) — CPSP Pakistan (2012)",
-          "Diploma in Health Services Management — NIPA Lahore (2016)",
-        ],
-        executiveRoles: [
-          "Senior Medical Officer, Mayo Hospital, Lahore (2015–Present)",
-          "District Health Officer (Acting), Lahore (2020–2021)",
-          "Medical Officer, DHQ Hospital, Sheikhupura (2010–2015)",
-          "House Officer, Services Hospital, Lahore (2006–2007)",
-        ],
-        achievements: [
-          "Led the Punjab chapter's campaign for multi-tier promotion of Grade 17 doctors",
-          "Established a peer-support network for 300+ SMOs in central Punjab",
-          "Authored GCDA's internal policy note on healthcare worker burnout prevention",
-          "Coordinated mass medical camps in 6 rural districts of Punjab",
-        ],
-      },
-      {
-        id: 102,
-        name: "Dr. Asif Mahmood",
-        role: "Divisional Representative",
-        region: "Punjab",
-        imgSrc: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "DHQ Hospital, Faisalabad",
-        qualification: "MBBS, MPH (Public Health)",
-        email: "dr.asifmahmood@gcda.com",
-        phone: "+92 321 7654321",
-        fathersName: "Mahmood Hassan",
-        // religion: "Islam",
-        joinedGCDA: "June 2016",
-        bio: "Specializing in Public Health, Dr. Asif focuses on healthcare administration accountability and grassroots representation inside the general assembly.",
-        professionalSummary:
-          "Dr. Asif Mahmood brings a unique perspective combining public health expertise with administrative acumen. His work focuses on bridging the gap between frontline healthcare workers and institutional policymakers.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Punjab)",
-          "Medical Officer — DHQ Hospital, Faisalabad",
-          "Treasurer: GCDA Faisalabad Chapter",
-        ],
-        education: [
-          "MBBS — Allama Iqbal Medical College, Lahore (2008)",
-          "MPH — University of Health Sciences, Lahore (2015)",
-        ],
-        executiveRoles: [
-          "Medical Officer, DHQ Hospital Faisalabad (2014–Present)",
-          "Medical Officer, THQ Hospital Jhang (2010–2014)",
-        ],
-        achievements: [
-          "Implemented digital patient registration at DHQ Faisalabad",
-          "Reduced medicine wastage by 25% through improved inventory system",
-          "Organized 3 CME workshops for junior doctors in Faisalabad Division",
-        ],
-      },
-      {
-        id: 103,
-        name: "Dr. Shahbaz Khan",
-        role: "Rural Cadre Delegate",
-        region: "Punjab",
-        imgSrc: "https://images.unsplash.com/photo-1536064438283-32fb4c37b2ea?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "Rural Health Centre (RHC), Sialkot",
-        qualification: "MBBS, CRHM",
-        email: "dr.shahbaz@gcda.com",
-        phone: "+92 333 4567890",
-        fathersName: "Khan Muhammad Sadiq",
-        // religion: "Islam",
-        joinedGCDA: "January 2017",
-        bio: "An advocate for doctors working in rural setups, Dr. Shahbaz works tirelessly to secure basic rights, security, and proper accommodations for medical officers posted in remote areas.",
-        professionalSummary:
-          "Dr. Shahbaz Khan is a vocal advocate for rural healthcare workers. His grassroots experience at RHC level gives him a unique and powerful voice in the House of Delegates for doctors overlooked by the system.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Punjab)",
-          "Medical Officer — RHC Sialkot",
-          "Rural Health Coordinator: GCDA Punjab Wing",
-        ],
-        education: [
-          "MBBS — University of Health Sciences, Lahore (2010)",
-          "Certificate in Rural Health Management — PHSA (2018)",
-        ],
-        executiveRoles: [
-          "Medical Officer, RHC Sialkot (2013–Present)",
-          "Medical Officer, BHU Gujranwala (2011–2013)",
-        ],
-        achievements: [
-          "Successfully campaigned for security guard deployment at 15 rural BHUs",
-          "Negotiated on-call allowance restoration for rural MOs in Sialkot district",
-          "Launched 'Doctor ki Awaaz' awareness campaign reaching 500+ rural doctors",
-        ],
-      },
-      {
-        id: 104,
-        name: "Dr. Ahmad Raza",
-        role: "Legal & Constitutional Chair",
-        region: "Punjab",
-        imgSrc: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=300",
-        designation: "Senior Medical Officer (SMO / Grade-18)",
-        hospital: "Services Hospital, Lahore",
-        qualification: "MBBS, MCPS, LLB",
-        email: "dr.ahmadraza@gcda.com",
-        phone: "+92 345 9876543",
-        fathersName: "Raza Muhammad Afzal",
-        // religion: "Islam",
-        joinedGCDA: "August 2014",
-        bio: "Dr. Ahmad Raza leads the constitutional enhancement committee within the House of Delegates to draft better legal frameworks for doctor career security.",
-        professionalSummary:
-          "Dr. Ahmad Raza is a legal-minded healthcare professional dedicated to institutional reform. He has been a key drafter of GCDA's constitutional amendments addressing seniority, service rules, and grievance mechanisms.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Punjab)",
-          "Chairperson: Constitutional Amendment Sub-Committee, GCDA",
-          "Senior Medical Officer — Services Hospital, Lahore",
-        ],
-        education: [
-          "MBBS — Punjab Medical College, Faisalabad (2004)",
-          "MCPS — CPSP Pakistan (2010)",
-          "LLB (Part-time) — Punjab University (2020)",
-        ],
-        executiveRoles: [
-          "Senior Medical Officer, Services Hospital Lahore (2016–Present)",
-          "Medical Officer, Ganga Ram Hospital Lahore (2010–2016)",
-        ],
-        achievements: [
-          "Drafted the GCDA Doctor Protection Constitutional Amendment (2022)",
-          "Successfully challenged illegal transfer orders for 40+ doctors via legal channel",
-          "Published research paper on 'Service Rules Gaps for Grade 17–18 Doctors'",
-        ],
-      },
-      {
-        id: 105,
-        name: "Dr. Yasir Hussain",
-        role: "Divisional Delegate",
-        region: "Punjab",
-        imgSrc: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "Nishtar Hospital, Multan",
-        qualification: "MBBS, MD (Internal Medicine)",
-        email: "dr.yasir@gcda.com",
-        phone: "+92 301 2345678",
-        fathersName: "Ghulam Hussain",
-        // religion: "Islam",
-        joinedGCDA: "October 2017",
-        bio: "Dr. Yasir Hussain represents South Punjab general cadre doctors, actively participating in decentralization initiatives and equipment procurement tracking.",
-        professionalSummary:
-          "Dr. Yasir Hussain focuses on improving infrastructure and staff allocation in South Punjab's peripheral hospitals, bridging communication gaps with provincial offices.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Punjab)",
-          "Medical Officer — Nishtar Hospital, Multan",
-          "South Punjab Coordinator: GCDA Grievance Cell",
-        ],
-        education: [
-          "MBBS — Nishtar Medical College, Multan (2011)",
-          "MD (Internal Medicine) — UHS Lahore (2018)",
-        ],
-        executiveRoles: [
-          "Medical Officer, Nishtar Hospital Multan (2018–Present)",
-          "Medical Officer, THQ Hospital Shujabad (2013–2017)",
-        ],
-        achievements: [
-          "Co-authored standard operating guidelines for emergency triage at Nishtar Multan",
-          "Successfully lobbied for functional incinerators in 3 DHQ hospitals of Multan division",
-          "Conducted 10+ basic life support training courses for rural paramedical staff",
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    rowTitle: "Sindh Delegates",
-    members: [
-      {
-        id: 201,
-        name: "Dr. Kamran Ali",
-        role: "Provincial Secretary",
-        region: "Sindh",
-        imgSrc: "https://images.unsplash.com/photo-1582750433449-6493528bb644?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "Jinnah Postgraduate Medical Centre (JPMC), Karachi",
-        qualification: "MBBS, DHA (Hospital Admin)",
-        email: "dr.kamran@gcda.com",
-        phone: "+92 300 8887776",
-        fathersName: "Ali Hassan",
-        // religion: "Islam",
-        joinedGCDA: "April 2018",
-        bio: "Representing the urban cadre of Sindh, Dr. Kamran focuses on streamlining promotion wait times from grade 17 to 18 and improving pay equity for government doctors.",
-        professionalSummary:
-          "Dr. Kamran Ali is a tireless advocate for urban healthcare workers in Karachi. His deep understanding of JPMC's administrative challenges equips him to represent Sindh's concerns with precision and authority.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Sindh)",
-          "Medical Officer — JPMC Karachi",
-          "Sindh Chapter Secretary: GCDA",
-        ],
-        education: [
-          "MBBS — Dow University of Health Sciences, Karachi (2009)",
-          "Diploma in Hospital Administration — Aga Khan University (2017)",
-        ],
-        executiveRoles: [
-          "Medical Officer, JPMC Karachi (2014–Present)",
-          "Medical Officer, Civil Hospital Karachi (2010–2014)",
-        ],
-        achievements: [
-          "Led Sindh chapter's demand for grade-18 promotions pending for 7+ years",
-          "Initiated GCDA Sindh Legal Aid Fund for victimized doctors",
-          "Organized province-wide doctors' rights rally with 1,200+ participants",
-        ],
-      },
-      {
-        id: 202,
-        name: "Dr. Yasmin Khan",
-        role: "Women Wing Chairperson",
-        region: "Sindh",
-        imgSrc: "https://images.unsplash.com/photo-1594824813573-246434e33963?q=80&w=300",
-        designation: "Senior Women Medical Officer (SWMO / Grade-18)",
-        hospital: "Civil Hospital, Hyderabad",
-        qualification: "MBBS, FCPS (Obs & Gynae)",
-        email: "dr.yasmin@gcda.com",
-        phone: "+92 312 3456789",
-        fathersName: "Khan Baz Muhammad",
-        // religion: "Islam",
-        joinedGCDA: "November 2019",
-        bio: "Dr. Yasmin highlights the challenges faced by female general cadre practitioners in public facilities and lobbies for equal workplace distribution and safe working conditions.",
-        professionalSummary:
-          "Dr. Yasmin Khan is the leading female voice in the GCDA House of Delegates. Her advocacy work for women medical officers spans workplace safety, maternity leave policies, and equal posting rights.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Sindh)",
-          "Senior Women Medical Officer — Civil Hospital, Hyderabad",
-          "Chairperson: GCDA Women's Rights Desk, Sindh",
-        ],
-        education: [
-          "MBBS — Liaquat University of Medical Sciences (2006)",
-          "FCPS (Obs & Gynae) — CPSP Pakistan (2014)",
-        ],
-        executiveRoles: [
-          "Senior WMO, Civil Hospital Hyderabad (2015–Present)",
-          "WMO, DHQ Hospital Nawabshah (2010–2015)",
-        ],
-        achievements: [
-          "Secured mandatory female doctor quota in all Sindh DHQ hospitals",
-          "Drafted GCDA's gender-sensitive workplace safety guidelines",
-          "Facilitated maternity leave policy approval for 200+ female doctors",
-        ],
-      },
-      {
-        id: 203,
-        name: "Dr. Tariq Baloch",
-        role: "Regional Delegate",
-        region: "Sindh",
-        imgSrc: "https://images.unsplash.com/photo-1637059824899-a441006a6875?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "People's Medical University Hospital, Nawabshah",
-        qualification: "MBBS, MPH",
-        email: "dr.tariqbaloch@gcda.com",
-        phone: "+92 303 3322114",
-        fathersName: "Sardar Mir Baloch",
-        // religion: "Islam",
-        joinedGCDA: "February 2016",
-        bio: "Dr. Tariq Baloch represents the rural healthcare sector of Central Sindh. He actively lobbies for infrastructural development and the provision of essential medicines at BHUs.",
-        professionalSummary:
-          "Dr. Tariq Baloch is a key community manager inside GCDA Sindh, focusing on structural safety and career path stabilization for doctors serving in peripheral districts.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Sindh)",
-          "Medical Officer — PMU Hospital, Nawabshah",
-          "Coordinator: Rural Infrastructure Desk, Sindh",
-        ],
-        education: [
-          "MBBS — Peoples University of Medical & Health Sciences (2011)",
-          "Master of Public Health (MPH) — Dow University, Karachi (2016)",
-        ],
-        executiveRoles: [
-          "Medical Officer, PMU Hospital Nawabshah (2016–Present)",
-          "Medical Officer, RHC Sakrand (2012–2016)",
-        ],
-        achievements: [
-          "Established structural accountability metrics across 12 Rural Health Centres",
-          "Successfully campaigned for basic security systems installation in interior Sindh setups",
-          "Coordinated 15+ clean drinking water filtration plant installations inside hospital lines",
-        ],
-      },
-      {
-        id: 204,
-        name: "Dr. Zainab Baloch",
-        role: "District Delegate",
-        region: "Sindh",
-        imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300",
-        designation: "Senior Women Medical Officer (SWMO / Grade-18)",
-        hospital: "GMMMC Teaching Hospital, Sukkur",
-        qualification: "MBBS, MCPS (Pediatrics)",
-        email: "dr.zainab@gcda.com",
-        phone: "+92 315 5556677",
-        fathersName: "Allah Baksh Baloch",
-        // religion: "Islam",
-        joinedGCDA: "September 2017",
-        bio: "Dr. Zainab Baloch focus remains on pediatric healthcare management reforms and security provisions for medical professionals in Upper Sindh.",
-        professionalSummary:
-          "Dr. Zainab Baloch works extensively on organizing public healthcare structures and advocating for female leadership models within the GCDA core structure.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Sindh)",
-          "Senior Women Medical Officer — GMMMC Hospital, Sukkur",
-          "Executive Member: Doctor Protection Force, Sukkur Division",
-        ],
-        education: [
-          "MBBS — Chandka Medical College, Larkana (2007)",
-          "MCPS (Pediatrics) — CPSP Pakistan (2013)",
-        ],
-        executiveRoles: [
-          "Senior WMO, GMMMC Teaching Hospital Sukkur (2016–Present)",
-          "Women Medical Officer, THQ Hospital Ghotki (2009–2016)",
-        ],
-        achievements: [
-          "Spearheaded the development of a renewed pediatric emergency ward protocol in Sukkur",
-          "Negotiated a comprehensive on-campus residential security structure for female staff",
-          "Resolved over 30 pay-scale disparity issues for administrative grade staff",
-        ],
-      },
-      {
-        id: 205,
-        name: "Dr. Faisal Shah",
-        role: "Divisional Rep",
-        region: "Sindh",
-        imgSrc: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300",
-        designation: "Senior Medical Officer (SMO / Grade-18)",
-        hospital: "DHQ Hospital, Larkana",
-        qualification: "MBBS, MPH",
-        email: "dr.faisal@gcda.com",
-        phone: "+92 334 1122334",
-        fathersName: "Syed Anwar Shah",
-        // religion: "Islam",
-        joinedGCDA: "May 2015",
-        bio: "Expertise in management frameworks, advocating for administrative positions to be held strictly by cadre doctors.",
-        professionalSummary:
-          "Dr. Faisal Shah has broad structural health management experience. He campaigns against non-technical bureaucrats managing complex medical facilities.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Sindh)",
-          "Senior Medical Officer — DHQ Hospital, Larkana",
-          "Chairperson: Administrative Policy Wing, GCDA Sindh",
-        ],
-        education: [
-          "MBBS — Larkana Medical College (2005)",
-          "Master of Public Health (MPH) — Health Services Academy, Islamabad (2012)",
-        ],
-        executiveRoles: [
-          "Senior Medical Officer, DHQ Hospital Larkana (2017–Present)",
-          "Hospital Administrator (Acting), DHQ Larkana (2021–2022)",
-          "Medical Officer, BHU Mirokhan (2006–2012)",
-        ],
-        achievements: [
-          "Successfully defended clinical management rights of doctors in local court cells",
-          "Standardized institutional inventory management systems reducing medical overheads by 18%",
-          "Created an active professional bridge framework between health offices and assembly desks",
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
-    rowTitle: "KPK Delegates",
-    members: [
-      {
-        id: 301,
-        name: "Dr. Amjad Khan",
-        role: "Provincial Chair",
-        region: "KPK",
-        imgSrc: "https://images.unsplash.com/photo-1607990283143-e81e7a2c93ab?q=80&w=300",
-        designation: "Senior Medical Officer (SMO / Grade-18)",
-        hospital: "Lady Reading Hospital (LRH), Peshawar",
-        qualification: "MBBS, MPH",
-        email: "dr.amjad@gcda.com",
-        phone: "+92 313 9988776",
-        fathersName: "Asfandyar Khan",
-        // religion: "Islam",
-        joinedGCDA: "January 2014",
-        bio: "Leading the structural transition advocacy for general cadre allocations under the MTI regulations in KPK.",
-        professionalSummary:
-          "Dr. Amjad Khan is a veteran policy specialist working towards stabilizing executive benefits and balancing civil servant definitions under institutional autonomy layouts.",
-        positions: [
-          "Provincial Chairman — GCDA (KPK Chapter)",
-          "Delegate Member — House of Delegates, GCDA",
-          "Senior Medical Officer — LRH, Peshawar",
-        ],
-        education: [
-          "MBBS — Khyber Medical College, Peshawar (2003)",
-          "Master of Public Health (MPH) — Khyber Medical University (2010)",
-        ],
-        executiveRoles: [
-          "Senior Medical Officer, LRH Peshawar (2015–Present)",
-          "Provincial Health Coordinator, Health Dept Peshawar (2011–2015)",
-        ],
-        achievements: [
-          "Negotiated major job structure protection terms in the MTI Reform Act for doctors",
-          "Unified three splinter doctor associations under the main collective GCDA banner",
-          "Pioneered standard workspace protocols for central operational wings in Peshawar",
-        ],
-      },
-      {
-        id: 302,
-        name: "Dr. Sana Wali",
-        role: "Provincial Delegate",
-        region: "KPK",
-        imgSrc: "https://images.unsplash.com/photo-1591604021695-0c69b7c05981?q=80&w=300",
-        designation: "Women Medical Officer (WMO / Grade-17)",
-        hospital: "Khyber Teaching Hospital (KTH), Peshawar",
-        qualification: "MBBS, FCPS (General Surgery)",
-        email: "dr.sana@gcda.com",
-        phone: "+92 322 4433221",
-        fathersName: "Wali Khan Muhammad",
-        // religion: "Islam",
-        joinedGCDA: "July 2016",
-        bio: "Advocate for structural protection policies for doctors in conflict-prone areas and emergency wings.",
-        professionalSummary:
-          "Dr. Sana Wali works continuously on emergency healthcare safety frameworks and security models protecting medical workers across high-risk districts.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (KPK)",
-          "Women Medical Officer — KTH, Peshawar",
-          "Secretary: Emergency Care Safety Sub-Committee",
-        ],
-        education: [
-          "MBBS — Khyber Medical College, Peshawar (2008)",
-          "FCPS (General Surgery) — CPSP Pakistan (2015)",
-        ],
-        executiveRoles: [
-          "Women Medical Officer / Surgeon, KTH Peshawar (2016–Present)",
-          "Medical Officer, DHQ Hospital Mardan (2010–2014)",
-        ],
-        achievements: [
-          "Successfully instituted modern localized safety parameters in primary critical care wards",
-          "Conducted provincial trauma workshops benefiting 400+ general medical practitioners",
-          "Led development of gender-equal on-call rest quarters layout inside KTH complex",
-        ],
-      },
-      {
-        id: 303,
-        name: "Dr. Bilal Afridi",
-        role: "Merged Districts Rep",
-        region: "KPK",
-        imgSrc: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "DHQ Hospital, Landi Kotal",
-        qualification: "MBBS",
-        email: "dr.bilal@gcda.com",
-        phone: "+92 334 7788990",
-        fathersName: "Malik Tariq Afridi",
-        // religion: "Islam",
-        joinedGCDA: "December 2018",
-        bio: "Dedicated to balancing incentives and hardship allowances for doctors working in the newly merged tribal districts.",
-        professionalSummary:
-          "Dr. Bilal Afridi brings vital ground-level experience concerning former FATA regions. He drives state initiatives toward remote medical area development models.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (KPK)",
-          "Medical Officer — DHQ Hospital, Landi Kotal",
-          "Spokesperson: Merged Districts Development Wing",
-        ],
-        education: [
-          "MBBS — Ayub Medical College, Abbottabad (2013)",
-        ],
-        executiveRoles: [
-          "Medical Officer, DHQ Landi Kotal (2016–Present)",
-          "Medical Officer, BHU Jamrud (2014–2016)",
-        ],
-        achievements: [
-          "Secured a 30% hardship allowance expansion for healthcare personnel in remote districts",
-          "Facilitated supply chains for essential life-support equipment across three border setups",
-          "Organized systematic medical outreach programs serving over 10,000 tribal patients",
-        ],
-      },
-      {
-        id: 304,
-        name: "Dr. Imran Shafi",
-        role: "Regional Delegate",
-        region: "KPK",
-        imgSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "DHQ Hospital, Abbottabad",
-        qualification: "MBBS, MCPS (Family Medicine)",
-        email: "dr.imran@gcda.com",
-        phone: "+92 346 6655443",
-        fathersName: "Muhammad Shafi",
-        // religion: "Islam",
-        joinedGCDA: "March 2017",
-        bio: "Focuses on strengthening training resources and regularizing contract-based medical officers.",
-        professionalSummary:
-          "Dr. Imran Shafi is an administrative leader within the Hazara division framework, specializing in medical education security and standardization of contract medical roles.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (KPK)",
-          "Medical Officer — DHQ Hospital, Abbottabad",
-          "Chairman: Contract Regularization Forum, Hazara",
-        ],
-        education: [
-          "MBBS — Ayub Medical College, Abbottabad (2010)",
-          "MCPS (Family Medicine) — CPSP Pakistan (2016)",
-        ],
-        executiveRoles: [
-          "Medical Officer, DHQ Abbottabad (2015–Present)",
-          "Medical Officer, THQ Hospital Havelian (2011–2015)",
-        ],
-        achievements: [
-          "Drafted comprehensive white-paper advocating the regularization of 250+ contract doctors",
-          "Introduced structured family medicine practices at primary healthcare units in Abbottabad",
-          "Initiated inter-departmental skill enhancement programs for clinical house practitioners",
-        ],
-      },
-      {
-        id: 305,
-        name: "Dr. Naveed Alam",
-        role: "District Representative",
-        region: "KPK",
-        imgSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "THQ Hospital, Swat",
-        qualification: "MBBS",
-        email: "dr.naveed@gcda.com",
-        phone: "+92 300 9911223",
-        fathersName: "Alam Khan Swati",
-        // religion: "Islam",
-        joinedGCDA: "November 2019",
-        bio: "Promotes provincial tourism medical units and optimized hazard cover insurance setup.",
-        professionalSummary:
-          "Dr. Naveed Alam focuses on establishing structured medical infrastructure in high-tourist zones across Swat and Malakand divisions.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (KPK)",
-          "District Representative — GCDA Swat Wing",
-          "Medical Officer — THQ Hospital, Swat",
-        ],
-        education: [
-          "MBBS — Saidu Medical College, Swat (2012)",
-        ],
-        executiveRoles: [
-          "Medical Officer, THQ Hospital Swat (2016–Present)",
-          "Medical Officer, RHC Matta, Swat (2013–2016)",
-        ],
-        achievements: [
-          "Established temporary trauma response stations during peak tourism seasons",
-          "Successfully campaigned for optimized health insurance models covering emergency staff",
-          "Streamlined rural patient tracking metrics inside northern healthcare districts",
-        ],
-      },
-    ],
-  },
-  {
-    id: 4,
-    rowTitle: "Balochistan Delegates",
-    members: [
-      {
-        id: 401,
-        name: "Dr. Zubair Baloch",
-        role: "Provincial Chief",
-        region: "Balochistan",
-        imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300",
-        designation: "Senior Medical Officer (SMO / Grade-18)",
-        hospital: "Sandeman Provincial Hospital, Quetta",
-        qualification: "MBBS, MS (Public Health)",
-        email: "dr.zubair@gcda.com",
-        phone: "+92 333 7894561",
-        fathersName: "Mir Jan Muhammad Baloch",
-        religion: "Islam",
-        joinedGCDA: "February 2013",
-        bio: "Advocating fiercely for provincial service rules enhancements, basic structure implementation, and secure transport lines.",
-        professionalSummary:
-          "Dr. Zubair Baloch is a senior figure leading structural changes in Balochistan’s public medical sector, focusing on doctors' constitutional rights and secure workplace environments.",
-        positions: [
-          "Provincial Chief — GCDA (Balochistan Wing)",
-          "Delegate Member — House of Delegates, GCDA",
-          "Senior Medical Officer — Sandeman Hospital, Quetta",
-        ],
-        education: [
-          "MBBS — Bolan Medical College, Quetta (2002)",
-          "MS (Public Health) — Quaid-e-Azam University, Islamabad (2009)",
-        ],
-        executiveRoles: [
-          "Senior Medical Officer, Sandeman Provincial Hospital (2012–Present)",
-          "Deputy Medical Superintendent (Admin), Civil Hospital Quetta (2018–2020)",
-        ],
-        achievements: [
-          "Led historical legislative drafting for the Balochistan Doctor Protection Framework Act",
-          "Secured major logistical updates including secure transit options for long-route duties",
-          "Successfully expanded fundamental medical resource budgets for remote urban clusters",
-        ],
-      },
-      {
-        id: 402,
-        name: "Dr. Farhana Jamali",
-        role: "Women Wing Representative",
-        region: "Balochistan",
-        imgSrc: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?q=80&w=300",
-        designation: "Women Medical Officer (WMO / Grade-17)",
-        hospital: "BMC Hospital, Quetta",
-        qualification: "MBBS",
-        email: "dr.farhana@gcda.com",
-        phone: "+92 311 2233445",
-        fathersName: "Mir Chakar Khan Jamali",
-        // religion: "Islam",
-        joinedGCDA: "August 2016",
-        bio: "Lobbies for residential complexes and basic amenities security for female doctors stationed away from Quetta.",
-        professionalSummary:
-          "Dr. Farhana Jamali drives essential workplace infrastructure developments, prioritizing functional residential setups for female practitioners in remote fields.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Balochistan)",
-          "Women Wing Representative — GCDA Quetta Head Office",
-          "Women Medical Officer — Bolan Medical College Hospital",
-        ],
-        education: [
-          "MBBS — Bolan Medical College, Quetta (2009)",
-        ],
-        executiveRoles: [
-          "Women Medical Officer, BMC Hospital Quetta (2014–Present)",
-          "Medical Officer, DHQ Hospital Sibi (2010–2014)",
-        ],
-        achievements: [
-          "Successfully acquired executive approval for building three secure female doctor hostels",
-          "Instituted comprehensive basic life support networks for maternal health teams in Sibi",
-          "Elected unopposed to represent localized gender governance metrics inside the assembly",
-        ],
-      },
-      {
-        id: 403,
-        name: "Dr. Waleed Mengal",
-        role: "Coastal Region Rep",
-        region: "Balochistan",
-        imgSrc: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "DHQ Hospital, Gwadar",
-        qualification: "MBBS",
-        email: "dr.waleed@gcda.com",
-        phone: "+92 332 9988112",
-        fathersName: "Sardar Akhtar Mengal",
-        
-        joinedGCDA: "October 2018",
-        bio: "Working towards specialized technical health allowances and tele-medicine facilities deployment in remote coastal stations.",
-        professionalSummary:
-          "Dr. Waleed Mengal manages strategic regional communications across coastal healthcare hubs, ensuring technical setups match growing population demands.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Balochistan)",
-          "Coastal Region Coordinator — Gwadar & Pasni Sector",
-          "Medical Officer — DHQ Hospital, Gwadar",
-        ],
-        education: [
-          "MBBS — Bolan Medical College, Quetta (2011)",
-        ],
-        executiveRoles: [
-          "Medical Officer, DHQ Hospital Gwadar (2015–Present)",
-          "Medical Officer, Basic Health Unit Ormara (2012–2015)",
-        ],
-        achievements: [
-          "Pioneered first cross-functional tele-medicine portal loop connecting Gwadar with Quetta specialists",
-          "Successfully negotiated tailored coastal health allowance packages for local medical officers",
-          "Delivered standard emergency medical supplies tracking setups across deep-sea coastal zones",
-        ],
-      },
-      {
-        id: 404,
-        name: "Dr. Jameel Achakzai",
-        role: "Northern Division Rep",
-        region: "Balochistan",
-        imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "DHQ Hospital, Zhob",
-        qualification: "MBBS",
-        email: "dr.jameel@gcda.com",
-        phone: "+92 315 4455667",
-        fathersName: "Mahmood Khan Achakzai",
-        // religion: "Islam",
-        joinedGCDA: "April 2017",
-        bio: "Focused on supply management optimization and emergency medical infrastructure allocation budgets.",
-        professionalSummary:
-          "Dr. Jameel Achakzai coordinates fundamental logistics protocols, working towards reducing delays in life-saving medicine drops to northern high-altitude clinics.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Balochistan)",
-          "Northern Division Representative — Zhob Sector",
-          "Medical Officer — DHQ Hospital, Zhob",
-        ],
-        education: [
-          "MBBS — Bolan Medical College, Quetta (2010)",
-        ],
-        executiveRoles: [
-          "Medical Officer, DHQ Hospital Zhob (2014–Present)",
-          "Medical Officer, Rural Health Centre Qilla Saifullah (2011–2014)",
-        ],
-        achievements: [
-          "Reduced localized cold-chain supply disruption metrics by 30% via backup solar setups",
-          "Structured an integrated regional emergency trauma response framework along national highways",
-          "Managed successful collaborative health drives targetting cold-induced respiratory outbreaks",
-        ],
-      },
-      {
-        id: 405,
-        name: "Dr. Khalid Bugti",
-        role: "Southern Division Rep",
-        region: "Balochistan",
-        imgSrc: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=300",
-        designation: "Medical Officer (MO / Grade-17)",
-        hospital: "DHQ Hospital, Khuzdar",
-        qualification: "MBBS",
-        email: "dr.khalid@gcda.com",
-        phone: "+92 336 1239874",
-        fathersName: "Mir Ghulam Qadir Bugti",
-        // religion: "Islam",
-        joinedGCDA: "June 2016",
-        bio: "Advocates for remote healthcare frameworks and basic health unit (BHU) structural security metrics.",
-        professionalSummary:
-          "Dr. Khalid Bugti centers his institutional work around improving protective deployments and physical safeguards for field staff serving deep in southern Balochistan.",
-        positions: [
-          "Delegate Member — House of Delegates, GCDA (Balochistan)",
-          "Southern Division Representative — Khuzdar Wing",
-          "Medical Officer — DHQ Hospital, Khuzdar",
-        ],
-        education: [
-          "MBBS — Bolan Medical College, Quetta (2008)",
-        ],
-        executiveRoles: [
-          "Medical Officer, DHQ Hospital Khuzdar (2013–Present)",
-          "Medical Officer, BHU Dera Bugti (2009–2013)",
-        ],
-        achievements: [
-          "Instituted structural monitoring metrics covering 20+ peripheral Basic Health Units",
-          "Successfully coordinated with regional authorities to guarantee on-site guard presence for late shifts",
-          "Established continuous medical education (CME) pathways for interior district physicians",
-        ],
-      },
-    ],
-  },
-];
+const createProfile = (
+  name,
+  imageNumber,
+  role,
+  region,
+  shortDescription,
+  extension = "jpeg"
+) => ({
+  id: name
+    .toLowerCase()
+    .replace("dr.", "dr")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, ""),
+
+  name,
+  role,
+  region,
+
+  image: `/assets/images/about/house-of-delegates/image${imageNumber}.${extension}`,
+
+  shortDescription:
+    shortDescription ||
+    "Senior medical professional associated with GCDA, contributing to doctors welfare, service matters, professional coordination, and healthcare administration.",
+
+  ...sharedProfileDetails,
+});
+
+const delegatesData = {
+  title: "House of Delegates",
+  subtitle: "General Cadre Doctors Association",
+
+  heroImage: "/assets/images/about/house-of-delegates/hero.jpg",
+
+  profiles: [
+    createProfile(
+      "Dr Muhammad Ali",
+      1,
+      "Provincial Delegate",
+      "Punjab",
+      "Delegate member associated with GCDA, contributing to doctors welfare, representation, service matters, and healthcare policy coordination."
+    ),
+
+    createProfile("Dr Asif Mahmood", 2, "Divisional Representative", "Punjab"),
+    createProfile("Dr Shahbaz Khan", 3, "Rural Cadre Delegate", "Punjab"),
+    createProfile("Dr Ahmad Raza", 4, "Legal & Constitutional Chair", "Punjab"),
+    createProfile("Dr Yasir Hussain", 5, "Divisional Delegate", "Punjab"),
+    createProfile("Dr Noman Raza", 6, "Delegate Member", "Punjab"),
+
+    createProfile("Dr Kamran Ali", 7, "Provincial Secretary", "Sindh"),
+    createProfile("Dr Yasmin Khan", 8, "Women Wing Chairperson", "Sindh"),
+    createProfile("Dr Tariq Baloch", 9, "Regional Delegate", "Sindh"),
+    createProfile("Dr Zainab Baloch", 10, "District Delegate", "Sindh"),
+    createProfile("Dr Faisal Shah", 11, "Divisional Representative", "Sindh"),
+
+    createProfile("Dr Amjad Khan", 12, "Provincial Chair", "KPK"),
+    createProfile("Dr Sana Wali", 13, "Provincial Delegate", "KPK"),
+    createProfile("Dr Bilal Afridi", 14, "Merged Districts Representative", "KPK"),
+    createProfile("Dr Imran Shafi", 15, "Regional Delegate", "KPK"),
+    createProfile("Dr Naveed Alam", 16, "District Representative", "KPK"),
+
+    createProfile("Dr Zubair Baloch", 17, "Provincial Chief", "Balochistan"),
+    createProfile("Dr Farhana Jamali", 18, "Women Wing Representative", "Balochistan"),
+    createProfile("Dr Waleed Mengal", 19, "Coastal Region Representative", "Balochistan"),
+    createProfile("Dr Jameel Achakzai", 20, "Northern Division Representative", "Balochistan"),
+    createProfile("Dr Khalid Bugti", 21, "Southern Division Representative", "Balochistan"),
+  ],
+};
+
+export default delegatesData;

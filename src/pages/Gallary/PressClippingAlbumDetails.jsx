@@ -9,7 +9,6 @@ function PressClippingAlbumDetails() {
   const [searchParams] = useSearchParams();
 
   const [activeIndex, setActiveIndex] = useState(null);
-  const [showAlbumDescription, setShowAlbumDescription] = useState(true);
 
   let album = null;
   let albumYear =
@@ -61,7 +60,6 @@ function PressClippingAlbumDetails() {
 
   const closeLightbox = () => {
     setActiveIndex(null);
-    setShowAlbumDescription(true);
   };
 
   const handleNext = () => {
@@ -105,13 +103,10 @@ function PressClippingAlbumDetails() {
             <button
               key={image.imgId}
               type="button"
-              onClick={() => {
-                setActiveIndex(index);
-                setShowAlbumDescription(true);
-              }}
+              onClick={() => setActiveIndex(index)}
               className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all text-left group"
             >
-              <div className="relative h-44 bg-gray-200 overflow-hidden">
+              <div className="relative h-72 bg-gray-200 overflow-hidden">
                 <img
                   src={image.src}
                   alt={image.title}
@@ -129,13 +124,13 @@ function PressClippingAlbumDetails() {
                 </span>
               </div>
 
-              <div className="p-4">
-                <h3 className="text-sm font-black text-gray-900 group-hover:text-[#0F765E] transition-colors line-clamp-2">
+              <div className="p-3">
+                <h3 className="text-sm font-black text-gray-900 group-hover:text-[#0F765E] transition-colors line-clamp-1">
                   {image.title}
                 </h3>
 
                 {image.details && (
-                  <p className="text-[12px] text-gray-500 leading-relaxed mt-3 line-clamp-3">
+                  <p className="text-[11px] text-gray-500 leading-5 mt-1 line-clamp-2">
                     {image.details}
                   </p>
                 )}
@@ -154,9 +149,7 @@ function PressClippingAlbumDetails() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className={`relative w-full ${
-                showAlbumDescription ? "max-w-[1320px]" : "max-w-[1120px]"
-              } max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl`}
+              className="relative w-full max-w-[1450px] max-h-[94vh] bg-white rounded-3xl overflow-hidden shadow-2xl"
               initial={{ opacity: 0, scale: 0.96, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 30 }}
@@ -172,110 +165,52 @@ function PressClippingAlbumDetails() {
                 </button>
               </div>
 
-              <div
-                className={`grid grid-cols-1 ${
-                  showAlbumDescription
-                    ? "lg:grid-cols-[70%_30%]"
-                    : "lg:grid-cols-1"
-                } max-h-[90vh]`}
-              >
-                <div className="bg-black flex flex-col max-h-[90vh]">
-                  <div
-                    className={`relative bg-black flex items-center justify-center overflow-hidden ${
-                      showAlbumDescription
-                        ? "h-[56vh] lg:h-[68vh]"
-                        : "h-[64vh] lg:h-[76vh]"
-                    }`}
+              <div className="bg-black flex flex-col max-h-[94vh]">
+                <div className="relative bg-black flex items-center justify-center overflow-hidden h-[82vh]">
+                  <img
+                    src={activeImage.src}
+                    alt={activeImage.title}
+                    className="w-full h-full object-contain"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-50 min-w-[52px] min-h-[52px] rounded-full bg-black/65 hover:bg-[#0F765E] text-white flex items-center justify-center text-3xl font-black transition-all backdrop-blur-md border border-white/30 shadow-xl"
+                    title="Previous Clipping"
                   >
-                    <img
-                      src={activeImage.src}
-                      alt={activeImage.title}
-                      className="max-w-full max-h-full object-contain p-3 lg:p-5"
-                    />
+                    ‹
+                  </button>
 
-                    <button
-                      type="button"
-                      onClick={handlePrev}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 z-50 min-w-[52px] min-h-[52px] rounded-full bg-black/65 hover:bg-[#0F765E] text-white flex items-center justify-center text-3xl font-black transition-all backdrop-blur-md border border-white/30 shadow-xl"
-                      title="Previous Clipping"
-                    >
-                      ‹
-                    </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-50 min-w-[52px] min-h-[52px] rounded-full bg-black/65 hover:bg-[#0F765E] text-white flex items-center justify-center text-3xl font-black transition-all backdrop-blur-md border border-white/30 shadow-xl"
+                    title="Next Clipping"
+                  >
+                    ›
+                  </button>
 
-                    <button
-                      type="button"
-                      onClick={handleNext}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 z-50 min-w-[52px] min-h-[52px] rounded-full bg-black/65 hover:bg-[#0F765E] text-white flex items-center justify-center text-3xl font-black transition-all backdrop-blur-md border border-white/30 shadow-xl"
-                      title="Next Clipping"
-                    >
-                      ›
-                    </button>
-
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 bg-black/65 text-white backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-xs font-black">
-                      {activeIndex + 1} / {album.images.length}
-                    </div>
-                  </div>
-
-                  <div className="bg-white px-6 md:px-8 py-4 flex-shrink-0">
-                    <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#0F765E] mb-2">
-                      Press Clipping Details
-                    </p>
-
-                    <h2 className="text-lg md:text-xl font-black text-gray-900 leading-tight">
-                      {activeImage.title}
-                    </h2>
-
-                    {activeImage.details && (
-                      <p className="text-sm text-gray-600 leading-relaxed mt-2 line-clamp-3">
-                        {activeImage.details}
-                      </p>
-                    )}
-
-                    {album.description && !showAlbumDescription && (
-                      <button
-                        type="button"
-                        onClick={() => setShowAlbumDescription(true)}
-                        className="mt-3 inline-flex items-center justify-center rounded-xl bg-[#0F765E] hover:bg-[#0b5e4b] text-white px-4 py-2 text-xs md:text-sm font-bold transition-all"
-                      >
-                        Show Album Description
-                      </button>
-                    )}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 bg-black/65 text-white backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-xs font-black">
+                    {activeIndex + 1} / {album.images.length}
                   </div>
                 </div>
 
-                {showAlbumDescription && album.description && (
-                  <div className="bg-white border-l border-gray-100 max-h-[90vh] flex flex-col overflow-hidden">
-                    <div className="px-6 md:px-7 pt-7 pb-5 border-b border-gray-100 flex-shrink-0">
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <p className="text-xs font-black uppercase tracking-[0.25em] text-[#0F765E] mb-3">
-                            Complete Press Clipping Description
-                          </p>
+                <div className="bg-white px-5 md:px-6 py-3 flex-shrink-0">
+                  <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#0F765E] mb-1">
+                    Press Clipping Details
+                  </p>
 
-                          <h3 className="text-xl md:text-2xl font-black text-gray-900 leading-tight">
-                            {album.title}
-                          </h3>
+                  <h2 className="text-sm md:text-base font-black text-gray-900 leading-tight line-clamp-1">
+                    {activeImage.title}
+                  </h2>
 
-                          <div className="w-16 h-1 bg-[#e67e22] mt-4 rounded-full" />
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => setShowAlbumDescription(false)}
-                          className="flex-shrink-0 bg-red-600 hover:bg-red-700 text-white rounded-xl px-3 py-2 text-xs font-black transition-all"
-                        >
-                          Close ✕
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="px-6 md:px-7 py-5 overflow-y-auto flex-1 custom-scrollbar">
-                      <p className="text-sm md:text-base text-gray-600 leading-8">
-                        {album.description?.replace(/\s+/g, " ")}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                  {activeImage.details && (
+                    <p className="text-[11px] md:text-xs text-gray-600 leading-5 mt-1 line-clamp-2">
+                      {activeImage.details}
+                    </p>
+                  )}
+                </div>
               </div>
             </motion.div>
           </motion.div>

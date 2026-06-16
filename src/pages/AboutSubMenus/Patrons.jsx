@@ -5,7 +5,9 @@ import patronsData from "../../data/patronsData";
 function Patrons() {
   const data = patronsData;
   const featuredProfile = data.profiles?.[0];
-  const otherProfiles = data.profiles?.slice(1) || [];
+
+  // نیچے صرف 3 images show ہوں گی
+  const otherProfiles = data.profiles?.slice(1, 4) || [];
 
   return (
     <main className="w-full bg-white">
@@ -29,23 +31,23 @@ function Patrons() {
       </section>
 
       {featuredProfile && (
-        <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-10">
+        <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-8">
           <Link
             to={`/about/patrons/profile/${featuredProfile.id}`}
-            className="block max-w-[520px] md:max-w-[620px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-white hover:shadow-xl transition-all duration-300"
+            className="block max-w-[360px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-white hover:shadow-xl transition-all duration-300"
           >
             <img
               src={featuredProfile.image}
               alt={featuredProfile.name}
-              className="w-full h-[240px] md:h-[310px] object-cover"
+              className="w-full h-[220px] object-cover"
             />
 
-            <div className="p-5 bg-white text-center">
-              <h3 className="text-lg md:text-xl font-black text-slate-800">
+            <div className="p-4 bg-white text-center">
+              <h3 className="text-base md:text-lg font-black text-slate-800">
                 {featuredProfile.name}
               </h3>
 
-              <p className="mt-2 text-sm text-slate-600 leading-6">
+              <p className="mt-2 text-xs md:text-sm text-slate-600 leading-6">
                 {featuredProfile.shortDescription}
               </p>
             </div>
@@ -53,8 +55,8 @@ function Patrons() {
         </section>
       )}
 
-      <section className="max-w-[1200px] mx-auto px-4 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+      <section className="max-w-[1000px] mx-auto px-4 pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {otherProfiles.map((profile) => (
             <Link
               key={profile.id}
@@ -65,7 +67,7 @@ function Patrons() {
                 <img
                   src={profile.image}
                   alt={profile.name}
-                  className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-[190px] object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 

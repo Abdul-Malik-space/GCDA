@@ -5,7 +5,6 @@ import chiefPatronData from "../../data/chiefPatronData";
 function ChiefPatron() {
   const data = chiefPatronData;
   const featuredProfile = data.profiles?.[0];
-  const otherProfiles = data.profiles?.slice(1) || [];
 
   return (
     <main className="w-full bg-white">
@@ -29,7 +28,7 @@ function ChiefPatron() {
       </section>
 
       {featuredProfile && (
-        <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-10">
+        <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-16">
           <Link
             to={`/about/chief-patron/profile/${featuredProfile.id}`}
             className="block max-w-[520px] md:max-w-[620px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-white hover:shadow-xl transition-all duration-300"
@@ -52,36 +51,6 @@ function ChiefPatron() {
           </Link>
         </section>
       )}
-
-      <section className="max-w-[1200px] mx-auto px-4 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-          {otherProfiles.map((profile) => (
-            <Link
-              key={profile.id}
-              to={`/about/chief-patron/profile/${profile.id}`}
-              className="group rounded-xl overflow-hidden bg-white border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300"
-            >
-              <div className="overflow-hidden">
-                <img
-                  src={profile.image}
-                  alt={profile.name}
-                  className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              <div className="p-4 text-center">
-                <h4 className="text-sm font-black text-slate-800">
-                  {profile.name}
-                </h4>
-
-                <p className="mt-2 text-xs text-slate-600 leading-5 line-clamp-3">
-                  {profile.shortDescription}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
     </main>
   );
 }

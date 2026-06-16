@@ -15,14 +15,17 @@ import Home from "./pages/Home";
 import Introduction from "./pages/Introduction";
 
 import CentralBody from "./pages/AboutSubMenus/CentralBody";
+import CentralBodyProfileDetails from "./pages/AboutSubMenus/CentralBodyProfileDetails";
 import MissionVision from "./pages/AboutSubMenus/MissionVision";
 import History from "./pages/AboutSubMenus/History";
 import HouseOfDelegates from "./pages/AboutSubMenus/HouseOfDelegates";
+import HouseOfDelegatesProfileDetails from "./pages/AboutSubMenus/HouseOfDelegatesProfileDetails";
 import ChiefPatron from "./pages/AboutSubMenus/ChiefPatron";
 import Patrons from "./pages/AboutSubMenus/Patrons";
 import ChiefPatronProfileDetails from "./pages/AboutSubMenus/ChiefPatronProfileDetails";
 import PatronProfileDetails from "./pages/AboutSubMenus/PatronProfileDetails";
 import BoardOfTrustees from "./pages/AboutSubMenus/BoardOfTrustes";
+import BoardOfTrusteesProfileDetails from "./pages/AboutSubMenus/BoardOfTrusteesProfileDetails";
 import Committees from "./pages/AboutSubMenus/Committees";
 
 import RulesRegulation from "./pages/ServiceMatter/RulesRegulation";
@@ -131,7 +134,7 @@ function AppContent() {
     <Navbar onOpenMembership={() => setIsFormOpen(true)} />
   )}
 
-      <main className="w-full pt-[180px]">
+      <main className={`w-full ${hideNavbarOnProfileDetails ? "pt-0" : "pt-[150px]"}`}>
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -855,6 +858,35 @@ function AppContent() {
   }
 />
 
+
+{/* provincila body */}
+
+<Route
+  path="/about/central-body/profile/:profileId"
+  element={
+    <Page>
+      <CentralBodyProfileDetails />
+    </Page>
+  }
+/>
+
+<Route
+  path="/about/house-delegates/profile/:profileId"
+  element={
+    <Page>
+      <HouseOfDelegatesProfileDetails />
+    </Page>
+  }
+/>
+
+<Route
+  path="/about/board-trustees/profile/:profileId"
+  element={
+    <Page>
+      <BoardOfTrusteesProfileDetails />
+    </Page>
+  }
+/>
           {/* Contact */}
           <Route
             path="/contact/contact-info"

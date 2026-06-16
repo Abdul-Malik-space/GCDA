@@ -116,11 +116,6 @@ const chiefPatronData = {
       1,
       "Chief Patron associated with GCDA, contributing to doctors welfare, medical leadership, service matters, and healthcare administration."
     ),
-
-    createProfile("Dr Kashif Raza", 2),
-    createProfile("Dr Hina Batool", 3),
-    createProfile("Dr Usman Yusuf", 4),
-    createProfile("Dr Sana Malik", 5),
   ],
 };
 
