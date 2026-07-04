@@ -10,11 +10,11 @@ function Navbar({ onOpenMembership, setActivePage }) {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const [activeBranchMenu, setActiveBranchMenu] = useState(null);
-  const [isDesktopBranchesOpen, setIsDesktopBranchesOpen] = useState(false);
   const [activeDesktopNestedMenu, setActiveDesktopNestedMenu] = useState(null);
   const [activeMobileMenu, setActiveMobileMenu] = useState(null);
   const [activeMobileBranchType, setActiveMobileBranchType] = useState(null);
   const [activeMobileNestedMenu, setActiveMobileNestedMenu] = useState(null);
+  const [districtSearch, setDistrictSearch] = useState("");
 
   const provinces = [
     { label: "Punjab", slug: "punjab" },
@@ -25,30 +25,30 @@ function Navbar({ onOpenMembership, setActivePage }) {
     { label: "Azad Jammu Kashmir", slug: "azad-jammu-kashmir" },
   ];
 
-const districts = [
-  { label: "Attock District", slug: "attock-district" },
-  { label: "Bahawalnagar District", slug: "bahawalnagar-district" },
-  { label: "Bahawalpur District", slug: "bahawalpur-district" },
-  { label: "Bhakkar District", slug: "bhakkar-district" },
-  { label: "Chiniot District", slug: "chiniot-district" },
-  { label: "Chakwal District", slug: "chakwal-district" },
-  { label: "DG Khan District", slug: "dg-khan-district" },
-  { label: "Faisalabad District", slug: "faisalabad-district" },
-  { label: "Gujranwala District", slug: "gujranwala-district" },
-  { label: "Gujrat District", slug: "gujrat-district" },
-  { label: "Hafizabad District", slug: "hafizabad-district" },
-  { label: "Jehlum District", slug: "jhelum-district" },
-  { label: "Kasur District", slug: "kasur-district" },
-  { label: "Khanewal District", slug: "khanewal-district" },
-  { label: "Khushab District", slug: "khushab-district" },
-  { label: "Lahore District", slug: "lahore-district" },
-  { label: "Layyah District", slug: "layyah-district" },
-  { label: "Lodharan District", slug: "lodharan-district" },
-  { label: "Mandi Bahauddin District", slug: "mandi-bahauddin-district" },
-  { label: "Mianwali", slug: "mianwali-district" },
-  { label: "Multan", slug: "multan-district" },
-  { label: "Muzaffar Gargh", slug: "muzaffar-gargh" },
-];
+  const districts = [
+    { label: "Attock District", slug: "attock-district" },
+    { label: "Bahawalnagar District", slug: "bahawalnagar-district" },
+    { label: "Bahawalpur District", slug: "bahawalpur-district" },
+    { label: "Bhakkar District", slug: "bhakkar-district" },
+    { label: "Chiniot District", slug: "chiniot-district" },
+    { label: "Chakwal District", slug: "chakwal-district" },
+    { label: "DG Khan District", slug: "dg-khan-district" },
+    { label: "Faisalabad District", slug: "faisalabad-district" },
+    { label: "Gujranwala District", slug: "gujranwala-district" },
+    { label: "Gujrat District", slug: "gujrat-district" },
+    { label: "Hafizabad District", slug: "hafizabad-district" },
+    { label: "Jehlum District", slug: "jhelum-district" },
+    { label: "Kasur District", slug: "kasur-district" },
+    { label: "Khanewal District", slug: "khanewal-district" },
+    { label: "Khushab District", slug: "khushab-district" },
+    { label: "Lahore District", slug: "lahore-district" },
+    { label: "Layyah District", slug: "layyah-district" },
+    { label: "Lodharan District", slug: "lodharan-district" },
+    { label: "Mandi Bahauddin District", slug: "mandi-bahauddin-district" },
+    { label: "Mianwali District", slug: "mianwali-district" },
+    { label: "Multan District", slug: "multan-district" },
+    { label: "Muzaffargarh District", slug: "muzaffargarh-district" },
+  ];
 
   const aboutLinks = [
     { label: "Introduction", to: "/about/introduction" },
@@ -88,10 +88,7 @@ const districts = [
   ];
 
   const jobPortalLinks = [
-    {
-      label: "Jobs in Primary & Secondary Health Care Dept",
-      to: "/job-portal/primary-secondary-health-care-dept",
-    },
+    { label: "Jobs in Primary & Secondary Health Care Dept", to: "/job-portal/primary-secondary-health-care-dept" },
     { label: "Jobs in SHC & MED", to: "/job-portal/shc-med" },
     { label: "Job in Private Sector", to: "/job-portal/private-sector" },
     { label: "Overseas Jobs", to: "/job-portal/overseas-jobs" },
@@ -105,31 +102,13 @@ const districts = [
   ];
 
   const doctorsInitiativeLinks = [
-    {
-      label: "Children Scholarships",
-      to: "/doctors-initiatives/children-scholarships",
-    },
-    {
-      label: "Educational Gold Medals",
-      to: "/doctors-initiatives/educational-gold-medals",
-    },
-    {
-      label: "International Trainings",
-      to: "/doctors-initiatives/international-trainings",
-    },
+    { label: "Children Scholarships", to: "/doctors-initiatives/children-scholarships" },
+    { label: "Educational Gold Medals", to: "/doctors-initiatives/educational-gold-medals" },
+    { label: "International Trainings", to: "/doctors-initiatives/international-trainings" },
     { label: "Housing Projects", to: "/doctors-initiatives/housing-projects" },
-    {
-      label: "Adopt a Doctor Scheme",
-      to: "/doctors-initiatives/adopt-a-doctor-scheme",
-    },
-    {
-      label: "Lab Test Subsidised",
-      to: "/doctors-initiatives/lab-test-subsidised",
-    },
-    {
-      label: "Subsidised Hospital Care",
-      to: "/doctors-initiatives/subsidised-hospital-care",
-    },
+    { label: "Adopt a Doctor Scheme", to: "/doctors-initiatives/adopt-a-doctor-scheme" },
+    { label: "Lab Test Subsidised", to: "/doctors-initiatives/lab-test-subsidised" },
+    { label: "Subsidised Hospital Care", to: "/doctors-initiatives/subsidised-hospital-care" },
     { label: "Health Insurance", to: "/doctors-initiatives/health-insurance" },
     {
       label: "Medical Students",
@@ -165,21 +144,24 @@ const districts = [
   ];
 
   const contactLinks = [
-  {
-    label: "Contact Info",
-    to: "/contact/contact-info",
-  },
-  {
-    label: "Ask a Question",
-    to: "/contact/ask-a-question",
-  },
-];
+    { label: "Contact Info", to: "/contact/contact-info" },
+    { label: "Ask a Question", to: "/contact/ask-a-question" },
+  ];
+
+  const districtSearchValue = districtSearch.trim().toLowerCase();
+
+  const filteredDistricts = districts.filter((district) => {
+    const label = district.label.toLowerCase();
+    const slug = district.slug.toLowerCase().replaceAll("-", " ");
+    return label.includes(districtSearchValue) || slug.includes(districtSearchValue);
+  });
 
   const closeMobileMenu = () => {
     setIsOpen(false);
     setActiveMobileMenu(null);
     setActiveMobileBranchType(null);
     setActiveMobileNestedMenu(null);
+    setDistrictSearch("");
   };
 
   const handleMembershipOpen = () => {
@@ -206,11 +188,22 @@ const districts = [
     setActiveMobileNestedMenu((prev) => (prev === menuName ? null : menuName));
   };
 
+  const ChevronDown = ({ light = false }) => (
+    <svg
+      className={`w-[10px] h-[10px] mt-[1px] ${light ? "text-white/90" : "text-gray-500"}`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.7" d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+
   const MobileLink = ({ to, children, extraClass = "" }) => (
     <Link
       to={to}
       onClick={closeMobileMenu}
-      className={`block px-4 py-3 text-sm font-semibold text-slate-700 border-b border-slate-100 hover:bg-emerald-50 hover:text-[#1A7963] ${extraClass}`}
+      className={`block px-4 py-3 text-sm font-semibold text-slate-700 border-b border-slate-100 hover:bg-emerald-50 hover:text-[#166d58] ${extraClass}`}
     >
       {children}
     </Link>
@@ -223,9 +216,7 @@ const districts = [
       className="w-full flex items-center justify-between px-4 py-3 text-sm font-black text-slate-800 border-b border-slate-100 hover:bg-emerald-50"
     >
       <span>{label}</span>
-      <span className="text-lg text-[#1A7963]">
-        {activeMobileMenu === id ? "−" : "+"}
-      </span>
+      <span className="text-lg text-[#166d58]">{activeMobileMenu === id ? "−" : "+"}</span>
     </button>
   );
 
@@ -240,22 +231,16 @@ const districts = [
               <button
                 type="button"
                 onClick={() => toggleMobileNestedMenu(nestedId)}
-                className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50 hover:text-[#1A7963]"
+                className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50 hover:text-[#166d58]"
               >
                 <span>{item.label}</span>
-                <span className="text-[#1A7963]">
-                  {activeMobileNestedMenu === nestedId ? "−" : "+"}
-                </span>
+                <span className="text-[#166d58]">{activeMobileNestedMenu === nestedId ? "−" : "+"}</span>
               </button>
 
               {activeMobileNestedMenu === nestedId && (
                 <div className="bg-white">
                   {item.children.map((child) => (
-                    <MobileLink
-                      key={child.to}
-                      to={child.to}
-                      extraClass="pl-8 text-xs"
-                    >
+                    <MobileLink key={child.to} to={child.to} extraClass="pl-8 text-xs">
                       {child.label}
                     </MobileLink>
                   ))}
@@ -274,46 +259,72 @@ const districts = [
     </div>
   );
 
+  const TopBarLink = ({ to, children }) => (
+    <Link
+      to={to}
+      className="h-full flex items-center text-[12px] font-extrabold text-white hover:text-white/80 transition-colors whitespace-nowrap"
+    >
+      {children}
+    </Link>
+  );
+
+  const TopBarDropdown = ({ label, links, width = "w-60" }) => (
+    <div className="relative group h-full flex items-center">
+      <button
+        type="button"
+        className="h-full flex items-center gap-[5px] text-[12px] font-extrabold text-white hover:text-white/80 transition-colors whitespace-nowrap"
+      >
+        {label}
+        <ChevronDown light />
+      </button>
+
+      <div
+        className={`absolute left-0 top-full ${width} bg-white border border-gray-100 shadow-xl rounded-[3px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 text-[13px] font-semibold text-gray-700 py-2 z-[99999]`}
+      >
+        {links.map((item, index) => (
+          <Link
+            key={item.to}
+            to={item.to}
+            className={`block px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] ${
+              index !== links.length - 1 ? "border-b border-gray-100" : ""
+            }`}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+
   const DesktopLink = ({ to, children }) => (
     <Link
       to={to}
-      className="py-3 hover:text-[#1A7963] transition-colors cursor-pointer whitespace-nowrap"
+      className="h-[57px] flex items-center text-[12px] font-semibold text-[#111827] hover:text-[#166d58] transition-colors whitespace-nowrap"
     >
       {children}
     </Link>
   );
 
   const DesktopDropdown = ({ label, links, width = "w-56" }) => (
-    <div className="relative group py-3">
+    <div className="relative group h-[57px] flex items-center">
       <button
         type="button"
-        className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
+        className="h-[57px] flex items-center gap-[5px] text-[12px] font-semibold text-[#111827] hover:text-[#166d58] transition-colors whitespace-nowrap"
       >
         {label}
-        <svg
-          className="w-3 h-3 text-gray-500 mt-0.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.5"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <ChevronDown />
       </button>
 
       <div
-        className={`absolute left-0 mt-2 ${width} bg-white border border-gray-100 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm font-normal text-gray-700 py-2 z-50`}
+        className={`absolute left-0 top-full ${width} bg-white border border-gray-100 shadow-xl rounded-[3px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 text-[13px] font-semibold text-gray-700 py-2 z-[99999]`}
       >
         {links.map((item, index) => (
           <Link
             key={item.to}
             to={item.to}
-            className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${index !== links.length - 1 ? "border-b border-gray-100" : ""
-              }`}
+            className={`block px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] ${
+              index !== links.length - 1 ? "border-b border-gray-100" : ""
+            }`}
           >
             {item.label}
           </Link>
@@ -323,32 +334,17 @@ const districts = [
   );
 
   const DesktopNestedDropdown = ({ label, links, width = "w-72" }) => (
-    <div
-      className="relative group py-3"
-      onMouseLeave={() => setActiveDesktopNestedMenu(null)}
-    >
+    <div className="relative group h-[57px] flex items-center" onMouseLeave={() => setActiveDesktopNestedMenu(null)}>
       <button
         type="button"
-        className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
+        className="h-[57px] flex items-center gap-[5px] text-[12px] font-semibold text-[#111827] hover:text-[#166d58] transition-colors whitespace-nowrap"
       >
         {label}
-        <svg
-          className="w-3 h-3 text-gray-500 mt-0.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.5"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <ChevronDown />
       </button>
 
       <div
-        className={`absolute left-0 mt-2 ${width} bg-white border border-gray-100 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm font-normal text-gray-700 py-2 z-50`}
+        className={`absolute left-0 top-full ${width} bg-white border border-gray-100 shadow-xl rounded-[3px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 text-[13px] font-semibold text-gray-700 py-2 z-[99999]`}
       >
         {links.map((item, index) => {
           const hasChildren = item.children?.length;
@@ -357,25 +353,23 @@ const districts = [
             return (
               <div
                 key={item.label}
-                className={`relative ${index !== links.length - 1 ? "border-b border-gray-100" : ""
-                  }`}
+                className={`relative ${index !== links.length - 1 ? "border-b border-gray-100" : ""}`}
                 onMouseEnter={() => setActiveDesktopNestedMenu(item.label)}
               >
-                <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] cursor-pointer">
+                <div className="flex justify-between items-center px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] cursor-pointer">
                   <span>{item.label}</span>
-                  <span className="text-gray-400">›</span>
+                  <span className="text-gray-400 text-lg leading-none">›</span>
                 </div>
 
                 {activeDesktopNestedMenu === item.label && (
-                  <div className="absolute left-full top-0 w-72 bg-white border border-gray-100 shadow-xl rounded-md py-2 z-50">
+                  <div className="absolute left-full top-0 w-80 bg-white border border-gray-100 shadow-xl rounded-[3px] py-2 z-[99999]">
                     {item.children.map((child, childIndex) => (
                       <Link
                         key={child.to}
                         to={child.to}
-                        className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${childIndex !== item.children.length - 1
-                          ? "border-b border-gray-100"
-                          : ""
-                          }`}
+                        className={`block px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] ${
+                          childIndex !== item.children.length - 1 ? "border-b border-gray-100" : ""
+                        }`}
                       >
                         {child.label}
                       </Link>
@@ -390,8 +384,9 @@ const districts = [
             <Link
               key={item.to}
               to={item.to}
-              className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${index !== links.length - 1 ? "border-b border-gray-100" : ""
-                }`}
+              className={`block px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] ${
+                index !== links.length - 1 ? "border-b border-gray-100" : ""
+              }`}
             >
               {item.label}
             </Link>
@@ -401,414 +396,223 @@ const districts = [
     </div>
   );
 
-
-  const DesktopBranchesDropdown = () => (
-    <div
-      className="relative py-3"
-      onMouseEnter={() => setIsDesktopBranchesOpen(true)}
-      onMouseLeave={() => {
-        setIsDesktopBranchesOpen(false);
-        setActiveBranchMenu(null);
-      }}
-    >
-      <button
-        type="button"
-        className="hover:text-[#1A7963] flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
-        onMouseEnter={() => setIsDesktopBranchesOpen(true)}
-      >
-        Branches
-        <svg
-          className="w-3 h-3 text-gray-500 mt-0.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.5"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
-
-      {/* Hover bridge: cursor dropdown تک جاتے ہوئے menu close نہیں ہوگا */}
-      {isDesktopBranchesOpen && (
-        <div className="absolute left-0 top-full h-3 w-56 z-50" />
-      )}
-
-      <div
-        className={`absolute left-0 top-full w-56 bg-white border border-gray-100 shadow-xl rounded-md transition-all duration-200 text-sm font-normal text-gray-700 py-2 z-50 ${
-          isDesktopBranchesOpen
-            ? "opacity-100 visible translate-y-0"
-            : "opacity-0 invisible -translate-y-1 pointer-events-none"
-        }`}
-      >
-        <div
-          className="relative border-b border-gray-100"
-          onMouseEnter={() => setActiveBranchMenu("desktop-provincial")}
-          onMouseMove={() => setActiveBranchMenu("desktop-provincial")}
-        >
-          <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] cursor-pointer">
-            <span>Provincial Body</span>
-            <span className="text-gray-400">›</span>
-          </div>
-
-          {activeBranchMenu === "desktop-provincial" && (
-            <div
-              className="absolute left-[calc(100%-1px)] top-0 w-52 bg-white border border-gray-100 shadow-xl rounded-md py-2 z-[70]"
-              onMouseEnter={() => setActiveBranchMenu("desktop-provincial")}
-            >
-              {provinces.map((province) => (
-                <Link
-                  key={province.slug}
-                  to={`/branches/provincial/${province.slug}`}
-                  onClick={() => {
-                    setIsDesktopBranchesOpen(false);
-                    setActiveBranchMenu(null);
-                  }}
-                  className="block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] border-b border-gray-50 last:border-none"
-                >
-                  {province.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div
-          className="relative"
-          onMouseEnter={() => setActiveBranchMenu("desktop-district")}
-          onMouseMove={() => setActiveBranchMenu("desktop-district")}
-        >
-          <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] cursor-pointer">
-            <span>District Body</span>
-            <span className="text-gray-400">›</span>
-          </div>
-
-          {activeBranchMenu === "desktop-district" && (
-            <div
-              className="absolute left-[calc(100%-1px)] top-0 w-56 bg-white border border-gray-100 shadow-xl rounded-md py-2 max-h-72 overflow-y-auto z-[70]"
-              onMouseEnter={() => setActiveBranchMenu("desktop-district")}
-            >
-              {districts.map((district) => (
-                <Link
-                  key={district.slug}
-                  to={`/branches/district/${district.slug}`}
-                  onClick={() => {
-                    setIsDesktopBranchesOpen(false);
-                    setActiveBranchMenu(null);
-                  }}
-                  className="block px-4 py-1.5 hover:bg-gray-50 hover:text-[#1A7963] text-xs border-b border-gray-50 last:border-none"
-                >
-                  {district.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-  const TopBarDropdown = ({ label, links, width = "w-56" }) => (
-    <div className="relative group h-full flex items-center">
-      <button
-        type="button"
-        className="flex items-center gap-1 rounded-md px-2 xl:px-2.5 py-2 text-[11px] xl:text-xs 2xl:text-[13px] font-bold text-white hover:bg-white/10 transition-colors whitespace-nowrap"
-      >
-        {label}
-        <svg
-          className="w-3 h-3 text-white/80 mt-0.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.5"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
-
-      <div
-        className={`absolute left-0 top-full mt-1 ${width} bg-white border border-gray-100 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm font-normal text-gray-700 py-2 z-[60]`}
-      >
-        {links.map((item, index) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            className={`block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] ${index !== links.length - 1 ? "border-b border-gray-100" : ""
-              }`}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-
-  const TopBarBranchesDropdown = () => (
-    <div
-      className="relative group h-full flex items-center"
-      onMouseLeave={() => setActiveBranchMenu(null)}
-    >
-      <button
-        type="button"
-        className="flex items-center gap-1 rounded-md px-2 xl:px-2.5 py-2 text-[11px] xl:text-xs 2xl:text-[13px] font-bold text-white hover:bg-white/10 transition-colors whitespace-nowrap"
-      >
-        Branches
-        <svg
-          className="w-3 h-3 text-white/80 mt-0.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.5"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
-
-      <div className="absolute left-0 top-full mt-1 w-56 bg-white border border-gray-100 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm font-normal text-gray-700 py-2 z-[60]">
-        <div
-          className="relative border-b border-gray-100"
-          onMouseEnter={() => setActiveBranchMenu("top-provincial")}
-        >
-          <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] cursor-pointer">
-            <span>Provincial Body</span>
-            <span className="text-gray-400">›</span>
-          </div>
-
-          {activeBranchMenu === "top-provincial" && (
-            <div className="absolute left-full top-0 w-52 bg-white border border-gray-100 shadow-xl rounded-md py-2 z-[70]">
-              {provinces.map((province) => (
-                <Link
-                  key={province.slug}
-                  to={`/branches/provincial/${province.slug}`}
-                  className="block px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] border-b border-gray-50 last:border-none"
-                >
-                  {province.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div
-          className="relative"
-          onMouseEnter={() => setActiveBranchMenu("top-district")}
-        >
-          <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 hover:text-[#1A7963] cursor-pointer">
-            <span>District Body</span>
-            <span className="text-gray-400">›</span>
-          </div>
-
-          {activeBranchMenu === "top-district" && (
-            <div className="absolute left-full top-0 w-56 bg-white border border-gray-100 shadow-xl rounded-md py-2 max-h-72 overflow-y-auto z-[70]">
-              {districts.map((district) => (
-                <Link
-                  key={district.slug}
-                  to={`/branches/district/${district.slug}`}
-                  className="block px-4 py-1.5 hover:bg-gray-50 hover:text-[#1A7963] text-xs border-b border-gray-50 last:border-none"
-                >
-                  {district.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
+    <header
+      className="fixed top-0 left-0 w-full z-[9999] bg-white"
+      style={{ fontFamily: "'Montserrat', Arial, sans-serif" }}
+    >
       {/* TOP GREEN BAR */}
-      <div className="w-full bg-[#1A7963] text-white text-sm hidden md:block">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3 xl:gap-4 h-[90px] overflow-visible">
-          {/* لوگو سیکشن */}
-          <div
-            className="flex items-center cursor-pointer group flex-shrink-0 min-w-0 lg:w-[420px] xl:w-[455px] 2xl:w-[500px]"
+      <div className="hidden lg:block w-full h-[85px] bg-[#166d58] text-white">
+        <div
+          className="w-full h-full px-[30px] grid items-center"
+          style={{ gridTemplateColumns: "485px minmax(0, 1fr) 285px" }}
+        >
+          <Link
+            to="/"
             onClick={() => setActivePage?.("home")}
+            className="h-full flex items-center min-w-0"
           >
-            <div className="rounded-full overflow-hidden flex items-center justify-center flex-shrink-0">
-              <img
-                src={gcdaLogo}
-                alt="GCDA Logo"
-                className="h-[70px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-              />
-            </div>
+            <img
+              src={gcdaLogo}
+              alt="GCDA Logo"
+              className="w-[70px] h-[70px] object-contain rounded-full flex-shrink-0"
+            />
 
-            <div className="ml-4 leading-tight min-w-0 lg:w-[335px] xl:w-[370px] 2xl:w-[415px]">
-              <h1 className="text-white text-[13px] xl:text-[15px] 2xl:text-base font-black tracking-wide leading-snug whitespace-nowrap">
-                GENERAL CADER DOCOTORS ASSOCIATION
+            <div className="ml-[13px] leading-tight text-white min-w-0">
+              <h1 className="text-[15px] font-black tracking-[0.45px] leading-[18px] uppercase whitespace-nowrap">
+                GENERAL CADER DOCTORS ASSOCIATION
               </h1>
-              <p className="text-center text-base 2xl:text-lg font-black">GCDA</p>
+              <p className="text-[15px] font-black tracking-[0.7px] leading-[18px] uppercase mt-[4px]">
+                GCDA
+              </p>
             </div>
-          </div>
+          </Link>
 
-          {/* Top bar menu: logo text کے بعد اور phone number سے پہلے */}
-          <nav className="hidden lg:flex items-center justify-center gap-1 2xl:gap-2 flex-1 min-w-0">
+          <nav className="hidden xl:flex items-center justify-center gap-[18px] 2xl:gap-[26px] h-full min-w-0 overflow-hidden px-[10px]">
             <TopBarDropdown label="About Us" links={aboutLinks} width="w-64" />
             <TopBarDropdown label="Publication" links={publicationLinks} width="w-64" />
-            <Link
-              to="/pharmaceutical-updates"
-              className="rounded-md px-2 xl:px-2.5 py-2 text-[11px] xl:text-xs 2xl:text-[13px] font-bold text-white hover:bg-white/10 transition-colors whitespace-nowrap"
-            >
-              Pharmaceutical Updates
-            </Link>
-            <Link
-              to="/medical-tourism"
-              className="rounded-md px-2 xl:px-2.5 py-2 text-[11px] xl:text-xs 2xl:text-[13px] font-bold text-white hover:bg-white/10 transition-colors whitespace-nowrap"
-            >
-              Medical Tourism
-            </Link>
+            <TopBarLink to="/pharmaceutical-updates">Pharmaceutical Updates</TopBarLink>
+            <TopBarLink to="/medical-tourism">Medical Tourism</TopBarLink>
           </nav>
 
-          {/* بٹن اور فون نمبر سیکشن */}
-          <div className="flex items-center justify-end gap-2 xl:gap-3 flex-shrink-0 ml-auto">
-            {/* فون نمبر */}
-            <div className="flex items-center gap-2 border border-white/20 rounded-lg px-2.5 xl:px-3 py-1.5 flex-shrink-0 bg-white/5">
-              <a
-                href="tel:+3337074846"
-                className="cursor-pointer text-[11px] xl:text-xs font-medium whitespace-nowrap"
-              >
-                +333-7074846
-              </a>
-              <div className="text-white">
-                <svg className="w-3.5 h-3.5 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-              </div>
-            </div>
+          <div className="flex items-center justify-end gap-[12px] min-w-0">
+            <a
+              href="tel:+3337074846"
+              className="h-[30px] min-w-[116px] px-[11px] rounded-[7px] border border-white/20 bg-white/5 hover:bg-white/10 flex items-center justify-center gap-[7px] text-white transition-colors"
+            >
+              <span className="text-[11px] font-extrabold whitespace-nowrap">+333-7074846</span>
+              <svg className="w-[12px] h-[12px] rotate-90 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2.4"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.58 10.58 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
+            </a>
 
-            {/* ممبرشپ بٹن */}
             <button
               type="button"
               onClick={handleMembershipOpen}
-              className="bg-[#E9967A] hover:bg-[#d68569] text-white text-[11px] xl:text-xs font-bold px-3 xl:px-4 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-2 cursor-pointer flex-shrink-0"
+              className="h-[30px] min-w-[148px] px-[14px] rounded-[7px] bg-[#ee9a84] hover:bg-[#dc846d] flex items-center justify-center gap-[8px] text-white transition-colors"
             >
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <svg className="w-[13px] h-[13px] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
               </svg>
-              <span className="whitespace-nowrap">Online Membership</span>
+              <span className="text-[11px] font-extrabold whitespace-nowrap">Online Membership</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* MAIN NAVBAR */}
-      <div className="w-full bg-white shadow-md border-b border-gray-100">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between min-h-[62px] py-1.5 items-center gap-6">
-            <div className="hidden lg:flex flex-nowrap items-center gap-x-3 xl:gap-x-4 gap-y-0 font-semibold text-gray-800 text-[13px] xl:text-sm 2xl:text-[15px] leading-none flex-1 min-w-0">
+      {/* WHITE NAVBAR */}
+      <div className="w-full h-[57px] bg-white border-b border-gray-200 shadow-[0_2px_7px_rgba(0,0,0,0.22)]">
+        <div className="w-full h-full px-[30px]">
+          <div className="h-full flex items-center justify-between">
+            <nav className="hidden lg:flex items-center gap-[18px] h-[57px] whitespace-nowrap">
               <DesktopLink to="/">Home</DesktopLink>
-              <DesktopBranchesDropdown />
+
+              <div
+                className="relative group h-[57px] flex items-center"
+                onMouseLeave={() => {
+                  setActiveBranchMenu(null);
+                  setDistrictSearch("");
+                }}
+              >
+                <button
+                  type="button"
+                  className="h-[57px] flex items-center gap-[5px] text-[12px] font-semibold text-[#111827] hover:text-[#166d58] transition-colors whitespace-nowrap"
+                >
+                  Branches
+                  <ChevronDown />
+                </button>
+
+                <div className="absolute left-0 top-full w-[215px] bg-white border border-gray-100 shadow-xl rounded-[3px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 text-[13px] font-semibold text-gray-700 py-2 z-[99999]">
+                  <div className="relative border-b border-gray-100" onMouseEnter={() => setActiveBranchMenu("provincial")}>
+                    <div className="flex justify-between items-center px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] cursor-pointer">
+                      <span>Provincial Body</span>
+                      <span className="text-gray-400 text-lg leading-none">›</span>
+                    </div>
+
+                    {activeBranchMenu === "provincial" && (
+                      <div className="absolute left-full top-0 w-[215px] bg-white border border-gray-100 shadow-xl rounded-[3px] py-2 z-[99999]">
+                        {provinces.map((province, index) => (
+                          <Link
+                            key={province.slug}
+                            to={`/branches/provincial/${province.slug}`}
+                            className={`block px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] ${
+                              index !== provinces.length - 1 ? "border-b border-gray-100" : ""
+                            }`}
+                          >
+                            {province.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="relative" onMouseEnter={() => setActiveBranchMenu("district")}>
+                    <div className="flex justify-between items-center px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] cursor-pointer">
+                      <span>District Body</span>
+                      <span className="text-gray-400 text-lg leading-none">›</span>
+                    </div>
+
+                    {activeBranchMenu === "district" && (
+                      <div className="absolute left-full top-0 w-[300px] bg-white border border-gray-100 shadow-xl rounded-[3px] overflow-hidden z-[99999]">
+                        <div className="p-[10px] border-b border-gray-100 bg-white">
+                          <div className="relative">
+                            <input
+                              type="text"
+                              value={districtSearch}
+                              onChange={(event) => setDistrictSearch(event.target.value)}
+                              onClick={(event) => event.stopPropagation()}
+                              placeholder="Search district..."
+                              autoComplete="off"
+                              onFocus={() => setActiveBranchMenu("district")}
+                              className="w-full h-[36px] rounded-[4px] border border-gray-200 bg-gray-50 py-2 pl-9 pr-3 text-[12px] font-semibold text-gray-700 outline-none focus:border-[#166d58] focus:bg-white"
+                            />
+                            <svg
+                              className="absolute left-3 top-[11px] h-[14px] w-[14px] text-gray-400"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2.2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+
+                        <div className="max-h-[285px] overflow-y-auto py-1">
+                          {filteredDistricts.length > 0 ? (
+                            filteredDistricts.map((district, index) => (
+                              <Link
+                                key={district.slug}
+                                to={`/branches/district/${district.slug}`}
+                                className={`block px-4 py-2.5 text-[12px] font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#166d58] ${
+                                  index !== filteredDistricts.length - 1 ? "border-b border-gray-100" : ""
+                                }`}
+                              >
+                                {district.label}
+                              </Link>
+                            ))
+                          ) : (
+                            <div className="px-4 py-3 text-[12px] font-semibold text-gray-400">
+                              No district found
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
 
               <DesktopDropdown label="Programs" links={programLinks} width="w-60" />
-              <DesktopDropdown
-                label="Service Matter"
-                links={serviceMatterLinks}
-                width="w-60"
-              />
-              <DesktopDropdown
-                label="Job Portal"
-                links={jobPortalLinks}
-                width="w-80"
-              />
-              <DesktopDropdown
-                label="Registration with HCC"
-                links={registrationHccLinks}
-                width="w-64"
-              />
-              <DesktopNestedDropdown
-                label="Doctors Initiatives"
-                links={doctorsInitiativeLinks}
-                width="w-72"
-              />
-              <DesktopDropdown
-                label="Consultation Hub"
-                links={consultationHubLinks}
-                width="w-56"
-              />
+              <DesktopDropdown label="Service Matter" links={serviceMatterLinks} width="w-60" />
+              <DesktopDropdown label="Job Portal" links={jobPortalLinks} width="w-80" />
+              <DesktopDropdown label="Registration with HCC" links={registrationHccLinks} width="w-64" />
+              <DesktopNestedDropdown label="Doctors Initiatives" links={doctorsInitiativeLinks} width="w-72" />
+              <DesktopDropdown label="Consultation Hub" links={consultationHubLinks} width="w-56" />
               <DesktopDropdown label="Diseases" links={diseaseLinks} width="w-44" />
               <DesktopDropdown label="Gallery" links={galleryLinks} width="w-60" />
               <DesktopDropdown label="Contact" links={contactLinks} width="w-48" />
-            </div>
+            </nav>
 
-            {/* Desktop Search */}
-            <div className="hidden 2xl:flex items-center space-x-4 flex-shrink-0">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="bg-gray-50 border border-gray-200 rounded-md pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-[#1A7963] w-44"
-                />
-                <svg
-                  className="w-4 h-4 text-gray-400 absolute left-3 top-3"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-
-              <div className="border-l border-gray-300 pl-4 h-9 flex items-center">
-                <button className="text-[#D11A2A] hover:opacity-80 p-2 bg-gray-50 rounded-md border border-gray-100 shadow-sm cursor-pointer">
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Mobile Header */}
-            <div className="lg:hidden flex items-center justify-between w-full py-1.5">
-              <div
-                className="flex items-center gap-2 cursor-pointer min-w-0"
+            <div className="lg:hidden flex items-center justify-between w-full h-[57px]">
+              <Link
+                to="/"
+                className="flex items-center gap-2 min-w-0"
                 onClick={() => {
                   setActivePage?.("home");
                   closeMobileMenu();
                 }}
               >
-                <img
-                  src={gcdaLogo}
-                  alt="GCDA Logo"
-                  className="h-10 w-auto object-contain flex-shrink-0"
-                />
-
+                <img src={gcdaLogo} alt="GCDA Logo" className="h-11 w-11 object-contain flex-shrink-0" />
                 <div className="leading-tight min-w-0">
-                  <p className="text-[#1A7963] text-[12px] font-black leading-tight">
-                    General Cadre Doctors
+                  <p className="text-[#166d58] text-[12px] font-black leading-tight uppercase">
+                    General Cader Doctors
                   </p>
-                  <p className="text-slate-500 text-[9px] font-bold tracking-widest leading-tight">
+                  <p className="text-slate-500 text-[9px] font-bold tracking-widest leading-tight uppercase">
                     Association GCDA
                   </p>
                 </div>
-              </div>
+              </Link>
 
               <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   type="button"
                   onClick={handleMembershipOpen}
-                  className="bg-[#E9967A] hover:bg-[#d68569] text-white text-[10px] font-bold px-2.5 py-1.5 rounded-md shadow-sm transition-all duration-200 flex items-center gap-1 cursor-pointer"
+                  className="bg-[#ee9a84] hover:bg-[#dc846d] text-white text-[10px] font-bold px-2.5 py-1.5 rounded-md shadow-sm transition-all duration-200"
                 >
                   Membership
                 </button>
@@ -816,29 +620,14 @@ const districts = [
                 <button
                   type="button"
                   onClick={() => setIsOpen((prev) => !prev)}
-                  className="text-gray-700 hover:text-[#1A7963] p-1.5 border border-gray-200 rounded-md bg-gray-50 cursor-pointer"
+                  className="text-gray-700 hover:text-[#166d58] p-1.5 border border-gray-200 rounded-md bg-gray-50"
                   aria-label="Toggle mobile menu"
                 >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     {isOpen ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                     ) : (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                     )}
                   </svg>
                 </button>
@@ -847,39 +636,13 @@ const districts = [
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden bg-white border-t border-slate-200 shadow-2xl max-h-[calc(100vh-72px)] overflow-y-auto">
-            <div className="px-4 py-4 border-b border-slate-100">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-[#1A7963]"
-                />
-                <svg
-                  className="w-4 h-4 text-gray-400 absolute left-3 top-3.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-
+          <div className="lg:hidden bg-white border-t border-slate-200 shadow-2xl max-h-[calc(100vh-57px)] overflow-y-auto">
             <nav className="pb-6">
               <MobileLink to="/">Home</MobileLink>
 
-              <MobileToggle id="about" label="About" />
-              {activeMobileMenu === "about" && (
-                <MobileNestedLinks links={aboutLinks} parentId="about" />
-              )}
+              <MobileToggle id="about" label="About Us" />
+              {activeMobileMenu === "about" && <MobileNestedLinks links={aboutLinks} parentId="about" />}
 
               <MobileToggle id="branches" label="Branches" />
               {activeMobileMenu === "branches" && (
@@ -890,19 +653,13 @@ const districts = [
                     className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50"
                   >
                     <span>Provincial Body</span>
-                    <span className="text-[#1A7963]">
-                      {activeMobileBranchType === "provincial" ? "−" : "+"}
-                    </span>
+                    <span className="text-[#166d58]">{activeMobileBranchType === "provincial" ? "−" : "+"}</span>
                   </button>
 
                   {activeMobileBranchType === "provincial" && (
                     <div className="bg-white">
                       {provinces.map((province) => (
-                        <MobileLink
-                          key={province.slug}
-                          to={`/branches/provincial/${province.slug}`}
-                          extraClass="pl-8 text-xs"
-                        >
+                        <MobileLink key={province.slug} to={`/branches/provincial/${province.slug}`} extraClass="pl-8 text-xs">
                           {province.label}
                         </MobileLink>
                       ))}
@@ -915,104 +672,83 @@ const districts = [
                     className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50"
                   >
                     <span>District Body</span>
-                    <span className="text-[#1A7963]">
-                      {activeMobileBranchType === "district" ? "−" : "+"}
-                    </span>
+                    <span className="text-[#166d58]">{activeMobileBranchType === "district" ? "−" : "+"}</span>
                   </button>
 
                   {activeMobileBranchType === "district" && (
-                    <div className="bg-white max-h-72 overflow-y-auto">
-                     {districts.map((district) => (
-  <MobileLink
-    key={district.slug}
-    to={`/branches/district/${district.slug}`}
-    extraClass="pl-8 text-xs"
-  >
-    {district.label}
-  </MobileLink>
-))}
+                    <div className="bg-white">
+                      <div className="p-3 border-b border-slate-100 bg-white">
+                        <div className="relative">
+                          <input
+                            type="text"
+                            value={districtSearch}
+                            onChange={(event) => setDistrictSearch(event.target.value)}
+                            placeholder="Search district..."
+                            autoComplete="off"
+                            className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-10 pr-3 text-xs font-semibold text-gray-700 outline-none focus:border-[#166d58] focus:bg-white"
+                          />
+                          <svg className="absolute left-3 top-3 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div className="max-h-72 overflow-y-auto">
+                        {filteredDistricts.length > 0 ? (
+                          filteredDistricts.map((district) => (
+                            <MobileLink key={district.slug} to={`/branches/district/${district.slug}`} extraClass="pl-8 text-xs">
+                              {district.label}
+                            </MobileLink>
+                          ))
+                        ) : (
+                          <div className="px-8 py-3 text-xs font-semibold text-gray-400 border-b border-slate-100">
+                            No district found
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
               )}
 
               <MobileToggle id="publication" label="Publication" />
-              {activeMobileMenu === "publication" && (
-                <MobileNestedLinks
-                  links={publicationLinks}
-                  parentId="publication"
-                />
-              )}
+              {activeMobileMenu === "publication" && <MobileNestedLinks links={publicationLinks} parentId="publication" />}
 
               <MobileToggle id="programs" label="Programs" />
-              {activeMobileMenu === "programs" && (
-                <MobileNestedLinks links={programLinks} parentId="programs" />
-              )}
+              {activeMobileMenu === "programs" && <MobileNestedLinks links={programLinks} parentId="programs" />}
 
               <MobileToggle id="service-matter" label="Service Matter" />
-              {activeMobileMenu === "service-matter" && (
-                <MobileNestedLinks
-                  links={serviceMatterLinks}
-                  parentId="service-matter"
-                />
-              )}
+              {activeMobileMenu === "service-matter" && <MobileNestedLinks links={serviceMatterLinks} parentId="service-matter" />}
 
               <MobileToggle id="job-portal" label="Job Portal" />
-              {activeMobileMenu === "job-portal" && (
-                <MobileNestedLinks links={jobPortalLinks} parentId="job-portal" />
-              )}
+              {activeMobileMenu === "job-portal" && <MobileNestedLinks links={jobPortalLinks} parentId="job-portal" />}
 
               <MobileToggle id="registration-hcc" label="Registration with HCC" />
-              {activeMobileMenu === "registration-hcc" && (
-                <MobileNestedLinks
-                  links={registrationHccLinks}
-                  parentId="registration-hcc"
-                />
-              )}
+              {activeMobileMenu === "registration-hcc" && <MobileNestedLinks links={registrationHccLinks} parentId="registration-hcc" />}
 
               <MobileToggle id="doctors-initiatives" label="Doctors Initiatives" />
-              {activeMobileMenu === "doctors-initiatives" && (
-                <MobileNestedLinks
-                  links={doctorsInitiativeLinks}
-                  parentId="doctors-initiatives"
-                />
-              )}
+              {activeMobileMenu === "doctors-initiatives" && <MobileNestedLinks links={doctorsInitiativeLinks} parentId="doctors-initiatives" />}
 
               <MobileToggle id="consultation-hub" label="Consultation Hub" />
-              {activeMobileMenu === "consultation-hub" && (
-                <MobileNestedLinks
-                  links={consultationHubLinks}
-                  parentId="consultation-hub"
-                />
-              )}
+              {activeMobileMenu === "consultation-hub" && <MobileNestedLinks links={consultationHubLinks} parentId="consultation-hub" />}
 
-              <MobileLink to="/pharmaceutical-updates">
-                Pharmaceutical Updates
-              </MobileLink>
+              <MobileLink to="/pharmaceutical-updates">Pharmaceutical Updates</MobileLink>
               <MobileLink to="/medical-tourism">Medical Tourism</MobileLink>
 
               <MobileToggle id="diseases" label="Diseases" />
-              {activeMobileMenu === "diseases" && (
-                <MobileNestedLinks links={diseaseLinks} parentId="diseases" />
-              )}
+              {activeMobileMenu === "diseases" && <MobileNestedLinks links={diseaseLinks} parentId="diseases" />}
 
               <MobileToggle id="gallery" label="Gallery" />
-              {activeMobileMenu === "gallery" && (
-                <MobileNestedLinks links={galleryLinks} parentId="gallery" />
-              )}
+              {activeMobileMenu === "gallery" && <MobileNestedLinks links={galleryLinks} parentId="gallery" />}
 
               <MobileToggle id="contact" label="Contact" />
-              {activeMobileMenu === "contact" && (
-                <MobileNestedLinks links={contactLinks} parentId="contact" />
-              )}
+              {activeMobileMenu === "contact" && <MobileNestedLinks links={contactLinks} parentId="contact" />}
             </nav>
           </div>
         )}
       </div>
 
-      {isFormOpen && !onOpenMembership && (
-        <MembershipForm onClose={() => setIsFormOpen(false)} />
-      )}
+      {isFormOpen && !onOpenMembership && <MembershipForm onClose={() => setIsFormOpen(false)} />}
     </header>
   );
 }

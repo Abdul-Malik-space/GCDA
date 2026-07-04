@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import bahawalnagarDistrictData from "../../data/districts/bahawalnagarDistrictData";
 
 function BahawalnagarDistrictBody() {
   const data = bahawalnagarDistrictData;
-  const featuredProfile = data.profiles?.[0];
-  const otherProfiles = data.profiles?.slice(1) || [];
+
+  // First 20 profiles = 4 rows, 5 cards per row on desktop
+  const profiles = data.profiles?.slice(0, 20) || [];
+
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }, []);
+
+  const handleProfileClick = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
 
   return (
     <main className="w-full bg-white">
@@ -29,42 +49,17 @@ function BahawalnagarDistrictBody() {
         </div>
       </section>
 
-      {/* FIRST FEATURED PROFILE */}
-      {featuredProfile && (
-        <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-10">
-          <Link
-            to={`/branches/district/bahawalnagar-district/profile/${featuredProfile.id}`}
-            className="block max-w-[520px] md:max-w-[620px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-white hover:shadow-xl transition-all duration-300"
-          >
-            <img
-              src={featuredProfile.image}
-              alt={featuredProfile.name}
-              className="w-full h-[240px] md:h-[310px] object-cover"
-            />
-
-            <div className="p-5 bg-white text-center">
-              <h3 className="text-lg md:text-xl font-black text-slate-800">
-                {featuredProfile.name}
-              </h3>
-
-              <p className="mt-2 text-sm text-slate-600 leading-6">
-                {featuredProfile.shortDescription}
-              </p>
-            </div>
-          </Link>
-        </section>
-      )}
-
-      {/* PROFILE CARDS */}
-      <section className="max-w-[1200px] mx-auto px-4 pb-16">
+      {/* PROFILE CARDS - FIRST ROW ALSO HAS 5 CARDS */}
+      <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-          {otherProfiles.map((profile) => (
+          {profiles.map((profile) => (
             <Link
               key={profile.id}
               to={`/branches/district/bahawalnagar-district/profile/${profile.id}`}
+              onClick={handleProfileClick}
               className="group rounded-xl overflow-hidden bg-white border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <div className="overflow-hidden">
+              <div className="overflow-hidden bg-slate-100">
                 <img
                   src={profile.image}
                   alt={profile.name}

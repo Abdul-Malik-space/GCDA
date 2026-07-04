@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import multanDistrictData from "../../data/districts/multanDistrictData";
 
-function ProfileCard({ profile, districtSlug }) {
+function ProfileCard({ profile, districtSlug, onProfileClick }) {
   return (
     <Link
       to={`/branches/district/${districtSlug}/profile/${profile.id}`}
+      onClick={onProfileClick}
       className="group rounded-xl overflow-hidden bg-white border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300"
     >
-      <div className="overflow-hidden">
+      <div className="overflow-hidden bg-slate-100">
         <img
           src={profile.image}
           alt={profile.name}
@@ -29,12 +30,36 @@ function ProfileCard({ profile, districtSlug }) {
 
 function MultanDistrictBody() {
   const data = multanDistrictData;
-  const featuredProfile = data.profiles?.[0];
-  const otherProfiles = data.profiles?.slice(1) || [];
   const districtSlug = "multan-district";
+
+  // First 20 profiles = 4 rows, 5 cards per row on desktop
+  const profiles = data.profiles?.slice(0, 20) || [];
+
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
+
+  const handleProfileClick = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
 
   return (
     <main className="w-full bg-white">
+      {/* SMALL HERO SECTION */}
       <section
         className="relative min-h-[90px] md:min-h-[145px] flex items-center justify-center bg-cover bg-center"
         style={{
@@ -54,21 +79,15 @@ function MultanDistrictBody() {
         </div>
       </section>
 
-      {featuredProfile && (
-        <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-8">
-          <div className="max-w-[220px] mx-auto">
-            <ProfileCard profile={featuredProfile} districtSlug={districtSlug} />
-          </div>
-        </section>
-      )}
-
-      <section className="max-w-[1200px] mx-auto px-4 pb-16">
+      {/* PROFILE CARDS - FIRST ROW ALSO HAS 5 CARDS */}
+      <section className="max-w-[1200px] mx-auto px-4 pt-10 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-          {otherProfiles.map((profile) => (
+          {profiles.map((profile) => (
             <ProfileCard
               key={profile.id}
               profile={profile}
               districtSlug={districtSlug}
+              onProfileClick={handleProfileClick}
             />
           ))}
         </div>

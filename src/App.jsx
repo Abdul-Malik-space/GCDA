@@ -104,7 +104,7 @@ import ServiceMatterVideoGalleryHome from "./pages/Gallary/ServiceMatterVideoGal
 import ServiceMatterVideoAlbum from "./pages/Gallary/ServiceMatterVideoAlbum";
 import PressClippingGalleryHome from "./pages/Gallary/PressClippingGalleryHome";
 import PressClippingAlbumDetails from "./pages/Gallary/PressClippingAlbumDetails";
-
+import ScrollToTop from "./components/ScrollToTop";
 import ContactInfo from "./pages/Contact/ContactInfo";
 
 function Page({ children }) {
@@ -129,13 +129,18 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 w-full overflow-x-hidden selection:bg-[#1A7963] selection:text-white relative">
-  
+      <ScrollToTop />
   {!hideNavbarOnProfileDetails && (
     <Navbar onOpenMembership={() => setIsFormOpen(true)} />
   )}
 
-      <main className={`w-full ${hideNavbarOnProfileDetails ? "pt-0" : "pt-[150px]"}`}>
+      <main
+        className={`w-full ${
+          hideNavbarOnProfileDetails ? "pt-0" : "pt-[142px]"
+        }`}
+      >
         <Routes>
+           
           <Route path="/" element={<Home />} />
 
           {/* Photo Gallery Routes */}
