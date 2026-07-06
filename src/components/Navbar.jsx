@@ -63,7 +63,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
   ];
 
   const publicationLinks = [
-    { label: "Scientific Journal of GCDA", to: "/publications/scientific-journal" },
+    {
+      label: "Scientific Journal of GCDA",
+      to: "/publications/scientific-journal",
+    },
     { label: "News Letter", to: "/publications/newsletter" },
     { label: "GCDA Gazette", to: "/publications/gazette" },
     { label: "Annual Report", to: "/publications/annual-report" },
@@ -76,7 +79,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
     { label: "Training Programs", to: "/programs/training" },
     { label: "Training Session", to: "/programs/training-session" },
     { label: "ACSM Activities", to: "/programs/acsm-activities" },
-    { label: "International Programs", to: "/programs/international-programs" },
+    {
+      label: "International Programs",
+      to: "/programs/international-programs",
+    },
   ];
 
   const serviceMatterLinks = [
@@ -88,7 +94,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
   ];
 
   const jobPortalLinks = [
-    { label: "Jobs in Primary & Secondary Health Care Dept", to: "/job-portal/primary-secondary-health-care-dept" },
+    {
+      label: "Jobs in Primary & Secondary Health Care Dept",
+      to: "/job-portal/primary-secondary-health-care-dept",
+    },
     { label: "Jobs in SHC & MED", to: "/job-portal/shc-med" },
     { label: "Job in Private Sector", to: "/job-portal/private-sector" },
     { label: "Overseas Jobs", to: "/job-portal/overseas-jobs" },
@@ -102,13 +111,31 @@ function Navbar({ onOpenMembership, setActivePage }) {
   ];
 
   const doctorsInitiativeLinks = [
-    { label: "Children Scholarships", to: "/doctors-initiatives/children-scholarships" },
-    { label: "Educational Gold Medals", to: "/doctors-initiatives/educational-gold-medals" },
-    { label: "International Trainings", to: "/doctors-initiatives/international-trainings" },
+    {
+      label: "Children Scholarships",
+      to: "/doctors-initiatives/children-scholarships",
+    },
+    {
+      label: "Educational Gold Medals",
+      to: "/doctors-initiatives/educational-gold-medals",
+    },
+    {
+      label: "International Trainings",
+      to: "/doctors-initiatives/international-trainings",
+    },
     { label: "Housing Projects", to: "/doctors-initiatives/housing-projects" },
-    { label: "Adopt a Doctor Scheme", to: "/doctors-initiatives/adopt-a-doctor-scheme" },
-    { label: "Lab Test Subsidised", to: "/doctors-initiatives/lab-test-subsidised" },
-    { label: "Subsidised Hospital Care", to: "/doctors-initiatives/subsidised-hospital-care" },
+    {
+      label: "Adopt a Doctor Scheme",
+      to: "/doctors-initiatives/adopt-a-doctor-scheme",
+    },
+    {
+      label: "Lab Test Subsidised",
+      to: "/doctors-initiatives/lab-test-subsidised",
+    },
+    {
+      label: "Subsidised Hospital Care",
+      to: "/doctors-initiatives/subsidised-hospital-care",
+    },
     { label: "Health Insurance", to: "/doctors-initiatives/health-insurance" },
     {
       label: "Medical Students",
@@ -153,7 +180,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
   const filteredDistricts = districts.filter((district) => {
     const label = district.label.toLowerCase();
     const slug = district.slug.toLowerCase().replaceAll("-", " ");
-    return label.includes(districtSearchValue) || slug.includes(districtSearchValue);
+    return (
+      label.includes(districtSearchValue) ||
+      slug.includes(districtSearchValue)
+    );
   });
 
   const closeMobileMenu = () => {
@@ -190,12 +220,19 @@ function Navbar({ onOpenMembership, setActivePage }) {
 
   const ChevronDown = ({ light = false }) => (
     <svg
-      className={`w-[10px] h-[10px] mt-[1px] ${light ? "text-white/90" : "text-gray-500"}`}
+      className={`w-[10px] h-[10px] mt-[1px] ${
+        light ? "text-white/90" : "text-gray-500"
+      }`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.7" d="M19 9l-7 7-7-7" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.7"
+        d="M19 9l-7 7-7-7"
+      />
     </svg>
   );
 
@@ -216,7 +253,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
       className="w-full flex items-center justify-between px-4 py-3 text-sm font-black text-slate-800 border-b border-slate-100 hover:bg-emerald-50"
     >
       <span>{label}</span>
-      <span className="text-lg text-[#166d58]">{activeMobileMenu === id ? "−" : "+"}</span>
+      <span className="text-lg text-[#166d58]">
+        {activeMobileMenu === id ? "−" : "+"}
+      </span>
     </button>
   );
 
@@ -234,13 +273,19 @@ function Navbar({ onOpenMembership, setActivePage }) {
                 className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50 hover:text-[#166d58]"
               >
                 <span>{item.label}</span>
-                <span className="text-[#166d58]">{activeMobileNestedMenu === nestedId ? "−" : "+"}</span>
+                <span className="text-[#166d58]">
+                  {activeMobileNestedMenu === nestedId ? "−" : "+"}
+                </span>
               </button>
 
               {activeMobileNestedMenu === nestedId && (
                 <div className="bg-white">
                   {item.children.map((child) => (
-                    <MobileLink key={child.to} to={child.to} extraClass="pl-8 text-xs">
+                    <MobileLink
+                      key={child.to}
+                      to={child.to}
+                      extraClass="pl-8 text-xs"
+                    >
                       {child.label}
                     </MobileLink>
                   ))}
@@ -334,7 +379,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
   );
 
   const DesktopNestedDropdown = ({ label, links, width = "w-72" }) => (
-    <div className="relative group h-[57px] flex items-center" onMouseLeave={() => setActiveDesktopNestedMenu(null)}>
+    <div
+      className="relative group h-[57px] flex items-center"
+      onMouseLeave={() => setActiveDesktopNestedMenu(null)}
+    >
       <button
         type="button"
         className="h-[57px] flex items-center gap-[5px] text-[12px] font-semibold text-[#111827] hover:text-[#166d58] transition-colors whitespace-nowrap"
@@ -353,7 +401,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
             return (
               <div
                 key={item.label}
-                className={`relative ${index !== links.length - 1 ? "border-b border-gray-100" : ""}`}
+                className={`relative ${
+                  index !== links.length - 1 ? "border-b border-gray-100" : ""
+                }`}
                 onMouseEnter={() => setActiveDesktopNestedMenu(item.label)}
               >
                 <div className="flex justify-between items-center px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] cursor-pointer">
@@ -368,7 +418,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
                         key={child.to}
                         to={child.to}
                         className={`block px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] ${
-                          childIndex !== item.children.length - 1 ? "border-b border-gray-100" : ""
+                          childIndex !== item.children.length - 1
+                            ? "border-b border-gray-100"
+                            : ""
                         }`}
                       >
                         {child.label}
@@ -429,9 +481,14 @@ function Navbar({ onOpenMembership, setActivePage }) {
           </Link>
 
           <nav className="hidden xl:flex items-center justify-center gap-[18px] 2xl:gap-[26px] h-full min-w-0 overflow-hidden px-[10px]">
-            <TopBarDropdown label="About Us" links={aboutLinks} width="w-64" />
-            <TopBarDropdown label="Publication" links={publicationLinks} width="w-64" />
-            <TopBarLink to="/pharmaceutical-updates">Pharmaceutical Updates</TopBarLink>
+            <TopBarDropdown
+              label="Publication"
+              links={publicationLinks}
+              width="w-64"
+            />
+            <TopBarLink to="/pharmaceutical-updates">
+              Pharmaceutical Updates
+            </TopBarLink>
             <TopBarLink to="/medical-tourism">Medical Tourism</TopBarLink>
           </nav>
 
@@ -440,8 +497,15 @@ function Navbar({ onOpenMembership, setActivePage }) {
               href="tel:+3337074846"
               className="h-[30px] min-w-[116px] px-[11px] rounded-[7px] border border-white/20 bg-white/5 hover:bg-white/10 flex items-center justify-center gap-[7px] text-white transition-colors"
             >
-              <span className="text-[11px] font-extrabold whitespace-nowrap">+333-7074846</span>
-              <svg className="w-[12px] h-[12px] rotate-90 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span className="text-[11px] font-extrabold whitespace-nowrap">
+                +333-7074846
+              </span>
+              <svg
+                className="w-[12px] h-[12px] rotate-90 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -456,7 +520,12 @@ function Navbar({ onOpenMembership, setActivePage }) {
               onClick={handleMembershipOpen}
               className="h-[30px] min-w-[148px] px-[14px] rounded-[7px] bg-[#ee9a84] hover:bg-[#dc846d] flex items-center justify-center gap-[8px] text-white transition-colors"
             >
-              <svg className="w-[13px] h-[13px] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                className="w-[13px] h-[13px] flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -464,7 +533,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
-              <span className="text-[11px] font-extrabold whitespace-nowrap">Online Membership</span>
+              <span className="text-[11px] font-extrabold whitespace-nowrap">
+                Online Membership
+              </span>
             </button>
           </div>
         </div>
@@ -474,8 +545,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
       <div className="w-full h-[57px] bg-white border-b border-gray-200 shadow-[0_2px_7px_rgba(0,0,0,0.22)]">
         <div className="w-full h-full px-[30px]">
           <div className="h-full flex items-center justify-between">
-            <nav className="hidden lg:flex items-center gap-[18px] h-[57px] whitespace-nowrap">
+            <nav className="hidden lg:flex items-center gap-[14px] xl:gap-[18px] h-[57px] whitespace-nowrap">
               <DesktopLink to="/">Home</DesktopLink>
+
+              <DesktopDropdown label="About Us" links={aboutLinks} width="w-64" />
 
               <div
                 className="relative group h-[57px] flex items-center"
@@ -493,7 +566,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
                 </button>
 
                 <div className="absolute left-0 top-full w-[215px] bg-white border border-gray-100 shadow-xl rounded-[3px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 text-[13px] font-semibold text-gray-700 py-2 z-[99999]">
-                  <div className="relative border-b border-gray-100" onMouseEnter={() => setActiveBranchMenu("provincial")}>
+                  <div
+                    className="relative border-b border-gray-100"
+                    onMouseEnter={() => setActiveBranchMenu("provincial")}
+                  >
                     <div className="flex justify-between items-center px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] cursor-pointer">
                       <span>Provincial Body</span>
                       <span className="text-gray-400 text-lg leading-none">›</span>
@@ -506,7 +582,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
                             key={province.slug}
                             to={`/branches/provincial/${province.slug}`}
                             className={`block px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] ${
-                              index !== provinces.length - 1 ? "border-b border-gray-100" : ""
+                              index !== provinces.length - 1
+                                ? "border-b border-gray-100"
+                                : ""
                             }`}
                           >
                             {province.label}
@@ -516,7 +594,10 @@ function Navbar({ onOpenMembership, setActivePage }) {
                     )}
                   </div>
 
-                  <div className="relative" onMouseEnter={() => setActiveBranchMenu("district")}>
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setActiveBranchMenu("district")}
+                  >
                     <div className="flex justify-between items-center px-4 py-2.5 hover:bg-gray-50 hover:text-[#166d58] cursor-pointer">
                       <span>District Body</span>
                       <span className="text-gray-400 text-lg leading-none">›</span>
@@ -529,7 +610,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
                             <input
                               type="text"
                               value={districtSearch}
-                              onChange={(event) => setDistrictSearch(event.target.value)}
+                              onChange={(event) =>
+                                setDistrictSearch(event.target.value)
+                              }
                               onClick={(event) => event.stopPropagation()}
                               placeholder="Search district..."
                               autoComplete="off"
@@ -559,7 +642,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
                                 key={district.slug}
                                 to={`/branches/district/${district.slug}`}
                                 className={`block px-4 py-2.5 text-[12px] font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#166d58] ${
-                                  index !== filteredDistricts.length - 1 ? "border-b border-gray-100" : ""
+                                  index !== filteredDistricts.length - 1
+                                    ? "border-b border-gray-100"
+                                    : ""
                                 }`}
                               >
                                 {district.label}
@@ -578,11 +663,31 @@ function Navbar({ onOpenMembership, setActivePage }) {
               </div>
 
               <DesktopDropdown label="Programs" links={programLinks} width="w-60" />
-              <DesktopDropdown label="Service Matter" links={serviceMatterLinks} width="w-60" />
-              <DesktopDropdown label="Job Portal" links={jobPortalLinks} width="w-80" />
-              <DesktopDropdown label="Registration with HCC" links={registrationHccLinks} width="w-64" />
-              <DesktopNestedDropdown label="Doctors Initiatives" links={doctorsInitiativeLinks} width="w-72" />
-              <DesktopDropdown label="Consultation Hub" links={consultationHubLinks} width="w-56" />
+              <DesktopDropdown
+                label="Service Matter"
+                links={serviceMatterLinks}
+                width="w-60"
+              />
+              <DesktopDropdown
+                label="Job Portal"
+                links={jobPortalLinks}
+                width="w-80"
+              />
+              <DesktopDropdown
+                label="Registration with HCC"
+                links={registrationHccLinks}
+                width="w-64"
+              />
+              <DesktopNestedDropdown
+                label="Doctors Initiatives"
+                links={doctorsInitiativeLinks}
+                width="w-72"
+              />
+              <DesktopDropdown
+                label="Consultation Hub"
+                links={consultationHubLinks}
+                width="w-56"
+              />
               <DesktopDropdown label="Diseases" links={diseaseLinks} width="w-44" />
               <DesktopDropdown label="Gallery" links={galleryLinks} width="w-60" />
               <DesktopDropdown label="Contact" links={contactLinks} width="w-48" />
@@ -597,7 +702,11 @@ function Navbar({ onOpenMembership, setActivePage }) {
                   closeMobileMenu();
                 }}
               >
-                <img src={gcdaLogo} alt="GCDA Logo" className="h-11 w-11 object-contain flex-shrink-0" />
+                <img
+                  src={gcdaLogo}
+                  alt="GCDA Logo"
+                  className="h-11 w-11 object-contain flex-shrink-0"
+                />
                 <div className="leading-tight min-w-0">
                   <p className="text-[#166d58] text-[12px] font-black leading-tight uppercase">
                     General Cader Doctors
@@ -623,11 +732,26 @@ function Navbar({ onOpenMembership, setActivePage }) {
                   className="text-gray-700 hover:text-[#166d58] p-1.5 border border-gray-200 rounded-md bg-gray-50"
                   aria-label="Toggle mobile menu"
                 >
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     {isOpen ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
                     )}
                   </svg>
                 </button>
@@ -642,7 +766,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
               <MobileLink to="/">Home</MobileLink>
 
               <MobileToggle id="about" label="About Us" />
-              {activeMobileMenu === "about" && <MobileNestedLinks links={aboutLinks} parentId="about" />}
+              {activeMobileMenu === "about" && (
+                <MobileNestedLinks links={aboutLinks} parentId="about" />
+              )}
 
               <MobileToggle id="branches" label="Branches" />
               {activeMobileMenu === "branches" && (
@@ -653,13 +779,19 @@ function Navbar({ onOpenMembership, setActivePage }) {
                     className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50"
                   >
                     <span>Provincial Body</span>
-                    <span className="text-[#166d58]">{activeMobileBranchType === "provincial" ? "−" : "+"}</span>
+                    <span className="text-[#166d58]">
+                      {activeMobileBranchType === "provincial" ? "−" : "+"}
+                    </span>
                   </button>
 
                   {activeMobileBranchType === "provincial" && (
                     <div className="bg-white">
                       {provinces.map((province) => (
-                        <MobileLink key={province.slug} to={`/branches/provincial/${province.slug}`} extraClass="pl-8 text-xs">
+                        <MobileLink
+                          key={province.slug}
+                          to={`/branches/provincial/${province.slug}`}
+                          extraClass="pl-8 text-xs"
+                        >
                           {province.label}
                         </MobileLink>
                       ))}
@@ -672,7 +804,9 @@ function Navbar({ onOpenMembership, setActivePage }) {
                     className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-100 hover:bg-emerald-50"
                   >
                     <span>District Body</span>
-                    <span className="text-[#166d58]">{activeMobileBranchType === "district" ? "−" : "+"}</span>
+                    <span className="text-[#166d58]">
+                      {activeMobileBranchType === "district" ? "−" : "+"}
+                    </span>
                   </button>
 
                   {activeMobileBranchType === "district" && (
@@ -682,13 +816,25 @@ function Navbar({ onOpenMembership, setActivePage }) {
                           <input
                             type="text"
                             value={districtSearch}
-                            onChange={(event) => setDistrictSearch(event.target.value)}
+                            onChange={(event) =>
+                              setDistrictSearch(event.target.value)
+                            }
                             placeholder="Search district..."
                             autoComplete="off"
                             className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-10 pr-3 text-xs font-semibold text-gray-700 outline-none focus:border-[#166d58] focus:bg-white"
                           />
-                          <svg className="absolute left-3 top-3 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          <svg
+                            className="absolute left-3 top-3 h-4 w-4 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
                           </svg>
                         </div>
                       </div>
@@ -696,7 +842,11 @@ function Navbar({ onOpenMembership, setActivePage }) {
                       <div className="max-h-72 overflow-y-auto">
                         {filteredDistricts.length > 0 ? (
                           filteredDistricts.map((district) => (
-                            <MobileLink key={district.slug} to={`/branches/district/${district.slug}`} extraClass="pl-8 text-xs">
+                            <MobileLink
+                              key={district.slug}
+                              to={`/branches/district/${district.slug}`}
+                              extraClass="pl-8 text-xs"
+                            >
                               {district.label}
                             </MobileLink>
                           ))
@@ -712,43 +862,85 @@ function Navbar({ onOpenMembership, setActivePage }) {
               )}
 
               <MobileToggle id="publication" label="Publication" />
-              {activeMobileMenu === "publication" && <MobileNestedLinks links={publicationLinks} parentId="publication" />}
+              {activeMobileMenu === "publication" && (
+                <MobileNestedLinks
+                  links={publicationLinks}
+                  parentId="publication"
+                />
+              )}
 
               <MobileToggle id="programs" label="Programs" />
-              {activeMobileMenu === "programs" && <MobileNestedLinks links={programLinks} parentId="programs" />}
+              {activeMobileMenu === "programs" && (
+                <MobileNestedLinks links={programLinks} parentId="programs" />
+              )}
 
               <MobileToggle id="service-matter" label="Service Matter" />
-              {activeMobileMenu === "service-matter" && <MobileNestedLinks links={serviceMatterLinks} parentId="service-matter" />}
+              {activeMobileMenu === "service-matter" && (
+                <MobileNestedLinks
+                  links={serviceMatterLinks}
+                  parentId="service-matter"
+                />
+              )}
 
               <MobileToggle id="job-portal" label="Job Portal" />
-              {activeMobileMenu === "job-portal" && <MobileNestedLinks links={jobPortalLinks} parentId="job-portal" />}
+              {activeMobileMenu === "job-portal" && (
+                <MobileNestedLinks links={jobPortalLinks} parentId="job-portal" />
+              )}
 
               <MobileToggle id="registration-hcc" label="Registration with HCC" />
-              {activeMobileMenu === "registration-hcc" && <MobileNestedLinks links={registrationHccLinks} parentId="registration-hcc" />}
+              {activeMobileMenu === "registration-hcc" && (
+                <MobileNestedLinks
+                  links={registrationHccLinks}
+                  parentId="registration-hcc"
+                />
+              )}
 
-              <MobileToggle id="doctors-initiatives" label="Doctors Initiatives" />
-              {activeMobileMenu === "doctors-initiatives" && <MobileNestedLinks links={doctorsInitiativeLinks} parentId="doctors-initiatives" />}
+              <MobileToggle
+                id="doctors-initiatives"
+                label="Doctors Initiatives"
+              />
+              {activeMobileMenu === "doctors-initiatives" && (
+                <MobileNestedLinks
+                  links={doctorsInitiativeLinks}
+                  parentId="doctors-initiatives"
+                />
+              )}
 
               <MobileToggle id="consultation-hub" label="Consultation Hub" />
-              {activeMobileMenu === "consultation-hub" && <MobileNestedLinks links={consultationHubLinks} parentId="consultation-hub" />}
+              {activeMobileMenu === "consultation-hub" && (
+                <MobileNestedLinks
+                  links={consultationHubLinks}
+                  parentId="consultation-hub"
+                />
+              )}
 
-              <MobileLink to="/pharmaceutical-updates">Pharmaceutical Updates</MobileLink>
+              <MobileLink to="/pharmaceutical-updates">
+                Pharmaceutical Updates
+              </MobileLink>
               <MobileLink to="/medical-tourism">Medical Tourism</MobileLink>
 
               <MobileToggle id="diseases" label="Diseases" />
-              {activeMobileMenu === "diseases" && <MobileNestedLinks links={diseaseLinks} parentId="diseases" />}
+              {activeMobileMenu === "diseases" && (
+                <MobileNestedLinks links={diseaseLinks} parentId="diseases" />
+              )}
 
               <MobileToggle id="gallery" label="Gallery" />
-              {activeMobileMenu === "gallery" && <MobileNestedLinks links={galleryLinks} parentId="gallery" />}
+              {activeMobileMenu === "gallery" && (
+                <MobileNestedLinks links={galleryLinks} parentId="gallery" />
+              )}
 
               <MobileToggle id="contact" label="Contact" />
-              {activeMobileMenu === "contact" && <MobileNestedLinks links={contactLinks} parentId="contact" />}
+              {activeMobileMenu === "contact" && (
+                <MobileNestedLinks links={contactLinks} parentId="contact" />
+              )}
             </nav>
           </div>
         )}
       </div>
 
-      {isFormOpen && !onOpenMembership && <MembershipForm onClose={() => setIsFormOpen(false)} />}
+      {isFormOpen && !onOpenMembership && (
+        <MembershipForm onClose={() => setIsFormOpen(false)} />
+      )}
     </header>
   );
 }
