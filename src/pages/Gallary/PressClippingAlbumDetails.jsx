@@ -143,13 +143,13 @@ function PressClippingAlbumDetails() {
       <AnimatePresence>
         {activeImage && (
           <motion.div
-            className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="relative w-full max-w-[1450px] max-h-[94vh] bg-white rounded-3xl overflow-hidden shadow-2xl"
+              className="relative w-full max-w-[96vw] max-h-[96vh] bg-black rounded-3xl overflow-hidden shadow-2xl"
               initial={{ opacity: 0, scale: 0.96, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 30 }}
@@ -159,18 +159,18 @@ function PressClippingAlbumDetails() {
                 <button
                   type="button"
                   onClick={closeLightbox}
-                  className="pointer-events-auto text-white bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 text-sm font-bold"
+                  className="pointer-events-auto text-white bg-black/65 hover:bg-black/85 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 text-sm font-bold"
                 >
                   ← Back to Clippings
                 </button>
               </div>
 
-              <div className="bg-black flex flex-col max-h-[94vh]">
-                <div className="relative bg-black flex items-center justify-center overflow-hidden h-[82vh]">
+              <div className="bg-black flex flex-col max-h-[96vh]">
+                <div className="relative bg-black flex items-center justify-center overflow-hidden h-[84vh] md:h-[86vh]">
                   <img
                     src={activeImage.src}
                     alt={activeImage.title}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover object-center"
                   />
 
                   <button

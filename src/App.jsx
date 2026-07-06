@@ -28,11 +28,11 @@ import BoardOfTrustees from "./pages/AboutSubMenus/BoardOfTrustes";
 import BoardOfTrusteesProfileDetails from "./pages/AboutSubMenus/BoardOfTrusteesProfileDetails";
 import Committees from "./pages/AboutSubMenus/Committees";
 
-import RulesRegulation from "./pages/ServiceMatter/RulesRegulation";
-import Policies from "./pages/ServiceMatter/Policies";
-import ServiceMatters from "./pages/ServiceMatter/ServiceMatters";
-import ServiceCaseLaws from "./pages/ServiceMatter/ServiceCaseLaws";
-import TaxationMatters from "./pages/ServiceMatter/TaxationMatters";
+import Policies from "./pages/servicmatters/Policies";
+import RulesRegulation from "./pages/servicmatters/RulesRegulation";
+import ServiceCaseLaws from "./pages/servicmatters/ServiceCaseLaws";
+import ServiceMatters from "./pages/servicmatters/ServiceMatters";
+import TaxationMatters from "./pages/servicmatters/TaxationMatters";
 
 import GalleryHome from "./pages/Gallary/GalleryHome";
 import AlbumDetails from "./pages/Gallary/AlbumDetails";
