@@ -142,15 +142,15 @@ function AlbumDetails() {
       <AnimatePresence>
         {activeImage && (
           <motion.div
-            className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
               className={`relative w-full ${
-                showSeminarDescription ? "max-w-[1450px]" : "max-w-[1180px]"
-              } max-h-[92vh] bg-white rounded-3xl overflow-hidden shadow-2xl`}
+                showSeminarDescription ? "max-w-[97vw]" : "max-w-[96vw]"
+              } max-h-[96vh] bg-white rounded-3xl overflow-hidden shadow-2xl`}
               initial={{ opacity: 0, scale: 0.96, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 30 }}
@@ -160,7 +160,7 @@ function AlbumDetails() {
                 <button
                   type="button"
                   onClick={closeLightbox}
-                  className="pointer-events-auto text-white bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 text-sm font-bold"
+                  className="pointer-events-auto text-white bg-black/65 hover:bg-black/85 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 text-sm font-bold"
                 >
                   ← Back to Photos
                 </button>
@@ -171,20 +171,20 @@ function AlbumDetails() {
                   showSeminarDescription
                     ? "lg:grid-cols-[82%_18%]"
                     : "lg:grid-cols-1"
-                } max-h-[92vh]`}
+                } max-h-[96vh]`}
               >
-                <div className="bg-black flex flex-col max-h-[92vh]">
+                <div className="bg-black flex flex-col max-h-[96vh]">
                   <div
                     className={`relative bg-black flex items-center justify-center overflow-hidden ${
                       showSeminarDescription
-                        ? "h-[72vh] lg:h-[78vh]"
-                        : "h-[76vh] lg:h-[80vh]"
+                        ? "h-[78vh] lg:h-[82vh]"
+                        : "h-[82vh] lg:h-[86vh]"
                     }`}
                   >
                     <img
                       src={activeImage.src}
                       alt={activeImage.title}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover object-center"
                     />
 
                     <button
@@ -242,7 +242,7 @@ function AlbumDetails() {
                 </div>
 
                 {showSeminarDescription && album.description && (
-                  <div className="bg-white border-l border-gray-100 max-h-[92vh] flex flex-col overflow-hidden">
+                  <div className="bg-white border-l border-gray-100 max-h-[96vh] flex flex-col overflow-hidden">
                     <div className="px-4 pt-5 pb-4 border-b border-gray-100 flex-shrink-0">
                       <div className="flex items-start justify-between gap-3">
                         <div>
